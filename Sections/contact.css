@@ -1,124 +1,140 @@
+main.two-column {
+    /* CSS Grid creates a 2-column layout */
+    display: grid;
+    /* Two equal-width columns */
+    grid-template-columns: 1fr 1fr;
+    /* Space between the columns */
+     gap: 20px;
+     /* Inside padding */
+     padding: 20px;
+     /* Maximum width for the grid */
+     max-width: var(--max-width);
+     /* Center the grid on the page */
+     margin: 0 auto;
+ }
+
+ main.two-column h2 {
+     /* Center the heading text horizontally */
+     text-align: center;
+     /* Space inside the colored box */
+     padding: 16px 20px;
+     /* Stretch background to section edges */
+     margin: -24px -24px 20px -24px;
+     /* Rounded corners on top only */
+     border-radius: 8px 8px 0 0;
+     /* Light primary color background for index */
+     background-color: #00000021;
+     /* White text for contrast */
+     color: #000000;
+ }
+
+main.container h1 {
+    /* Center the heading text horizontally */
+    text-align: center;
+    /* Space inside the colored box */
+    padding: 16px 20px;
+    /* Stretch background to section edges */
+    margin: -24px -24px 20px -24px;
+    /* Rounded corners on top only */
+    border-radius: 8px 8px 0 0;
+    /* Light primary color background for index */
+    background-color: #00000021;
+    /* White text for contrast */
+    color: #000000;
+}
+
 /* ========================================
-   CONTACT PAGE STYLES
-   Styles specific to the contact page
+   Contact-options — visual polish
+   Adds card accents, small icons and subtle highlights
+   without changing grid column widths or the `gap` value.
    ======================================== */
 
-/* Two-column layout for contact form + alternative contacts */
-.contact-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    padding: 20px 0;
-    max-width: var(--max-width);
-    margin: 0 auto;
+/* Slight left accent for the alternative contact panel */
+.contact-options .contact-alternative {
+    padding: 18px 20px;
+    border-left: 4px solid var(--primary);
+    background: rgba(255,255,255,0.6);
 }
 
-/* New grid that holds three dedicated panels. The intro panel spans both columns. */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-.contact-grid .intro-panel {
-    /* span full width so it's placed above the two columns */
-    grid-column: 1 / -1;
-}
-
-/* Intro heading style (matches index heading style) */
-.contact-intro {
-    /* Make the intro its own white panel */
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    margin-bottom: 20px;
-}
-
-.contact-intro h1 {
-    text-align: center;
-    padding: 8px 0;
-    margin: 0 0 8px 0;
+/* Decorative icons for each contact line (no layout changes) */
+.contact-options .contact-alternative p {
+    position: relative;
+    padding-left: 34px; /* leaves room for the icon */
+    margin: 10px 0;
     color: var(--text);
-    font-size: 1.8rem;
 }
-
-/* Contact form fields */
-.contact-form label { display: block; margin: 8px 0 6px; font-weight: 600; }
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    margin-bottom: 12px;
+.contact-options .contact-alternative p::before {
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: var(--primary);
 }
+.contact-options .contact-alternative p:nth-of-type(1)::before { content: "✉"; }
+.contact-options .contact-alternative p:nth-of-type(2)::before { content: "☎"; }
+.contact-options .contact-alternative p:nth-of-type(3)::before { content: "🔗"; }
+.contact-options .contact-alternative p:nth-of-type(4)::before { content: "🐱"; }
 
-.contact-form button {
-    background: var(--primary);
+/* Button styling: add envelope glyph inside button (purely decorative) */
+.contact-options .contact-form button {
+    background: linear-gradient(180deg, var(--primary), #e25a46);
     color: #fff;
-    border: none;
     padding: 10px 14px;
-    border-radius: 6px;
+    padding-left: 40px; /* make room for the glyph */
+    border-radius: 8px;
+    border: none;
     font-weight: 700;
-    cursor: pointer;
+    position: relative;
+}
+.contact-options .contact-form button::before {
+    content: "✉";
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.95;
+    pointer-events: none;
 }
 
-.contact-form button:hover { opacity: 0.95; }
+/* Subtle top-right highlight — purely decorative */
+.contact-options .contact-panel::after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    right: -40px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle at 35% 35%, rgba(255,99,71,0.08), transparent 45%);
+    transform: rotate(8deg);
+    pointer-events: none;
+}
 
-/* Panel wrapper for each column inside the contact wrapper */
-.contact-panel {
-    background: #ffffff; /* white panel */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+/* Make the form panel taller and allow the submit area to stick to the bottom
+   while the textarea grows — internal layout only, does not change grid gap */
+.contact-options .form-panel {
+    min-height: 520px;
     display: flex;
     flex-direction: column;
 }
-
-/* Ensure form stretches to fill panel */
-.contact-panel .contact-form { width: 100%; }
-
-/* Small tweak to intro spacing inside hero */
-.contact-intro {
-    margin-bottom: 12px;
+.contact-options .panel-intro { margin: 8px 0 14px; color: var(--muted); }
+.contact-options .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1; /* take available vertical space */
 }
+.contact-options .contact-form .row { display: flex; gap: 12px; }
+.contact-options .contact-form .col { flex: 1; }
+.contact-options .contact-form textarea { min-height: 240px; resize: vertical; }
+.contact-options .form-actions { margin-top: 12px; display: flex; justify-content: flex-end; }
+.contact-options .contact-form button { align-self: flex-end; }
 
-/* Make intro heading use the same light background used by alternative heading */
-.intro-panel h1 {
-    background: #f0f0f0; /* same as .contact-alternative h2 */
-    padding: 12px 16px;
-    margin: -20px -20px 12px -20px;
-    border-radius: 6px 6px 0 0;
-    text-align: center;
-}
-
-/* small spacing for the alternative heading inside its panel */
-.alternative-panel .contact-alternative h2 {
-    margin: 0 0 12px 0;
-}
-
-/* Small fix: ensure header background is visible and spans full width */
-header.site-header {
-    background: var(--header-bg);
-}
-
-/* Alternative contact block heading (small boxed header) */
-.contact-alternative h2 {
-    text-align: center;
-    padding: 12px 16px;
-    margin: -12px -12px 16px -12px;
-    border-radius: 6px 6px 0 0;
-    background: #f0f0f0;
-    color: var(--text);
-}
-
-/* Make layout single-column on small screens */
+/* Small responsive tweak: keep textarea smaller on narrow screens */
 @media (max-width: 768px) {
-    .contact-wrapper { grid-template-columns: 1fr; }
-    .contact-intro h1 { margin-left: 0; margin-right: 0; }
+    .contact-options .form-panel { min-height: auto; }
+    .contact-options .contact-form .row { flex-direction: column; }
+    .contact-options .contact-form textarea { min-height: 160px; }
 }
+

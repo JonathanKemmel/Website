@@ -24,43 +24,54 @@
 
         <main class="container">
             <section id="contact" class="hero">
-                <div class="contact-grid">
-                    <div class="contact-panel intro-panel">
-                       <h1>Let’s Get in Touch</h1>
-                       <p>Have a question, want to work together, or just want to say hi? Fill out the form or use one of the links below.</p>
-                    </div>
-
-                    <div class="contact-panel form-panel">
-                        <!-- Contact Form -->
-                        <form class="contact-form">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
-
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
-                          
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                          
-                            <button type="submit">Send Message</button>
-                        </form>
-                    </div>
-
-                    <div class="contact-panel alternative-panel">
-                        <!-- Alternative Contact -->
-                        <div class="contact-alternative">
-                            <h2>Other Ways to Reach Me</h2>
-                            <p>Email: <a href="mailto:jp@example.com">jp@example.com</a></p>
-                            <p>Phone: <a href="tel:+491234567890">+49 123 456 7890</a></p>
-                            <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
-                            <p>GitHub: <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
-                        </div>
-                    </div>
-                </div>
+                <h1>Let’s Get in Touch</h1>
+                <p>Have a question, want to work together, or just want to say hi? Fill out the form or use one of the links below.</p>
             </section>
         </main>
 
+        <main class="container two-column">
+            <section id="contact-options" class="hero contact-options">
+                <div class="contact-panel form-panel">
+                    <h2>Send a Message</h2>
+                    <p class="panel-intro">Tell me about your project or question — I'll reply as soon as I can.</p>
 
+                    <!-- Contact Form (reflowed so textarea grows and submit stays at bottom) -->
+                    <form class="contact-form">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="col">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" placeholder="Subject (optional)">
+                            </div>
+                        </div>
+
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Your Message" rows="8" required></textarea>
+
+                        <div class="form-actions">
+                            <button type="submit">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="alternative-contact" class="hero alternative-contact">
+                 <!-- Alternative Contact -->
+                <div class="contact-alternative">
+                    <h2>Other Ways to Reach Me</h2>
+                    <p>Email: <a href="mailto:jonathankemmel@gmail.com">jonathankemmel@gmail.com</a></p>
+                    <p>Phone: Nope, U wish ;)</p>
+                <!--<p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p> -->
+                    <p>GitHub: <a href="https://github.com/Jpnny-prog">github.com/Jpnny-prog</a></p> 
+                </div>
+            </section>
+        </main>
 
         <footer class="site-footer">
             <div class="container">
