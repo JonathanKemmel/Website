@@ -13,14 +13,35 @@
     margin: 0 auto;
 }
 
+/* New grid that holds three dedicated panels. The intro panel spans both columns. */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.contact-grid .intro-panel {
+    /* span full width so it's placed above the two columns */
+    grid-column: 1 / -1;
+}
+
 /* Intro heading style (matches index heading style) */
+.contact-intro {
+    /* Make the intro its own white panel */
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
 .contact-intro h1 {
     text-align: center;
-    padding: 16px 20px;
-    margin: -24px -20px 20px -20px; /* pull the heading to the edges of the white panel */
-    border-radius: 8px 8px 0 0;
-    background-color: #00000012; /* subtle tint similar to index */
-    color: #000000;
+    padding: 8px 0;
+    margin: 0 0 8px 0;
+    color: var(--text);
     font-size: 1.8rem;
 }
 
@@ -48,6 +69,43 @@
 }
 
 .contact-form button:hover { opacity: 0.95; }
+
+/* Panel wrapper for each column inside the contact wrapper */
+.contact-panel {
+    background: #ffffff; /* white panel */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure form stretches to fill panel */
+.contact-panel .contact-form { width: 100%; }
+
+/* Small tweak to intro spacing inside hero */
+.contact-intro {
+    margin-bottom: 12px;
+}
+
+/* Make intro heading use the same light background used by alternative heading */
+.intro-panel h1 {
+    background: #f0f0f0; /* same as .contact-alternative h2 */
+    padding: 12px 16px;
+    margin: -20px -20px 12px -20px;
+    border-radius: 6px 6px 0 0;
+    text-align: center;
+}
+
+/* small spacing for the alternative heading inside its panel */
+.alternative-panel .contact-alternative h2 {
+    margin: 0 0 12px 0;
+}
+
+/* Small fix: ensure header background is visible and spans full width */
+header.site-header {
+    background: var(--header-bg);
+}
 
 /* Alternative contact block heading (small boxed header) */
 .contact-alternative h2 {
