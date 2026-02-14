@@ -1,34 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="../styles.css">
-</head>
-<body>
-    <header>
-        <h1>My Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../about.html">About Me</a></li>
-                <li><a href="../projects.html">Projects</a></li>
-                <li><a href="../contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Portfolio — Jonathan Kemmel</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">My Portfolio</h1>
+                <nav class="main-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
 
-    <main>
-        <h2>Welcome to My Portfolio</h2>
-        <p>Greetings, i´m Jonathan.</p>
-        <p>I try to learn IT related stuff.</p>
-        <p>All things i already did are listed in my projects section, aswell as things i plan to do.</p>
-        <p>Since we´re in IT, there will also be listed some things i dropped, which i´ll pick up some time in the future.</p>
-        <li><a href="../projects.html">Projects</a></li>
-    </main>
-<body>
+        <main class="container">
+            <section id="intro" class="hero">
+                <h2>Welcome to My Portfolio</h2>
+                <p>Greetings — I’m Jonathan.</p>
+                <p>I’m learning IT-related topics and building small projects.</p>
+                <p>All completed and planned work is listed in the Projects section.</p>
+                <p>Some items were dropped and may be picked up in the future.</p>  
 
- <footer>
-        <p>&copy; 2026 Jonathan Kemmel </p>
- </footer>
+                <nav class="quick-links" aria-label="Quick links">
+                    <ul>
+                        <li><a href="projects.html">View Projects</a></li>
+                        <li><a href="contact.html">Contact Me</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </main>
+
+        <main class="container">
+            <section id="intro" class="hero">
+                <h2>Latest Updates</h2>
+                <p>#Add Updated content here.</p> 
+
+                <nav class="quick-links" aria-label="Quick links">
+                    <ul>
+                        <li><a href="../update.html">View Updates</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p>&copy; 2026 Jonathan Kemmel</p>
+            </div>
+        </footer>
+    </body>
+</html>
