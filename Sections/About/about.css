@@ -1,0 +1,198 @@
+
+/* ====== ABOUT PAGE STYLES ======
+   Dieses Stylesheet gestaltet die About-Seite mit modernen Karten, Grid-Layout und Timeline.
+*/
+
+
+/* Haupt-Container für die About-Seite */
+.about-container {
+    padding: 60px 20px; /* Abstand oben/unten und seitlich */
+}
+
+
+/* Überschrift der Seite */
+.about-container h1 {
+    font-size: 2.8rem; /* Sehr große Schrift */
+    text-align: center; /* Zentriert */
+    margin-bottom: 50px; /* Abstand nach unten */
+    color: var(--text); /* Primäre Textfarbe */
+    font-weight: 700; /* Fett */
+    position: relative; /* Für das ::after Deko-Element */
+    padding-bottom: 30px; /* Platz für Unterstreichung */
+}
+
+
+/* Farbige Unterstreichung unter der Überschrift */
+.about-container h1::after {
+    content: ""; /* Leeres Deko-Element */
+    position: absolute; /* Absolut unter der Überschrift */
+    bottom: 0; /* Am unteren Rand */
+    left: 50%; /* Horizontal mittig */
+    transform: translateX(-50%); /* Exakt zentrieren */
+    width: 80px; /* Breite der Linie */
+    height: 4px; /* Höhe der Linie */
+    background: linear-gradient(90deg, var(--primary), #764ba2); /* Farbverlauf */
+    border-radius: 2px; /* Abgerundete Ecken */
+}
+
+
+/* Einleitungskarte oben auf der Seite */
+.intro-section {
+    max-width: 800px; /* Maximalbreite */
+    margin: 0 auto 60px; /* Zentriert, Abstand nach unten */
+    background: white; /* Weißer Hintergrund */
+    padding: 40px; /* Innenabstand */
+    border-radius: 12px; /* Abgerundete Ecken */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Schatten für Tiefe */
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Dezente Umrandung */
+}
+
+
+/* Text in der Einleitung */
+.intro-section p {
+    font-size: 1.1rem; /* Etwas größere Schrift */
+    line-height: 1.8; /* Zeilenabstand für Lesbarkeit */
+    color: var(--muted); /* Gedämpfte Textfarbe */
+    margin-bottom: 20px; /* Abstand zwischen Absätzen */
+}
+
+
+/* Letzter Absatz ohne Abstand nach unten */
+.intro-section p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Grid für die 4 Info-Karten */
+.about-grid {
+    display: grid; /* Grid-Layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Spalten */
+    gap: 30px; /* Abstand zwischen Karten */
+    margin-bottom: 60px; /* Abstand nach unten */
+}
+
+
+/* Einzelne Info-Karte */
+.about-card {
+    background: white; /* Weißer Hintergrund */
+    padding: 40px; /* Innenabstand */
+    border-radius: 12px; /* Abgerundete Ecken */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Schatten */
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Umrandung */
+    text-align: center; /* Inhalt zentriert */
+    transition: all 0.3s ease; /* Weiche Übergänge bei Hover */
+}
+
+
+/* Hover-Effekt für Karten */
+.about-card:hover {
+    transform: translateY(-5px); /* Karte hebt sich leicht an */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12); /* Stärkerer Schatten */
+}
+
+/* Icon oben in der Karte */
+.card-icon {
+    font-size: 3rem; /* Großes Emoji/Icon */
+    margin-bottom: 20px; /* Abstand nach unten */
+    display: block; /* Block-Element */
+}
+
+.about-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.about-card p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* Timeline section */
+.timeline {
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.timeline h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 40px;
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(255, 99, 71, 0.2);
+}
+
+.timeline-date {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 80px;
+}
+
+.timeline-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.timeline-content p {
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .about-container {
+        padding: 40px 20px;
+    }
+
+    .about-container h1 {
+        font-size: 2rem;
+    }
+
+    .intro-section {
+        padding: 30px 20px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .about-card {
+        padding: 30px 20px;
+    }
+
+    .timeline {
+        max-width: 100%;
+    }
+
+    .timeline-item {
+        grid-template-columns: 70px 1fr;
+        gap: 20px;
+    }
+}

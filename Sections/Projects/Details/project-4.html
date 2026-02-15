@@ -1,0 +1,101 @@
+<!--
+    PROJECT-4.HTML
+    Diese Datei zeigt die Detailseite für das Data Dashboard Projekt.
+    Jeder Block und wichtige Zeile ist mit deutschen Kommentaren versehen.
+-->
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <!-- Meta-Informationen und Einbindung der Stylesheets -->
+        <meta charset="utf-8" /> <!-- Zeichencodierung UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive -->
+        <title>Data Dashboard — Jonathan Kemmel</title> <!-- Titel im Browser-Tab -->
+        <link rel="stylesheet" href="../../styles.css" /> <!-- Basis-Styles -->
+        <link rel="stylesheet" href="./project-detail.css" /> <!-- Detailseiten-Styles -->
+    </head>
+    <body>
+        <!-- Kopfbereich mit Navigation -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1> <!-- Logo/Seitentitel -->
+                <nav class="main-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../Home/index.html">Home</a></li> <!-- Link zur Startseite -->
+                        <li><a href="../../About/about.html">About</a></li> <!-- Link zu Über mich -->
+                        <li><a href="../projects.html">Projects</a></li> <!-- Link zu Projekten -->
+                        <li><a href="../../Contact/contact.html">Contact</a></li> <!-- Link zu Kontakt -->
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hauptinhalt der Seite -->
+        <main class="container project-detail">
+            <!-- Zurück-Button -->
+            <a href="../projects.html" class="btn-back">← Zurück zu den Projekten</a>
+            
+            <article class="detail-content">
+                <!-- Kopfbereich mit Icon und Titel -->
+                <div class="detail-header">
+                    <div class="detail-icon">📊</div> <!-- Icon für das Projekt -->
+                    <h1>Data Dashboard</h1> <!-- Projektname -->
+                </div>
+
+                <!-- Abschnitt: Übersicht -->
+                <section class="detail-section">
+                    <h2>Übersicht</h2>
+                    <p>
+                        Ein interaktives Dashboard zur Visualisierung und Analyse großer Datenmengen. 
+                        Das Dashboard bietet Echtzeit-Updates, anpassbare Berichte und umfangreiche 
+                        Analysefunktionen für datengetriebene Entscheidungen.
+                    </p>
+                </section>
+
+                <!-- Abschnitt: Technologien -->
+                <section class="detail-section">
+                    <h2>Technologien</h2>
+                    <ul class="tech-list">
+                        <li>React für die Benutzeroberfläche</li>
+                        <li>Chart.js für Datenvisualisierung</li>
+                        <li>Redux für State Management</li>
+                        <li>WebSocket für Echtzeit-Updates</li>
+                    </ul>
+                </section>
+
+                <!-- Abschnitt: Features -->
+                <section class="detail-section">
+                    <h2>Features</h2>
+                    <ul class="feature-list">
+                        <li>Interaktive Charts und Grafiken</li>
+                        <li>Echtzeit-Datenatualisierung</li>
+                        <li>Benutzerdefinierte Berichte und Filter</li>
+                        <li>Export-Funktionen (PDF, CSV, Excel)</li>
+                    </ul>
+                </section>
+
+                <!-- Abschnitt: Herausforderungen & Lösungen -->
+                <section class="detail-section">
+                    <h2>Herausforderungen & Lösungen</h2>
+                    <p>
+                        Die Verarbeitung großer Datumengen in Echtzeit war eine komplexe Aufgabe. 
+                        Dies wurde durch Virtualisierung von Listen, Caching und optimierte SQL-Queries 
+                        gelöst. Die Performance wurde durch kontinuierliche Profiling gewährleistet.
+                    </p>
+                </section>
+
+                <!-- Call-to-Action Buttons -->
+                <div class="detail-cta">
+                    <a href="#" class="btn btn-primary">Dashboard öffnen</a> <!-- Primärer Button -->
+                    <a href="#" class="btn btn-secondary">Live Demo</a> <!-- Sekundärer Button -->
+                </div>
+            </article>
+        </main>
+
+        <!-- Footer mit Copyright -->
+        <footer class="site-footer">
+            <div class="container">
+                <p>&copy; 2026 Jonathan Kemmel</p>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Backend API — Jonathan Kemmel</title>
+        <link rel="stylesheet" href="../../styles.css" />
+        <link rel="stylesheet" href="./project-detail.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+                <nav class="main-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../Home/index.html">Home</a></li>
+                        <li><a href="../../About/about.html">About</a></li>
+                        <li><a href="../projects.html">Projects</a></li>
+                        <li><a href="../../Contact/contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container project-detail">
+            <a href="../projects.html" class="btn-back">← Zurück zu den Projekten</a>
+            
+            <article class="detail-content">
+                <div class="detail-header">
+                    <div class="detail-icon">⚙️</div>
+                    <h1>Backend API</h1>
+                </div>
+
+                <section class="detail-section">
+                    <h2>Übersicht</h2>
+                    <p>
+                        Eine hochperformante RESTful API, die mit modernen Backend-Technologien und Best 
+                        Practices entwickelt wurde. Die API bietet sichere Authentifizierung, Datenverwaltung 
+                        und umfangreiche Dokumentation.
+                    </p>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Technologien</h2>
+                    <ul class="tech-list">
+                        <li>Node.js & Express</li>
+                        <li>MongoDB für Datenspeicherung</li>
+                        <li>JWT für Authentifizierung</li>
+                        <li>Docker für Containerisierung</li>
+                    </ul>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Features</h2>
+                    <ul class="feature-list">
+                        <li>Sichere RESTful API mit OAuth2</li>
+                        <li>Skalierbare Datenbankarchitektur</li>
+                        <li>Umfangreiche Unit & Integration Tests</li>
+                        <li>Ausführliche API-Dokumentation mit Swagger</li>
+                    </ul>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Herausforderungen & Lösungen</h2>
+                    <p>
+                        Die Skalierbarkeit war eine zentrale Anforderung. Dies wurde durch die Verwendung 
+                        von MongoDB, Caching-Strategien und Load Balancing erreicht. Sicherheit wurde durch 
+                        JWT-Token und reguläre Security Audits gewährleistet.
+                    </p>
+                </section>
+
+                <div class="detail-cta">
+                    <a href="#" class="btn btn-primary">API testen</a>
+                    <a href="#" class="btn btn-secondary">GitHub Repository</a>
+                </div>
+            </article>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p>&copy; 2026 Jonathan Kemmel</p>
+            </div>
+        </footer>
+    </body>
+</html>

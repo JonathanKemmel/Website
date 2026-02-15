@@ -1,0 +1,94 @@
+<!--
+    PROJECTS.HTML
+    Diese Datei zeigt die Projektübersicht mit Karten-Grid.
+    Jeder Block und wichtige Zeile ist mit deutschen Kommentaren versehen.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Meta-Informationen und Einbindung der Stylesheets -->
+        <meta charset="utf-8" /> <!-- Zeichencodierung UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive -->
+        <title>Projects — Jonathan Kemmel</title> <!-- Titel im Browser-Tab -->
+        <link rel="stylesheet" href="../styles.css" /> <!-- Basis-Styles -->
+        <link rel="stylesheet" href="./projects.css" /> <!-- Seiten-spezifische Styles -->
+    </head>
+    <body>
+        <!-- Kopfbereich mit Navigation -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1> <!-- Logo/Seitentitel -->
+                <nav class="main-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../Home/index.html">Home</a></li> <!-- Link zur Startseite -->
+                        <li><a href="../About/about.html">About</a></li> <!-- Link zu Über mich -->
+                        <li><a href="./projects.html">Projects</a></li> <!-- Link zu Projekten -->
+                        <li><a href="../Contact/contact.html">Contact</a></li> <!-- Link zu Kontakt -->
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hauptinhalt der Seite -->
+        <main class="container projects-container">
+            <h2>Meine Projekte</h2> <!-- Überschrift -->
+            <div class="projects-grid">
+                <!-- Projektkarte 1 -->
+                <article class="project-card">
+                    <div class="project-preview">
+                        <div class="preview-image">📱</div> <!-- Icon/Emoji für Projektvorschau -->
+                    </div>
+                    <div class="project-info">
+                        <h3>Web Application</h3> <!-- Projektname -->
+                        <p class="preview-text">Eine moderne Web-Anwendung mit HTML, CSS und JavaScript</p> <!-- Kurzbeschreibung -->
+                        <a href="Details/project-1.html" class="btn btn-primary">Details anzeigen</a> <!-- Link zur Detailseite -->
+                    </div>
+                </article>
+
+                <!-- Projektkarte 2 -->
+                <article class="project-card">
+                    <div class="project-preview">
+                        <div class="preview-image">🎨</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Design System</h3>
+                        <p class="preview-text">Ein umfassendes Designsystem mit Komponenten und Styles</p>
+                        <a href="Details/project-2.html" class="btn btn-primary">Details anzeigen</a>
+                    </div>
+                </article>
+
+                <!-- Projektkarte 3 -->
+                <article class="project-card">
+                    <div class="project-preview">
+                        <div class="preview-image">⚙️</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Backend API</h3>
+                        <p class="preview-text">RESTful API mit modernen Technologien und Best Practices</p>
+                        <a href="Details/project-3.html" class="btn btn-primary">Details anzeigen</a>
+                    </div>
+                </article>
+
+                <!-- Projektkarte 4 -->
+                <article class="project-card">
+                    <div class="project-preview">
+                        <div class="preview-image">📊</div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Data Dashboard</h3>
+                        <p class="preview-text">Interactive Dashboard zur Datenvisualisierung und Analyse</p>
+                        <a href="Details/project-4.html" class="btn btn-primary">Details anzeigen</a>
+                    </div>
+                </article>
+
+            </div>
+        </main>
+
+        <!-- Footer mit Copyright -->
+        <footer class="site-footer">
+            <div class="container">
+                <p>&copy; 2026 Jonathan Kemmel</p>
+            </div>
+        </footer>
+    </body>
+</html>

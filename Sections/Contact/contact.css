@@ -1,0 +1,320 @@
+
+/* ====== CONTACT PAGE STYLES ======
+   Dieses Stylesheet gestaltet die Kontaktseite mit modernem Formular und Info-Karten.
+*/
+
+
+/* Haupt-Container für die Kontaktseite */
+.contact-page {
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%); /* Heller Verlauf */
+    min-height: 100vh; /* Mindestens volle Höhe */
+}
+
+
+/* Hero-Bereich oben mit Gradient und Titel */
+.contact-hero {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); /* Blauer Verlauf */
+    color: white; /* Weißer Text */
+    padding: 80px 20px; /* Viel Abstand */
+    text-align: center; /* Zentriert */
+    position: relative; /* Für Deko-Elemente */
+    overflow: hidden; /* Überlauf abschneiden */
+}
+
+
+/* Animierter Kreis im Hintergrund */
+.contact-hero::before {
+    content: ""; /* Leeres Deko-Element */
+    position: absolute; /* Absolut im Hero-Bereich */
+    top: -50%; /* Oben außerhalb */
+    right: -10%; /* Rechts außerhalb */
+    width: 500px; /* Größe */
+    height: 500px;
+    background: rgba(255, 255, 255, 0.1); /* Sehr transparenter Kreis */
+    border-radius: 50%; /* Kreisform */
+    animation: float 8s ease-in-out infinite; /* Schwebt auf und ab */
+}
+
+
+/* Keyframes für Schweb-Animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); } /* Start/Ende: normal */
+    50% { transform: translateY(-30px); } /* Mitte: 30px nach oben */
+}
+
+
+/* Hauptüberschrift im Hero-Bereich */
+.contact-hero h1 {
+    font-size: 3rem; /* Sehr groß */
+    font-weight: 800; /* Extra fett */
+    margin-bottom: 15px; /* Abstand nach unten */
+    position: relative; /* Für Layering */
+    z-index: 1; /* Über Deko-Elementen */
+    letter-spacing: -0.5px; /* Leicht enger */
+}
+
+
+/* Untertitel im Hero-Bereich */
+.contact-hero .hero-subtitle {
+    font-size: 1.2rem; /* Etwas größer */
+    opacity: 0.95; /* Leicht transparent */
+    position: relative; /* Für Layering */
+    z-index: 1; /* Über Deko-Elementen */
+}
+
+
+/* Grid-Container für Formular und Info-Karten */
+.contact-container {
+    padding: 60px 20px; /* Abstand */
+    display: grid; /* Grid-Layout */
+    grid-template-columns: 1fr 1fr; /* Zwei Spalten */
+    gap: 50px; /* Abstand zwischen Spalten */
+    max-width: 1100px; /* Maximalbreite */
+    margin: 0 auto; /* Zentriert */
+}
+
+/* Contact form section */
+.contact-form-section h2,
+.contact-info-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--text);
+    font-weight: 700;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--primary);
+    display: inline-block;
+}
+
+/* Form styling */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 14px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.contact-form .btn {
+    padding: 14px 32px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Contact info section */
+.contact-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.contact-info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.info-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.contact-info-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.contact-info-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.contact-info-card a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.contact-info-card a:hover {
+    color: #ff4500;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-hero {
+        padding: 60px 20px;
+    }
+
+    .contact-hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .contact-hero .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px 20px;
+    }
+
+    .contact-form-section h2,
+    .contact-info-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 14px;
+    }
+
+    .contact-info-card {
+        padding: 20px;
+    }
+
+    .info-icon {
+        font-size: 2rem;
+    }
+}
+
+/* Slight left accent for the alternative contact panel */
+.contact-options .contact-alternative {
+    padding: 18px 20px;
+    border-left: 4px solid var(--primary);
+    background: rgba(255,255,255,0.6);
+}
+
+/* Decorative icons for each contact line (no layout changes) */
+.contact-options .contact-alternative p {
+    position: relative;
+    padding-left: 34px; /* leaves room for the icon */
+    margin: 10px 0;
+    color: var(--text);
+}
+.contact-options .contact-alternative p::before {
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: var(--primary);
+}
+.contact-options .contact-alternative p:nth-of-type(1)::before { content: "✉"; }
+.contact-options .contact-alternative p:nth-of-type(2)::before { content: "☎"; }
+.contact-options .contact-alternative p:nth-of-type(3)::before { content: "🔗"; }
+.contact-options .contact-alternative p:nth-of-type(4)::before { content: "🐱"; }
+
+/* Button styling: add envelope glyph inside button (purely decorative) */
+.contact-options .contact-form button {
+    background: linear-gradient(180deg, var(--primary), #e25a46);
+    color: #fff;
+    padding: 10px 14px;
+    padding-left: 40px; /* make room for the glyph */
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    position: relative;
+}
+.contact-options .contact-form button::before {
+    content: "✉";
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+/* Subtle top-right highlight — purely decorative */
+.contact-options .contact-panel::after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    right: -40px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle at 35% 35%, rgba(255,99,71,0.08), transparent 45%);
+    transform: rotate(8deg);
+    pointer-events: none;
+}
+
+/* Make the form panel taller and allow the submit area to stick to the bottom
+   while the textarea grows — internal layout only, does not change grid gap */
+.contact-options .form-panel {
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+}
+.contact-options .panel-intro { margin: 8px 0 14px; color: var(--muted); }
+.contact-options .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1; /* take available vertical space */
+}
+.contact-options .contact-form .row { display: flex; gap: 12px; }
+.contact-options .contact-form .col { flex: 1; }
+.contact-options .contact-form textarea { min-height: 240px; resize: vertical; }
+.contact-options .form-actions { margin-top: 12px; display: flex; justify-content: flex-end; }
+.contact-options .contact-form button { align-self: flex-end; }
+
+/* Small responsive tweak: keep textarea smaller on narrow screens */
+@media (max-width: 768px) {
+    .contact-options .form-panel { min-height: auto; }
+    .contact-options .contact-form .row { flex-direction: column; }
+    .contact-options .contact-form textarea { min-height: 160px; }
+}
+
