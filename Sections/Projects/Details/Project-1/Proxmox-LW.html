@@ -23,6 +23,176 @@
                 </nav>
             </div>
         </header>
+    
+        <main>
+            <section class="project-detail-section">
+                <div class="container">
+                    <h1 class="Proxmox">Proxmox</h1>
+                    <h2>Hardware:</h2>
+                    <div class="underline"></div>
+                    <p class="project-hardware"> 
+                        <ul>
+                            <li>AsRock E350M1/USB3</li>
+                            <li>AMD E-350</li>
+                            <li>Kingston 4GB DDR3 DIMM</li>
+                            <li>Samsung 4GB DDR3 DIMM</li>
+                            <li>Samsung 570 EVO 250GB</li>
+                            <li>Western Digital WD10JFCX-68N6GN0</li>
+                            <li>Mini Box PicoPSU 90W</li>
+                            <li>Tesfish 12V 7A 84W Netzteil</li>
+                        </ul>
+                    </p>
+                    <h2>Use Case:</h2>
+                    <div class="underline"></div>
+                    <p class="project-use-case"> 
+                        <ul>
+                            <li>Hosten von lightweight Anwendungen</li>
+                            <li>Stromgünstiger 24/7 Betrieb</li>
+                            <li>Einfaches Management von Diensten über eine benutzerfreundliche Weboberfläche</li>
+                            <li>Skalierbarkeit und Flexibilität für zukünftige Erweiterungen</li>
+                        </ul>
+                    </p>
+                </div>
+            </section>
+
+            <section class="Content-table-section">
+                <div class="container">
+                    <h2>Content:</h2>
+                    <div class="underline"></div>
+                    <p class="content-table">
+                        <ul>
+                            <li><a href="#Proxmox">Proxmox</a></li>
+                            <li><a href="#Setup and Installation">Setup and Installation</a></li>
+                            <li><a href="#Install MyDokuWiki">Install myDokuWiki</a></li>
+                            <li><a href="#MyDokuWiki USB Backup">MyDokuWiki USB Backup</a></li>
+                            <li><a href="#Install Tailscale VPN Server">Install Tailscale VPN Server</a></li>
+                            <li><a href="#Setup Debian 12 VM template">Setup Debian 12 VM template</a></li>
+                            <li><a href="#Setup HDD as SMB-Share">Setup HDD as SMB-Share</a></li>
+                        </ul>
+                    </p>
+                </div>
+            </section>
+
+            <section class="Content-section">
+                <div class="container">
+                    <h3 id="Setup and Installation">Setup and Installation:</h2>
+                    <div class="underline"></div>
+                    <p class="content">
+                        <ul>
+                            <li>Download Proxmox VE ISO from the official website.</li>
+                            <li>Create a bootable USB drive using tools like Rufus or Etcher.</li>
+                            <li>Boot the server from the USB drive and follow the installation prompts.</li>
+                            <li>On Target Hard-Disk:</li>
+                                <ol class="eingerückt">
+                                    <li>hdsize: Full Disk Size</li>
+                                    <li>swapsize: Swap Size should match RAM Size</li>
+                                    <li>maxroot: Maximum Root Partition Size (leave Room for backups/VMs)</li>
+                                    <li>minfree: 2GB (Reserved Space to prevent full Disk) </li>
+                                    <li> => leaves the rest for VM/CT Storage</li>
+                                </ol>
+                            <li>Configure network settings (recommend static IP) and set a strong root password during installation.</li>
+                            <li>After installation, access the Proxmox web interface via https://your-proxmox-ip:8006.</li>
+                            <li> Post Install:</li>
+                                <ol class="eingerückt">
+                                    <li>Update Proxmox VE to the latest version</li>
+                                    <li>Enable No-Subscription Repository</li>
+                                    <li>Enable Firewall, configure if needed</li>
+                                    <ol class="eingerückt-doppelt">
+                                        <li>Security and Maintenance:</li>
+                                        <li>Enable 2FA on Login</li>
+                                        <li>Schedule regular backups (atleast for important things)</li>
+                                        <li>Setup Update and Upgrade monthly</li>
+                                    </ol>
+                                </ol>
+                        </ul>
+                    </p>
+
+                    <h3 id="Install MyDokuWiki">Install MyDokuWiki:</h2>
+                    <div class="underline"></div>
+                    <p class="content">
+                        <ul>
+                            <li>Log in to the Proxmox web interface and download template (recommended ubuntu-24.04-standard-...)</li>
+                            <li>Create a new Linux Container.</li>
+                                <ol class="eingerückt">
+                                    <li>Unprivileged Container: check</li>
+                                    <li>Root Disk: 8GB</li>
+                                    <li>CPU: 1 core</li>
+                                    <li>Memory & Swap: 512MB</li>
+                                    <li>Start at Boot: Check optional</li>
+                                </ol>
+                            <li>Inside LXC Terminal Update and Install Web Stack:</li>
+                                <ol class="eingerückt">
+                                    <li>apt update && apt upgrade -y</li>
+                                    <li>apt install apache2 php php-gd php-xml php-json php-mbstring libapache2-mod-php unzip wget nano ufw -y</li>
+                                    <li>systemctl enable apache2</li>
+                                </ol>
+                            <li>Install myDokuWiki:</li>
+                                <ol class="eingerückt">
+                                    <li>cd /tmp</li>
+                                    <li>wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz</li>
+                                    <li>tar -xvzf dokuwiki-stable.tgz</li>
+                                    <li>mv dokuwiki-*/ /var/www/html/dokuwiki</li>
+                                    <li>chown -R www-data:www-data /var/www/html/dokuwiki</li>
+                                </ol>
+                            <li>Access MyDokuWiki via http://&lt;container-ip&gt;/install.php in a web browser</li>
+                            <li>Follow the on-screen instructions to complete the installation and configuration of MyDokuWiki</li>
+                            <li>Now you can access it via http://&lt;container-ip&gt;/doku.php in a web browser</li>
+                            <li>Configure UFW Firewall to allow HTTP traffic:</li>
+                                <ol class="eingerückt">
+                                    <li>ufw allow 80/tcp & 443/tcp</li>
+                                    <li>ufw enable</li>
+                                </ol>
+                            <li>Regularly update MyDokuWiki and the underlying OS to ensure security and stability</li>
+                            <li>Setup an automated backup system for MyDokuWiki data (highly recommended)</li>
+                        </ul>
+                    </p>
+
+                    <h3 id="MyDokuWiki USB Backup">MyDokuWiki USB Backup:</h2>
+                    <div class="underline"></div>
+                    <p class="content">
+                        <ul>
+                            <li>Connect a USB drive to the Proxmox server and identify it using the command line.</li>
+                            <li>Create a backup script that uses rsync or tar to back up the MyDokuWiki data directory to the USB drive.</li>
+                            <li>Schedule the backup script to run at regular intervals using cron.</li>
+                            <li>Ensure that the backup process is working correctly by checking the contents of the USB drive after the first backup.</li>
+                        </ul>
+                    </p>
+
+                    <h3 id="Install Tailscale VPN Server">Install Tailscale VPN Server:</h2>
+                    <div class="underline"></div>
+                    <p class="content">
+                        <ul>
+                            <li>Log in to the Proxmox web interface and create a new Linux Container for the Tailscale VPN server.</li>
+                            <li>Install a lightweight Linux distribution (e.g., Debian) on the container.</li>
+                            <li>Once the OS is installed, log in to the container and install Tailscale using the package manager or by downloading it from the official website.</li>
+                            <li>Configure Tailscale according to your needs and connect your devices to the VPN network.</li>
+                        </ul>
+                    </p>
+
+                    <h3 id="Setup Debian 12 VM template">Setup Debian 12 VM template:</h2>
+                    <div class="underline"></div>
+                    <p class="content">
+                        <ul>
+                            <li>Log in to the Proxmox web interface and create a new virtual machine for the Debian 12 template.</li>
+                            <li>Install Debian 12 on the VM and perform any necessary updates and configurations.</li>
+                            <li>Once the OS is set up, shut down the VM and convert it into a template using the Proxmox web interface.</li>
+                            <li>Use the Debian 12 template to quickly deploy new VMs with the same configuration in the future.</li>
+                        </ul>
+                    </p>
+
+                    <h3 id="Setup HDD as SMB-Share">Setup HDD as SMB-Share:</h2>
+                    <div class="underline"></div>
+                    <p class="content">
+                        <ul>
+                            <li>Connect an additional hard drive to the Proxmox server and identify it using the command line.</li>
+                            <li>Format and mount the hard drive on the Proxmox server.</li>
+                            <li>Install and configure Samba on the Proxmox server to share the mounted hard drive over the network.</li>
+                            <li>Set appropriate permissions for the shared folder and access it from other devices on the network.</li>
+                        </ul>
+                    </p>
+                </div>
+            </section>
+        </main>
     </body>
 </html>
 
