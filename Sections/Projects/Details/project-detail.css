@@ -110,6 +110,54 @@
     line-height: 1.8;
 }
 
+/* Content area lists */
+.content ul,
+.project-hardware,
+.project-use-case,
+.content-table {
+    list-style-type: disc;
+    margin-left: 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+}
+
+.content ul li,
+.project-hardware li,
+.project-use-case li,
+.content-table li {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 8px;
+}
+
+.content ol {
+    list-style-type: decimal;
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+.content ol li {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 6px;
+}
+
+/* Nested lists with custom classes */
+.content .eingerückt {
+    margin-left: 40px;
+    margin-top: 8px;
+}
+
+.content .eingerückt-doppelt {
+    margin-left: 60px;
+    margin-top: 8px;
+}
+
 /* Technology list */
 .tech-list {
     list-style: none;
