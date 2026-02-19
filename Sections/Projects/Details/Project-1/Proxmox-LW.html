@@ -118,25 +118,25 @@
                                 </ol>
                             <li>Inside LXC Terminal Update and Install Web Stack:</li>
                                 <ol class="eingerückt">
-                                    <li>apt update && apt upgrade -y</li>
-                                    <li>apt install apache2 php php-gd php-xml php-json php-mbstring libapache2-mod-php unzip wget nano ufw -y</li>
-                                    <li>systemctl enable apache2</li>
+                                    <li><span class="cmd">apt update && apt upgrade -y</span></li>
+                                    <li><span class="cmd">apt install apache2 php php-gd php-xml php-json php-mbstring libapache2-mod-php unzip wget nano ufw -y</span></li>
+                                    <li><span class="cmd">systemctl enable apache2</span></li>
                                 </ol>
                             <li>Install myDokuWiki:</li>
                                 <ol class="eingerückt">
-                                    <li>cd /tmp</li>
-                                    <li>wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz</li>
-                                    <li>tar -xvzf dokuwiki-stable.tgz</li>
-                                    <li>mv dokuwiki-*/ /var/www/html/dokuwiki</li>
-                                    <li>chown -R www-data:www-data /var/www/html/dokuwiki</li>
+                                    <li><span class="cmd">cd /tmp</span></li>
+                                    <li><span class="cmd">wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz</span></li>
+                                    <li><span class="cmd">tar -xvzf dokuwiki-stable.tgz</span></li>
+                                    <li><span class="cmd">mv dokuwiki-*/ /var/www/html/dokuwiki</span></li>
+                                    <li><span class="cmd">chown -R www-data:www-data /var/www/html/dokuwiki</span></li>
                                 </ol>
                             <li>Access MyDokuWiki via http://&lt;container-ip&gt;/install.php in a web browser</li>
                             <li>Follow the on-screen instructions to complete the installation and configuration of MyDokuWiki</li>
                             <li>Now you can access it via http://&lt;container-ip&gt;/doku.php in a web browser</li>
                             <li>Configure UFW Firewall to allow HTTP traffic:</li>
                                 <ol class="eingerückt">
-                                    <li>ufw allow 80/tcp & 443/tcp</li>
-                                    <li>ufw enable</li>
+                                    <li><span class="cmd">ufw allow 80/tcp & 443/tcp</span></li>
+                                    <li><span class="cmd">ufw enable</span></li>
                                 </ol>
                             <li>Regularly update MyDokuWiki and the underlying OS to ensure security and stability</li>
                             <li>Setup an automated backup system for MyDokuWiki data (highly recommended)</li>
@@ -168,8 +168,8 @@
                             <li>After installation, access website link and configure Tailscale</li>
                             <li>Enable Subnet routing in LXC Shell (optional as Exit Node)</li>
                                 <ol class="eingerückt">
-                                    <li>sudo sysctl -w net.ipv4.ip_forwarding=1</li>
-                                    <li>sudo tailscale up --advertise-routes=192.168.2.0/24 (--advertise-exit-node)</li>
+                                    <li><span class="cmd">sudo sysctl -w net.ipv4.ip_forwarding=1</span></li>
+                                    <li><span class="cmd">sudo tailscale up --advertise-routes=192.168.2.0/24 (--advertise-exit-node)</span></li>
                                 </ol>
                             <li>Register other devices, like phone and Laptop to access the VPN network</li>
                         </ul>
@@ -208,8 +208,8 @@
                             <li>Format and mount the hard drive on the Proxmox server</li>
                             <li>Install and configure Samba on the Proxmox server to share the mounted hard drive over the network:</li>
                                 <ol class="eingerückt">
-                                    <li>Install Samba: apt install samba -y</li>
-                                    <li>Edit the Samba configuration file: nano /etc/samba/smb.conf</li>
+                                    <li>Install Samba: <span class="cmd">apt install samba -y</span></li>
+                                    <li>Edit the Samba configuration file: <span class="cmd">nano /etc/samba/smb.conf</span></li>
                                     <li>Add:</li>
                                         <ol class="eingerückt-doppelt">
                                             <li>At the end of the file, add a new section for the shared folder:</li>
@@ -224,7 +224,7 @@
                                             <li>create mask = 0664</li>
                                             <li>directory mask = 2775</li>
                                         </ol>
-                                    <li>Restart the Samba service to apply the changes: systemctl restart smbd</li>
+                                    <li>Restart the Samba service to apply the changes: <span class="cmd">systemctl restart smbd</span></li>
                                 </ol>
                             <li>Set appropriate permissions and user for the shared folder and access it from other devices on the network</li>
                             <li>Configure Proxmox Firewall to allow access to the SMB share if needed:</li>

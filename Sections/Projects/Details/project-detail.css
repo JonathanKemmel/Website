@@ -158,6 +158,19 @@
     margin-top: 8px;
 }
 
+/* Command/Code styling */
+.cmd {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.95em;
+    color: #d63384;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
 /* Technology list */
 .tech-list {
     list-style: none;

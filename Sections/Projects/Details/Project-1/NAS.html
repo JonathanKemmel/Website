@@ -140,17 +140,17 @@
                         <ul>
                             <li>Update & Upgrade:</li>
                                 <ol class="eingerückt">
-                                    <li>sudo apt update && apt upgrade -y</li>
-                                    <li>sudo reboot</li>
+                                    <li><span class="cmd">sudo apt update && apt upgrade -y</span></li>
+                                    <li><span class="cmd">sudo reboot</span></li>
                                 </ol>
                             <li>Enable SSH:</li>
                                 <ol class="eingerückt">
-                                    <li>sudo systemctl enable ssh</li>
-                                    <li>sudo systemctl start ssh</li>
+                                    <li><span class="cmd">sudo systemctl enable ssh</span></li>
+                                    <li><span class="cmd">sudo systemctl start ssh</span></li>
                                 </ol>
                             <li>Install required tools:</li>
                                 <ol class="eingerückt">
-                                    <li>sudo apt install -y sudo curl gnupg lsb-release</li>
+                                    <li><span class="cmd">sudo apt install -y sudo curl gnupg lsb-release</span></li>
                                 </ol>
                         </ul>
                     </div>
@@ -162,19 +162,19 @@
                         <ul>
                             <li>Add OMV Repo:</li>
                                 <ol class="eingerückt">
-                                    <li>sudo curl -fsSL https://packages.openmediavault.org/public/archive.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/openmediavault.gpg</li>
-                                    <li>echo "deb https://packages.openmediavault.org/public arrakis main" | sudo tee /etc/apt/sources.list.d/openmediavault.list</li>
-                                    <li>sudo apt update</li>
+                                    <li><span class="cmd">sudo curl -fsSL https://packages.openmediavault.org/public/archive.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/openmediavault.gpg</span></li>
+                                    <li><span class="cmd">echo "deb https://packages.openmediavault.org/public arrakis main" | sudo tee /etc/apt/sources.list.d/openmediavault.list</span></li>
+                                    <li><span class="cmd">sudo apt update</span></li>
                                 </ol>
                             <li>Install OMV:</li>
                                 <ol class="eingerückt">
-                                    <li>sudo apt install openmediavault-keyring postfix -y</li>
-                                    <li>sudo apt update</li>
-                                    <li>sudo apt install openmediavault -y</li>
+                                    <li><span class="cmd">sudo apt install openmediavault-keyring postfix -y</span></li>
+                                    <li><span class="cmd">sudo apt update</span></li>
+                                    <li><span class="cmd">sudo apt install openmediavault -y</span></li>
                                 </ol>
                             <li>Initialize OMV:</li>
                                 <ol class="eingerückt">
-                                    <li>sudo omv-initsystem</li>
+                                    <li><span class="cmd">sudo omv-initsystem</span></li>
                                 </ol>
                             <li>Access OMV Web GUI:</li>
                                 <ol class="eingerückt">
