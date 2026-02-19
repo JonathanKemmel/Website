@@ -31,14 +31,12 @@
                     <h2>Hardware:</h2>
                     <div class="underline"></div>
                     <ul class="project-hardware"> 
-                        <li>AsRock E350M1/USB3</li>
-                        <li>AMD E-350</li>
-                        <li>Kingston 4GB DDR3 DIMM</li>
-                        <li>Samsung 4GB DDR3 DIMM</li>
-                        <li>Samsung 570 EVO 250GB</li>
-                        <li>Western Digital WD10JFCX-68N6GN0</li>
-                        <li>Mini Box PicoPSU 90W</li>
-                        <li>Tesfish 12V 7A 84W Netzteil</li>
+                        <li>AsRock E350M1 Motherboard</li>
+                        <li>AMD E-350 Processor</li>
+                        <li>8GB DDR3 RAM (2x4GB)</li>
+                        <li>250GB SSD (OS)</li>
+                        <li>1TB HDD (Storage)</li>
+                        <li>90W PicoPSU + 12V Power Supply</li>
                     </ul>
                     <h2>Use Case:</h2>
                     <div class="underline"></div>
@@ -169,7 +167,7 @@
                             <li>Enable Subnet routing in LXC Shell (optional as Exit Node)</li>
                                 <ol class="eingerückt">
                                     <li><span class="cmd">sudo sysctl -w net.ipv4.ip_forwarding=1</span></li>
-                                    <li><span class="cmd">sudo tailscale up --advertise-routes=192.168.2.0/24 (--advertise-exit-node)</span></li>
+                                    <li><span class="cmd">sudo tailscale up --advertise-routes=192.168.X.0/24 (--advertise-exit-node)</span></li>
                                 </ol>
                             <li>Register other devices, like phone and Laptop to access the VPN network</li>
                         </ul>
