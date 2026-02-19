@@ -7,7 +7,7 @@
 /* Haupt-Container für die Projektseite */
 .projects-container {
     padding: 60px 20px; /* Abstand oben/unten und seitlich */
-    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%); /* Heller Verlauf */
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%); /* Heller Verlauf */
 }
 
 
@@ -28,7 +28,7 @@
     display: block; /* Block-Element */
     width: 80px; /* Breite der Linie */
     height: 4px; /* Höhe der Linie */
-    background: linear-gradient(90deg, var(--primary), #764ba2); /* Farbverlauf */
+    background: linear-gradient(90deg, var(--primary), var(--accent-strong)); /* Farbverlauf */
     margin: 0 auto 40px; /* Zentriert, Abstand nach unten */
     border-radius: 2px; /* Abgerundete Ecken */
 }
@@ -45,7 +45,7 @@
 
 /* Einzelne Projektkarte */
 .project-card {
-    background: white; /* Weißer Hintergrund */
+    background: var(--surface); /* Weißer Hintergrund */
     border-radius: 12px; /* Abgerundete Ecken */
     overflow: hidden; /* Inhalt bleibt in der Karte */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Schatten */
@@ -55,7 +55,7 @@
     display: flex; /* Flexbox für vertikale Anordnung */
     flex-direction: column; /* Spaltenrichtung */
     height: 100%; /* Volle Höhe */
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Dezente Umrandung */
+    border: 1px solid var(--border); /* Dezente Umrandung */
 }
 
 
@@ -67,19 +67,19 @@
 
 /* Preview section of the card with unique gradients */
 .project-card:nth-child(1) .project-preview {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
 }
 
 .project-card:nth-child(2) .project-preview {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent-strong) 100%);
 }
 
 .project-card:nth-child(3) .project-preview {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, var(--primary-strong) 0%, var(--accent) 100%);
 }
 
 .project-card:nth-child(4) .project-preview {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    background: linear-gradient(135deg, var(--primary-strong) 0%, var(--text) 100%);
 }
 
 .project-preview {
@@ -156,14 +156,14 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary), #ff4500);
+    background: linear-gradient(135deg, var(--primary), var(--accent-strong));
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+    box-shadow: 0 4px 15px rgba(31, 122, 140, 0.28);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
+    box-shadow: 0 6px 20px rgba(31, 122, 140, 0.35);
     text-decoration: none;
 }
 

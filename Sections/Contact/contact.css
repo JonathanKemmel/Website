@@ -6,14 +6,14 @@
 
 /* Haupt-Container für die Kontaktseite */
 .contact-page {
-    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%); /* Heller Verlauf */
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%); /* Heller Verlauf */
     min-height: 100vh; /* Mindestens volle Höhe */
 }
 
 
 /* Hero-Bereich oben mit Gradient und Titel */
 .contact-hero {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); /* Blauer Verlauf */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%); /* Blauer Verlauf */
     color: white; /* Weißer Text */
     padding: 80px 20px; /* Viel Abstand */
     text-align: center; /* Zentriert */
@@ -107,7 +107,7 @@
 .form-group input,
 .form-group textarea {
     padding: 14px 16px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid var(--border);
     border-radius: 8px;
     font-family: inherit;
     font-size: 1rem;
@@ -119,7 +119,7 @@
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.1);
+    box-shadow: 0 0 0 3px rgba(31, 122, 140, 0.12);
 }
 
 .form-group textarea {
@@ -146,11 +146,11 @@
 }
 
 .contact-info-card {
-    background: white;
+    background: var(--surface);
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border);
     transition: all 0.3s ease;
     text-align: center;
 }
@@ -186,7 +186,7 @@
 }
 
 .contact-info-card a:hover {
-    color: #ff4500;
+    color: var(--primary-strong);
     text-decoration: underline;
 }
 
@@ -258,7 +258,7 @@
 
 /* Button styling: add envelope glyph inside button (purely decorative) */
 .contact-options .contact-form button {
-    background: linear-gradient(180deg, var(--primary), #e25a46);
+    background: linear-gradient(180deg, var(--primary), var(--accent-strong));
     color: #fff;
     padding: 10px 14px;
     padding-left: 40px; /* make room for the glyph */
@@ -286,7 +286,7 @@
     right: -40px;
     width: 180px;
     height: 180px;
-    background: radial-gradient(circle at 35% 35%, rgba(255,99,71,0.08), transparent 45%);
+    background: radial-gradient(circle at 35% 35%, rgba(31, 122, 140, 0.1), transparent 45%);
     transform: rotate(8deg);
     pointer-events: none;
 }

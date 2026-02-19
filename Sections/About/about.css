@@ -31,7 +31,7 @@
     transform: translateX(-50%); /* Exakt zentrieren */
     width: 80px; /* Breite der Linie */
     height: 4px; /* Höhe der Linie */
-    background: linear-gradient(90deg, var(--primary), #764ba2); /* Farbverlauf */
+    background: linear-gradient(90deg, var(--primary), var(--accent-strong)); /* Farbverlauf */
     border-radius: 2px; /* Abgerundete Ecken */
 }
 
@@ -40,11 +40,11 @@
 .intro-section {
     max-width: 800px; /* Maximalbreite */
     margin: 0 auto 60px; /* Zentriert, Abstand nach unten */
-    background: white; /* Weißer Hintergrund */
+    background: var(--surface); /* Weißer Hintergrund */
     padding: 40px; /* Innenabstand */
     border-radius: 12px; /* Abgerundete Ecken */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Schatten für Tiefe */
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Dezente Umrandung */
+    border: 1px solid var(--border); /* Dezente Umrandung */
 }
 
 
@@ -74,11 +74,11 @@
 
 /* Einzelne Info-Karte */
 .about-card {
-    background: white; /* Weißer Hintergrund */
+    background: var(--surface); /* Weißer Hintergrund */
     padding: 40px; /* Innenabstand */
     border-radius: 12px; /* Abgerundete Ecken */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Schatten */
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Umrandung */
+    border: 1px solid var(--border); /* Umrandung */
     text-align: center; /* Inhalt zentriert */
     transition: all 0.3s ease; /* Weiche Übergänge bei Hover */
 }
@@ -142,7 +142,7 @@
     height: 8px;
     background: var(--primary);
     border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(255, 99, 71, 0.2);
+    box-shadow: 0 0 0 4px rgba(31, 122, 140, 0.2);
 }
 
 .timeline-date {

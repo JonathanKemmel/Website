@@ -18,7 +18,13 @@
         <header class="site-header">
             <div class="container header-inner">
                 <h1 class="site-title">JK Portfolio</h1> <!-- Logo/Seitentitel -->
-                <nav class="main-nav" aria-label="Primary">
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
                         <li><a href="../Home/index.html">Home</a></li> <!-- Link zur Startseite -->
                         <li><a href="../About/about.html">About</a></li> <!-- Link zu Über mich -->
@@ -116,5 +122,16 @@
                 <p>2026 Jonathan Kemmel.</p>
             </div>
         </footer>
+        <script>
+            (function () {
+                const toggle = document.querySelector(".nav-toggle");
+                const nav = document.querySelector(".main-nav");
+                if (!toggle || !nav) return;
+                toggle.addEventListener("click", () => {
+                    const isOpen = nav.classList.toggle("open");
+                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            })();
+        </script>
     </body>
 </html>

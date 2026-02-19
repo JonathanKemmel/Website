@@ -4,7 +4,7 @@
 ========================================= */
 .hero-section {
      /* Farbverlauf von Blau zu Lila als Hintergrund */
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
      /* Textfarbe weiß für Kontrast */
     color: white;
      /* Innenabstand oben/unten 100px, seitlich 20px */
@@ -75,7 +75,7 @@
     font-size: 1.3rem;
     margin-bottom: 20px;
     font-weight: 500;
-    color: #fffbe7;
+    color: #f6f7fb;
     text-shadow: 2px 2px 8px rgba(30, 30, 60, 0.5);
     letter-spacing: 0.02em;
 }
@@ -84,7 +84,7 @@
     font-size: 1.1rem;
     margin-bottom: 40px;
     line-height: 1.8;
-    color: #fffbe7;
+    color: #f6f7fb;
     text-shadow: 2px 2px 8px rgba(30, 30, 60, 0.5);
     font-weight: 500;
     letter-spacing: 0.02em;
@@ -112,7 +112,7 @@
 /* Primärer Button: weißer Hintergrund, blauer Text */
 .btn-primary {
     background: white;
-    color: #667eea;
+    color: var(--primary);
 }
 
 .btn-primary:hover {
@@ -129,14 +129,14 @@
 
 .btn-secondary:hover {
     background: white;
-    color: #667eea;
+    color: var(--primary);
     transform: translateY(-3px);
 }
 
 /* Updates-Bereich unter dem Hero-Block */
 .updates-section {
     padding: 80px 20px;
-    background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+    background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
     text-align: center;
 }
 
@@ -151,7 +151,7 @@
 .underline {
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary), #764ba2);
+    background: linear-gradient(90deg, var(--primary), var(--accent-strong));
     margin: 0 auto 30px;
     border-radius: 2px;
 }

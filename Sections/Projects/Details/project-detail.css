@@ -7,7 +7,7 @@
 /* Haupt-Container für die Projekt-Detailseite */
 .project-detail {
     padding: 60px 20px; /* Abstand oben/unten und seitlich */
-    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%); /* Heller Verlauf */
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%); /* Heller Verlauf */
     min-height: 100vh; /* Mindestens volle Höhe */
 }
 
@@ -28,7 +28,7 @@
 
 /* Hover-Effekt für Zurück-Button */
 .btn-back:hover {
-    color: #ff4500; /* Orange beim Hover */
+    color: var(--primary-strong); /* Dunkler beim Hover */
     transform: translateX(-4px); /* Leicht nach links verschieben */
 }
 
@@ -37,11 +37,11 @@
 .detail-content {
     max-width: 820px; /* Maximalbreite */
     margin: 0 auto; /* Zentriert */
-    background: white; /* Weißer Hintergrund */
+    background: var(--surface); /* Weißer Hintergrund */
     border-radius: 12px; /* Abgerundete Ecken */
     padding: 50px; /* Innenabstand */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Schatten */
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Dezente Umrandung */
+    border: 1px solid var(--border); /* Dezente Umrandung */
 }
 
 
@@ -51,7 +51,7 @@
     align-items: center; /* Vertikal zentriert */
     margin-bottom: 50px; /* Abstand nach unten */
     padding-bottom: 40px; /* Abstand nach unten */
-    border-bottom: 2px solid #f0f0f0; /* Linie als Trennung */
+    border-bottom: 2px solid var(--border); /* Linie als Trennung */
 }
 
 
@@ -65,7 +65,7 @@
     justify-content: center;
     width: 80px; /* Größe */
     height: 80px;
-    background: linear-gradient(135deg, rgba(255, 99, 71, 0.1), rgba(118, 75, 162, 0.1)); /* Farbverlauf */
+    background: linear-gradient(135deg, rgba(31, 122, 140, 0.12), rgba(224, 138, 46, 0.12)); /* Farbverlauf */
     border-radius: 12px; /* Abgerundet */
 }
 
@@ -161,12 +161,12 @@
 /* Command/Code styling */
 .cmd {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
+    background-color: var(--surface-alt);
+    border: 1px solid var(--border);
     border-radius: 4px;
     padding: 2px 6px;
     font-size: 0.95em;
-    color: #d63384;
+    color: var(--primary-strong);
     white-space: pre-wrap;
     word-break: break-word;
 }
@@ -182,36 +182,36 @@
 }
 
 .tech-list li {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
     color: white;
     padding: 10px 18px;
     border-radius: 20px;
     font-size: 0.95rem;
     font-weight: 500;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 15px rgba(31, 122, 140, 0.28);
     transition: all 0.3s ease;
 }
 
 .tech-list .plain {
-    background: linear-gradient(135deg, #667eeaa6 0%, #764ba26c 100%);
-    color: #111;
+    background: linear-gradient(135deg, rgba(31, 122, 140, 0.22) 0%, rgba(224, 138, 46, 0.18) 100%);
+    color: var(--text);
     padding: 10px 18px;
     border-radius: 20px;
     font-size: 0.95rem;
     font-weight: 500;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 15px rgba(31, 122, 140, 0.22);
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
 .tech-list .plain a {
-    color: #111;
+    color: var(--text);
     text-decoration: none;
 }
 
 .tech-list li:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 20px rgba(31, 122, 140, 0.35);
 }
 
 /* Feature list */
@@ -249,7 +249,7 @@
 .detail-cta {
     margin-top: 60px;
     padding-top: 40px;
-    border-top: 2px solid #f0f0f0;
+    border-top: 2px solid var(--border);
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
@@ -269,25 +269,25 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary), #ff4500);
+    background: linear-gradient(135deg, var(--primary), var(--accent-strong));
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.3);
+    box-shadow: 0 4px 15px rgba(31, 122, 140, 0.28);
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 99, 71, 0.4);
+    box-shadow: 0 6px 20px rgba(31, 122, 140, 0.35);
     text-decoration: none;
 }
 
 .btn-secondary {
-    background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
+    background: linear-gradient(135deg, var(--surface-alt), #e6ebf0);
     color: var(--text);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .btn-secondary:hover {
-    background: linear-gradient(135deg, #d0d0d0, #c0c0c0);
+    background: linear-gradient(135deg, #e6ebf0, #d9e0e7);
     text-decoration: none;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);

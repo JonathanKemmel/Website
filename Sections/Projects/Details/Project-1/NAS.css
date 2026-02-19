@@ -20,7 +20,7 @@
     bottom: 0;
     width: 90px;
     height: 3px;
-    background: linear-gradient(90deg, var(--primary), #764ba2);
+    background: linear-gradient(90deg, var(--primary), var(--accent-strong));
     border-radius: 2px;
 }
 
@@ -32,9 +32,9 @@
 }
 
 .nas-card {
-    background: #ffffff;
+    background: var(--surface);
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
     padding: 28px;
 }
@@ -77,9 +77,9 @@
 .project-detail-section .container1,
 .Content-table-section .container1,
 .Content-section .container2 {
-    background: #ffffff;
+    background: var(--surface);
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
     padding: 32px;
 }
@@ -95,7 +95,7 @@
 .project-detail-section .underline,
 .Content-table-section .underline,
 .Content-section .underline {
-    background: linear-gradient(90deg, var(--primary), #764ba2);
+    background: linear-gradient(90deg, var(--primary), var(--accent-strong));
     height: 2px;
     border-radius: 2px;
     margin-bottom: 18px;
@@ -113,20 +113,20 @@
     border-radius: 6px;
     transition: color 0.2s ease, background-color 0.2s ease;
     display: block;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border);
 }
 
 .Content-table-section .content-table a:hover {
-    color: #ff4500;
-    background: rgba(255, 99, 71, 0.06);
+    color: var(--primary-strong);
+    background: rgba(31, 122, 140, 0.08);
     text-decoration: none;
 }
 
 .content .guide {
     color: var(--text);
     font-weight: 600;
-    background: #f8f9fb;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
     border-left: 3px solid var(--primary);
     padding: 10px 14px;
     border-radius: 6px;
@@ -134,9 +134,9 @@
 }
 
 .content .cmd {
-    background-color: #f4f4f4;
-    border-color: rgba(0, 0, 0, 0.12);
-    color: #b02a73;
+    background-color: var(--surface-alt);
+    border-color: var(--border);
+    color: var(--primary-strong);
 }
 
 /* Subtle section spacing for readability */
@@ -146,9 +146,9 @@
 }
 
 .nas-guide-card {
-    background: #ffffff;
+    background: var(--surface);
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
     padding: 20px 22px;
     margin-bottom: 18px;
