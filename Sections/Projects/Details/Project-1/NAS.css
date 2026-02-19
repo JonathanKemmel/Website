@@ -1,0 +1,190 @@
+/* NAS-specific styles (page-level overrides) */
+
+/* Use existing site palette for consistency */
+.NAS {
+    color: var(--text);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    font-size: 2.4rem;
+    margin-bottom: 18px;
+    position: relative;
+    padding-bottom: 14px;
+    text-align: center;
+}
+
+.NAS::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 90px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), #764ba2);
+    border-radius: 2px;
+}
+
+.nas-overview {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 20px;
+}
+
+.nas-card {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    padding: 28px;
+}
+
+.nas-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 28px;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    padding: 20px 40px 40px;
+    align-items: start;
+}
+
+.nas-sidebar {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+}
+
+.nas-sidebar .container1 {
+    padding: 24px;
+}
+
+.nas-sidebar .content-table {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.nas-sidebar .content-table li {
+    margin-bottom: 8px;
+}
+
+.nas-main .container2 {
+    padding: 32px;
+}
+
+.project-detail-section .container1,
+.Content-table-section .container1,
+.Content-section .container2 {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    padding: 32px;
+}
+
+/* Remove outer box for hardware/use-case area */
+.project-detail-section .container1 {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0 20px 20px;
+}
+
+.project-detail-section .underline,
+.Content-table-section .underline,
+.Content-section .underline {
+    background: linear-gradient(90deg, var(--primary), #764ba2);
+    height: 2px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+}
+
+.project-detail-section .project-hardware li::marker,
+.project-detail-section .project-use-case li::marker {
+    color: var(--primary);
+}
+
+.Content-table-section .content-table a {
+    color: var(--primary);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.Content-table-section .content-table a:hover {
+    color: #ff4500;
+    background: rgba(255, 99, 71, 0.06);
+    text-decoration: none;
+}
+
+.content .guide {
+    color: var(--text);
+    font-weight: 600;
+    background: #f8f9fb;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-left: 3px solid var(--primary);
+    padding: 10px 14px;
+    border-radius: 6px;
+    letter-spacing: -0.1px;
+}
+
+.content .cmd {
+    background-color: #f4f4f4;
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #b02a73;
+}
+
+/* Subtle section spacing for readability */
+.Content-section .content > ul,
+.Content-section .content > ol {
+    padding-top: 4px;
+}
+
+.nas-guide-card {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    padding: 20px 22px;
+    margin-bottom: 18px;
+}
+
+.nas-guide-card:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .nas-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .nas-card {
+        padding: 22px;
+    }
+
+    .nas-layout {
+        grid-template-columns: 1fr;
+        padding: 12px 20px 20px;
+    }
+
+    .nas-sidebar {
+        position: static;
+    }
+
+    .project-detail-section .container1,
+    .Content-table-section .container1,
+    .Content-section .container2 {
+        padding: 24px 20px;
+    }
+
+    .Content-table-section .content-table a {
+        display: block;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+    }
+}

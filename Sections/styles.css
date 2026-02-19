@@ -272,6 +272,14 @@ footer.site-footer {
    ======================================== */
 
 @media (max-width: 768px) {
+    header.site-header {
+        padding: 8px 0;
+    }
+
+    .site-title {
+        font-size: 1.3rem;
+        line-height: 1.1;
+    }
     /* Two-column layout becomes one column on mobile */
     main.two-col {
         /* Single column instead of two */
@@ -288,16 +296,35 @@ footer.site-footer {
     .header-inner {
         /* Stack title above nav vertically */
         flex-direction: column;
-        /* Align items to the left */
-        align-items: flex-start;
+        /* Center align on mobile */
+        align-items: center;
+        gap: 6px;
+    }
+
+    .main-nav {
+        width: 100%;
     }
 
     /* Navigation menu stacks vertically on mobile */
     .main-nav ul {
         /* Stack links vertically instead of horizontally */
-        flex-direction: column;
+        flex-direction: row;
         /* Smaller gap between links on mobile */
-        gap: 8px;
+        gap: 4px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .main-nav a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 4px 6px;
+        font-size: 0.9rem;
+        line-height: 1.2;
+        background: transparent;
+        border: 0;
     }
 
     /* Reduce padding on smaller screens to save space */
