@@ -7,6 +7,7 @@
         <title>Web Application — Jonathan Kemmel</title> <!-- Titel im Browser-Tab -->
         <link rel="stylesheet" href="../../../styles.css" /> <!-- Basis-Styles -->
         <link rel="stylesheet" href="../project-detail.css" /> <!-- Detailseiten-Styles -->
+        <link rel="stylesheet" href="Laptop.css" /> <!-- Page-Styles -->
     </head>
     <body>
         <!-- Kopfbereich mit Navigation -->
@@ -34,38 +35,47 @@
             <section class="project-detail-section">
                 <div class="container1">
                     <h1 class="Laptop">Laptop (Mobile Workstation)</h1>
-                    <h2>Hardware:</h2>
-                    <div class="underline"></div>
-                    <ul class="project-hardware"> 
-                        <li>Lenovo G50-45</li>
-                        <li>AMD Processor</li>
-                        <li>4GB DDR4 RAM</li>
-                        <li>HDD Storage</li>
-                    </ul>
-                    <h2>Use Case:</h2>
-                    <div class="underline"></div>
-                    <ul class="project-use-case"> 
-                        <li>Mobile programming workstation</li>
-                        <li>ESPHome and Python development</li>
-                        <li>Lightweight Arch Linux setup</li>
-                        <li>Remote access via SSH</li>
-                    </ul>
+                    <div class="laptop-overview">
+                        <div class="laptop-card">
+                            <h2>Hardware:</h2>
+                            <div class="underline"></div>
+                            <ul class="project-hardware"> 
+                                <li>Lenovo G50-45</li>
+                                <li>AMD Processor</li>
+                                <li>4GB DDR4 RAM</li>
+                                <li>HDD Storage</li>
+                            </ul>
+                        </div>
+                        <div class="laptop-card">
+                            <h2>Use Case:</h2>
+                            <div class="underline"></div>
+                            <ul class="project-use-case"> 
+                                <li>Mobile programming workstation</li>
+                                <li>ESPHome and Python development</li>
+                                <li>Lightweight Arch Linux setup</li>
+                                <li>Remote access via SSH</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section class="Content-table-section">
-                <div class="container1">
-                    <h2>Content:</h2>
-                    <div class="underline"></div>
-                    <ul class="content-table">
-                        <li><a href="#Part 1">Arch Linux Installation & Configuration</a></li>
-                        <li><a href="#Part 2">IDE Setup for Low-Resource Development</a></li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="Content-section">
-                <div class="container2">
+            <section class="laptop-layout">
+                <aside class="laptop-sidebar">
+                    <div class="Content-table-section">
+                        <div class="container1">
+                            <h2>Content:</h2>
+                            <div class="underline"></div>
+                            <ul class="content-table">
+                                <li><a href="#Part 1">Arch Linux Installation & Configuration</a></li>
+                                <li><a href="#Part 2">IDE Setup for Low-Resource Development</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+                <div class="laptop-main">
+                    <section class="Content-section">
+                        <div class="container2">
                     <h3 id="Part 1">Arch Linux Installation & Configuration</h3>
                     <div class="underline"></div>
                     <div class="content">
@@ -340,6 +350,8 @@
                             <li>PlatformIO IDE in VS Code Insiders should now detect PlatformIO Core automatically</li>
                         </ul>
                     </div>
+                        </div>
+                    </section>
                 </div>
             </section>
         </main>

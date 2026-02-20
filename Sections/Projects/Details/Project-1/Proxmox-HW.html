@@ -7,6 +7,7 @@
         <title>Web Application — Jonathan Kemmel</title> <!-- Titel im Browser-Tab -->
         <link rel="stylesheet" href="../../../styles.css" /> <!-- Basis-Styles -->
         <link rel="stylesheet" href="../project-detail.css" /> <!-- Detailseiten-Styles -->
+        <link rel="stylesheet" href="Proxmox-HW.css" /> <!-- Page-Styles -->
     </head>
     <body>
         <!-- Kopfbereich mit Navigation -->
@@ -34,39 +35,48 @@
             <section class="project-detail-section">
                 <div class="container1">
                     <h1 class="Proxmox">Proxmox HW (High-Performance Server)</h1>
-                    <h2>Hardware:</h2>
-                    <div class="underline"></div>
-                    <ul class="project-hardware"> 
-                        <li>Custom Build Workstation</li>
-                        <li>Multi-Core Processor</li>
-                        <li>16GB+ RAM</li>
-                        <li>SSD Storage</li>
-                        <li>Dedicated Network Interface</li>
-                    </ul>
-                    <h2>Use Case:</h2>
-                    <div class="underline"></div>
-                    <ul class="project-use-case"> 
-                        <li>Running resource-intensive applications</li>
-                        <li>Development environments (Ubuntu VM)</li>
-                        <li>Security testing (Kali VM)</li>
-                        <li>On-demand high-performance computing</li>
-                    </ul>
+                    <div class="proxmox-hw-overview">
+                        <div class="proxmox-hw-card">
+                            <h2>Hardware:</h2>
+                            <div class="underline"></div>
+                            <ul class="project-hardware"> 
+                                <li>Custom Build Workstation</li>
+                                <li>Multi-Core Processor</li>
+                                <li>16GB+ RAM</li>
+                                <li>SSD Storage</li>
+                                <li>Dedicated Network Interface</li>
+                            </ul>
+                        </div>
+                        <div class="proxmox-hw-card">
+                            <h2>Use Case:</h2>
+                            <div class="underline"></div>
+                            <ul class="project-use-case"> 
+                                <li>Running resource-intensive applications</li>
+                                <li>Development environments (Ubuntu VM)</li>
+                                <li>Security testing (Kali VM)</li>
+                                <li>On-demand high-performance computing</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section class="Content-table-section">
-                <div class="container1">
-                    <h2>Content:</h2>
-                    <div class="underline"></div>
-                    <ul class="content-table">
-                        <li><a href="#Part 1">Create Ubuntu VM (Programming)</a></li>
-                        <li><a href="#Part 2">Create Kali VM (Hacking/Security)</a></li>
-                    </ul>
-                </div>
-            </section>
-
-            <section class="Content-section">
-                <div class="container2">
+            <section class="proxmox-hw-layout">
+                <aside class="proxmox-hw-sidebar">
+                    <div class="Content-table-section">
+                        <div class="container1">
+                            <h2>Content:</h2>
+                            <div class="underline"></div>
+                            <ul class="content-table">
+                                <li><a href="#Part 1">Create Ubuntu VM (Programming)</a></li>
+                                <li><a href="#Part 2">Create Kali VM (Hacking/Security)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+                <div class="proxmox-hw-main">
+                    <section class="Content-section">
+                        <div class="container2">
                     <h3 id="Part 1">Create Ubuntu VM (Programming)</h3>
                     <div class="underline"></div>
                     <div class="content">
@@ -213,6 +223,8 @@
                             <li>Finish → Start VM → Console → run Kali installer</li>
                         </ul>
                     </div>
+                        </div>
+                    </section>
                 </div>
             </section>
         </main>

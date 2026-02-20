@@ -1,7 +1,7 @@
-/* NAS-specific styles (page-level overrides) */
+/* Proxmox-LW-specific styles (page-level overrides) */
 
 /* Use existing site palette for consistency */
-.NAS {
+.Proxmox {
     color: var(--text);
     font-weight: 700;
     letter-spacing: -0.5px;
@@ -12,7 +12,7 @@
     text-align: center;
 }
 
-.NAS::after {
+.Proxmox::after {
     content: "";
     position: absolute;
     left: 50%;
@@ -24,14 +24,14 @@
     border-radius: 2px;
 }
 
-.nas-overview {
+.proxmox-lw-overview {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px;
     margin-top: 20px;
 }
 
-.nas-card {
+.proxmox-lw-card {
     background: var(--surface);
     border-radius: 10px;
     border: 1px solid var(--border);
@@ -39,7 +39,7 @@
     padding: 28px;
 }
 
-.nas-layout {
+.proxmox-lw-layout {
     display: grid;
     grid-template-columns: 260px minmax(0, 1fr);
     gap: 28px;
@@ -50,41 +50,27 @@
     align-items: start;
 }
 
-.nas-sidebar {
+.proxmox-lw-sidebar {
     position: sticky;
     top: 20px;
     align-self: start;
 }
 
-.nas-sidebar .container1 {
+.proxmox-lw-sidebar .container1 {
     padding: 24px;
 }
 
-.nas-sidebar .content-table {
+.proxmox-lw-sidebar .content-table {
     list-style: none;
     margin-left: 0;
     padding-left: 0;
 }
 
-.Content-table-section .content-table {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.Content-table-section .content-table li {
-    margin: 0 0 8px;
-}
-
-.Content-table-section .content-table li:last-child {
-    margin-bottom: 0;
-}
-
-.nas-sidebar .content-table li {
+.proxmox-lw-sidebar .content-table li {
     margin-bottom: 8px;
 }
 
-.nas-main .container2 {
+.proxmox-lw-main .container2 {
     padding: 32px;
 }
 
@@ -130,6 +116,20 @@
     border: 1px solid var(--border);
 }
 
+.Content-table-section .content-table {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Content-table-section .content-table li {
+    margin: 0 0 8px;
+}
+
+.Content-table-section .content-table li:last-child {
+    margin-bottom: 0;
+}
+
 .Content-table-section .content-table a:hover {
     color: var(--primary-strong);
     background: rgba(31, 122, 140, 0.08);
@@ -159,34 +159,21 @@
     padding-top: 4px;
 }
 
-.nas-guide-card {
-    background: var(--surface);
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-    padding: 20px 22px;
-    margin-bottom: 18px;
-}
-
-.nas-guide-card:last-child {
-    margin-bottom: 0;
-}
-
 @media (max-width: 768px) {
-    .nas-overview {
+    .proxmox-lw-overview {
         grid-template-columns: 1fr;
     }
 
-    .nas-card {
+    .proxmox-lw-card {
         padding: 22px;
     }
 
-    .nas-layout {
+    .proxmox-lw-layout {
         grid-template-columns: 1fr;
         padding: 12px 20px 20px;
     }
 
-    .nas-sidebar {
+    .proxmox-lw-sidebar {
         position: static;
     }
 
