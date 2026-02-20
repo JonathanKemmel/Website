@@ -40,6 +40,7 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Spalten */
     gap: 35px; /* Abstand zwischen Karten */
     margin-top: 50px; /* Abstand nach oben */
+    max-width: 1000px; /* Maximalbreite */
 }
 
 

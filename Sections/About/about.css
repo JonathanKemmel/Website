@@ -38,7 +38,7 @@
 
 /* Einleitungskarte oben auf der Seite */
 .intro-section {
-    max-width: 800px; /* Maximalbreite */
+    max-width: 1000px; /* Maximalbreite */
     margin: 0 auto 60px; /* Zentriert, Abstand nach unten */
     background: var(--surface); /* Weißer Hintergrund */
     padding: 40px; /* Innenabstand */
@@ -66,9 +66,11 @@
 /* Grid für die 4 Info-Karten */
 .about-grid {
     display: grid; /* Grid-Layout */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Spalten */
+    grid-template-columns: repeat(2, 1fr); /* Erzwinge 2 Spalten (2x2 Karten) */
+    grid-auto-rows: 1fr; /* Macht alle Reihen gleich hoch -> gleiche Kartenhöhe */
     gap: 30px; /* Abstand zwischen Karten */
-    margin-bottom: 60px; /* Abstand nach unten */
+    margin: 0 auto 60px; /* Abstand nach unten */
+    max-width: 1000px; /* Maximalbreite */
 }
 
 
@@ -83,6 +85,16 @@
     transition: all 0.3s ease; /* Weiche Übergänge bei Hover */
 }
 
+/* Gleiche Breite wird durch die Grid-Spalten erreicht; gleiche Höhe erzwingt
+   die Grid-Reihenhöhe und sorgt dafür, dass jede Karte die volle Höhe nutzt. */
+.about-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Inhalt oben anordnen, gleiche Startposition für Texte */
+    height: 100%; /* Füllt die von grid-auto-rows vorgegebene Höhe */
+    box-sizing: border-box; /* Padding zählt zur Höhe */
+}
+
 
 /* Hover-Effekt für Karten */
 .about-card:hover {
@@ -92,27 +104,38 @@
 
 /* Icon oben in der Karte */
 .card-icon {
-    font-size: 3rem; /* Großes Emoji/Icon */
-    margin-bottom: 20px; /* Abstand nach unten */
-    display: block; /* Block-Element */
+    width: 64px; /* Feste Box für Icon - sorgt für identische Position */
+    height: 64px;
+    font-size: 2.8rem; /* Größe des Icons */
+    display: flex; /* Zentriert das Emoji/Symbol innen */
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px; /* Gleichmäßiger Abstand nach unten */
+    flex: 0 0 auto; /* Nicht flexibel, bleibt oben */
 }
 
 .about-card h2 {
     font-size: 1.5rem;
-    margin-bottom: 15px;
+    margin: 0 0 12px; /* Kein Abstand oben, gleichmäßiger Abstand unten */
     color: var(--text);
     font-weight: 600;
+    min-height: 48px; /* Stellt sicher, dass alle Überschriften dieselbe Höhe haben */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .about-card p {
     color: var(--muted);
     line-height: 1.7;
     font-size: 1rem;
+    margin: 0; /* Kein zusätzlicher Abstand oben, Startposition wird so einheitlich */
+    flex: 1 1 auto; /* Füllt den mittleren Bereich, gleiche Platzverteilung */
 }
 
 /* Timeline section */
 .timeline {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto 60px;
 }
 
@@ -183,16 +206,29 @@
         gap: 20px;
     }
 
+    .about-card h2 {
+        font-size: 1.5rem;
+        margin: 0 0 15px; /* Kein zusätzlicher Abstand oben - so stehen alle Überschriften gleich */
+        color: var(--text);
+        font-weight: 600;
+        text-align: center;
+        flex: 0 0 auto; /* Überschrift bleibt im oberen Bereich */
+    }
+
+    .about-card p {
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 1rem;
+        flex: 1 1 auto; /* Inhalt füllt den mittleren Bereich */
+        margin: 0;
+    }
+
+    /* Stelle sicher, dass Icon + Überschrift stets am oberen Bereich stehen */
     .about-card {
-        padding: 30px 20px;
-    }
-
-    .timeline {
-        max-width: 100%;
-    }
-
-    .timeline-item {
-        grid-template-columns: 70px 1fr;
-        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Inhalt oben anordnen */
+        height: 100%;
+        box-sizing: border-box; /* Padding zählt zur Höhe */
     }
 }

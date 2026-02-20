@@ -1,0 +1,27 @@
+/* Backup of original root color variables from styles.css
+   Created before applying new professional palette.
+*/
+:root {
+    /* Core surfaces */
+    --bg: #f4f6f8;
+    --surface: #ffffff;
+    --surface-alt: #f8fafc;
+
+    /* Text colors */
+    --text: #1f2933;
+    --muted: #5f6c7b;
+
+    /* Brand accents */
+    --primary: #1f7a8c;
+    --primary-strong: #145b6b;
+    --accent: #f2b05e;
+    --accent-strong: #e08a2e;
+
+    /* Header */
+    --header-bg: #1f2933;
+    --header-text: #ffffff;
+
+    /* UI helpers */
+    --border: rgba(31, 41, 51, 0.1);
+    --max-width: 900px;
+}

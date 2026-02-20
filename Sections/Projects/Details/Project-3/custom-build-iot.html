@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Custom Build IoT — Jonathan Kemmel</title>
+        <link rel="stylesheet" href="../../../styles.css" />
+        <link rel="stylesheet" href="../project-detail.css" />
+        <link rel="stylesheet" href="home-assistant.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="primary-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="project-1.html">Geräte/Server</a></li>
+                        <li><a href="../Project-2/project-2.html">Networking</a></li>
+                        <li><a href="../Project-3/project-3.html">Home Automation</a></li>
+                        <li><a href="../Project-4/project-4.html">Coding</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <section class="project-detail-section">
+                <div class="container1">
+                    <h1 class="Proxmox">Custom Build IoT</h1>
+                    <div class="proxmox-lw-overview">
+                        <div class="proxmox-lw-card">
+                            <h2>Hardware:</h2>
+                            <div class="underline"></div>
+                            <ul class="project-hardware">
+                                <li>FILLER: ESP32-based LED controller (example)</li>
+                                <li>FILLER: Self-built smart button / switch</li>
+                                <li>FILLER: Custom sensor modules</li>
+                            </ul>
+                        </div>
+                        <div class="proxmox-lw-card">
+                            <h2>Use Case:</h2>
+                            <div class="underline"></div>
+                            <ul class="project-use-case">
+                                <li>FILLER: Local MQTT control and automation</li>
+                                <li>FILLER: ESPHome / Tasmota / custom firmware examples</li>
+                                <li>FILLER: Integrations and automation scenarios</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="proxmox-lw-layout">
+                <aside class="proxmox-lw-sidebar">
+                    <div class="Content-table-section">
+                        <div class="container1">
+                            <h2>Content:</h2>
+                            <div class="underline"></div>
+                            <ul class="content-table">
+                                <li><a href="#DIY">DIY Projects</a></li>
+                                <li><a href="#Firmware">Firmware & MQTT</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+                <div class="proxmox-lw-main">
+                    <section class="Content-section">
+                        <div class="container2">
+                            <h3 id="Firmware">Firmware & MQTT (filler)</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">FILLER: Notes about ESPHome/Tasmota, MQTT topics, OTA updates, and wiring.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </main>
+        <script>
+            (function () { const toggle = document.querySelector(".nav-toggle"); const nav = document.querySelector(".main-nav"); if (!toggle || !nav) return; toggle.addEventListener("click", () => { const isOpen = nav.classList.toggle("open"); toggle.setAttribute("aria-expanded", isOpen ? "true" : "false"); }); })();
+        </script>
+    </body>
+</html>

@@ -1,16 +1,24 @@
+
+<!--
+    PROJECT-1.HTML
+    Diese Datei zeigt die Detailseite für das Projekt "Web Application".
+    Jeder Block und wichtige Zeile ist mit deutschen Kommentaren versehen.
+-->
 <!DOCTYPE html>
 <html lang="de">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Backend API — Jonathan Kemmel</title>
-        <link rel="stylesheet" href="../../../styles.css" />
-        <link rel="stylesheet" href="../project-detail.css" />
+        <!-- Meta-Informationen und Einbindung der Stylesheets -->
+        <meta charset="utf-8" /> <!-- Zeichencodierung UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive -->
+        <title>Web Application — Jonathan Kemmel</title> <!-- Titel im Browser-Tab -->
+        <link rel="stylesheet" href="../../../styles.css" /> <!-- Basis-Styles -->
+        <link rel="stylesheet" href="../project-detail.css" /> <!-- Detailseiten-Styles -->
     </head>
     <body>
+        <!-- Kopfbereich mit Navigation -->
         <header class="site-header">
             <div class="container header-inner">
-                <h1 class="site-title">JK Portfolio</h1>
+                <h1 class="site-title">JK Portfolio</h1> <!-- Logo/Seitentitel -->
                 <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
                     <span></span>
                     <span></span>
@@ -19,69 +27,66 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="../../../Home/index.html">Home</a></li>
-                        <li><a href="../../../About/about.html">About</a></li>
-                        <li><a href="../../projects.html">Projects</a></li>
-                        <li><a href="../../../Contact/contact.html">Contact</a></li>
+                        <li><a href="../../../Home/index.html">Home</a></li> <!-- Link zur Startseite -->
+                        <li><a href="../../../About/about.html">About</a></li> <!-- Link zu Über mich -->
+                        <li><a href="../../projects.html">Projects</a></li> <!-- Link zu Projekten -->
+                        <li><a href="../../../Contact/contact.html">Contact</a></li> <!-- Link zu Kontakt -->
                     </ul>
                 </nav>
             </div>
         </header>
 
+        <!-- Main content of the page -->
         <main class="container project-detail">
-            <a href="../../projects.html" class="btn-back">← Zurück zu den Projekten</a>
+            <!-- Back button -->
+            <a href="../../projects.html" class="btn-back">← Back to Projects</a>
             
             <article class="detail-content">
+                <!-- Header section with icon and title -->
                 <div class="detail-header">
-                    <div class="detail-icon">⚙️</div>
-                    <h1>Backend API</h1>
+                    <div class="detail-icon">🏠</div> <!-- Icon for the project: Server/Computer -->
+                    <h1>Devices/Servers</h1> <!-- Project name -->
                 </div>
 
+                <!-- Section: Overview -->
                 <section class="detail-section">
-                    <h2>Übersicht</h2>
+                    <h2>Overview</h2>
                     <p>
-                        Eine hochperformante RESTful API, die mit modernen Backend-Technologien und Best 
-                        Practices entwickelt wurde. Die API bietet sichere Authentifizierung, Datenverwaltung 
-                        und umfangreiche Dokumentation.
+                        Here are all my device/server projects that I have implemented over time. Each project demonstrates my skills in device & server management, network configuration, and performance optimization across all devices.
                     </p>
                 </section>
 
+                <!-- Section: Technologies -->
                 <section class="detail-section">
-                    <h2>Technologien</h2>
+                    <h2>Technologies</h2>
                     <ul class="tech-list">
-                        <li>Node.js & Express</li>
-                        <li>MongoDB für Datenspeicherung</li>
-                        <li>JWT für Authentifizierung</li>
-                        <li>Docker für Containerisierung</li>
-                    </ul>
+                        <li class="plain"><a class="btn btn-primary" href="home-assistant.html">Home Assistant</a></li>
+                        <li class="plain"><a class="btn btn-primary" href="off-the-shelf-iot.html">Off-the-Shelf IoT</a></li>
+                        <li class="plain"><a class="btn btn-primary" href="custom-build-iot.html">Custom Build IoT</a></li>
                 </section>
 
+                <!-- Section: Features -->
                 <section class="detail-section">
                     <h2>Features</h2>
                     <ul class="feature-list">
-                        <li>Sichere RESTful API mit OAuth2</li>
-                        <li>Skalierbare Datenbankarchitektur</li>
-                        <li>Umfangreiche Unit & Integration Tests</li>
-                        <li>Ausführliche API-Dokumentation mit Swagger</li>
+                        <li>Home Assistant for hosting 24/7 uptime systems</li> <!-- Mobile capability -->
+                        <li>Off-the-Shelf IoT for hosting on-demand systems</li> <!-- Performance -->
+                        <li>Custom Build IoT as storage solution for multiple devices</li> <!-- Accessibility -->
+                        <li>Laptop as mobile workstation</li> <!-- UI/UX -->
                     </ul>
                 </section>
 
+                <!-- Section: Challenges & Solutions -->
                 <section class="detail-section">
-                    <h2>Herausforderungen & Lösungen</h2>
+                    <h2>Challenges & Solutions</h2>
                     <p>
-                        Die Skalierbarkeit war eine zentrale Anforderung. Dies wurde durch die Verwendung 
-                        von MongoDB, Caching-Strategien und Load Balancing erreicht. Sicherheit wurde durch 
-                        JWT-Token und reguläre Security Audits gewährleistet.
+                        The biggest challenge was working with old device components and optimizing them to ensure they function stably in the future. Using Home Assistant for self-hosting systems to save money, Custom Build IoT as an affordable cloud storage for data, and repurposing an old laptop as a mobile workstation.
                     </p>
                 </section>
-
-                <div class="detail-cta">
-                    <a href="#" class="btn btn-primary">API testen</a>
-                    <a href="#" class="btn btn-secondary">GitHub Repository</a>
-                </div>
             </article>
         </main>
 
+        <!-- Footer mit Copyright -->
         <footer class="site-footer">
             <div class="container">
                 <p>2026 Jonathan Kemmel</p>

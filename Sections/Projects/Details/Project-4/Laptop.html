@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <!-- Meta-Informationen und Einbindung der Stylesheets -->
+        <meta charset="utf-8" /> <!-- Zeichencodierung UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive -->
+        <title>Web Application — Jonathan Kemmel</title> <!-- Titel im Browser-Tab -->
+        <link rel="stylesheet" href="../../../styles.css" /> <!-- Basis-Styles -->
+        <link rel="stylesheet" href="../project-detail.css" /> <!-- Detailseiten-Styles -->
+        <link rel="stylesheet" href="Laptop.css" /> <!-- Page-Styles -->
+    </head>
+    <body>
+        <!-- Kopfbereich mit Navigation -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1> <!-- Logo/Seitentitel -->
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="primary-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="project-1.html">Geräte/Server</a></li> <!-- Link zur Startseite -->
+                        <li><a href="../Project-2/project-2.html">Networking</a></li> <!-- Link zu Über mich -->
+                        <li><a href="../Project-3/project-3.html">Home Automation</a></li> <!-- Link zu Projekten -->
+                        <li><a href="../Project-4/project-4.html">Coding</a></li> <!-- Link zu Kontakt -->
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    
+        <main>
+            <section class="project-detail-section">
+                <div class="container1">
+                    <h1 class="Laptop">Laptop (Mobile Workstation)</h1>
+                    <div class="laptop-overview">
+                        <div class="laptop-card">
+                            <h2>Hardware:</h2>
+                            <div class="underline"></div>
+                            <ul class="project-hardware"> 
+                                <li>Lenovo G50-45</li>
+                                <li>AMD Processor</li>
+                                <li>4GB DDR4 RAM</li>
+                                <li>HDD Storage</li>
+                            </ul>
+                        </div>
+                        <div class="laptop-card">
+                            <h2>Use Case:</h2>
+                            <div class="underline"></div>
+                            <ul class="project-use-case"> 
+                                <li>Mobile programming workstation</li>
+                                <li>ESPHome and Python development</li>
+                                <li>Lightweight Arch Linux setup</li>
+                                <li>Remote access via SSH</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="laptop-layout">
+                <aside class="laptop-sidebar">
+                    <div class="Content-table-section">
+                        <div class="container1">
+                            <h2>Content:</h2>
+                            <div class="underline"></div>
+                            <ul class="content-table">
+                                <li><a href="#Part 1">Arch Linux Installation & Configuration</a></li>
+                                <li><a href="#Part 2">IDE Setup for Low-Resource Development</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+                <div class="laptop-main">
+                    <section class="Content-section">
+                        <div class="container2">
+                    <h3 id="Part 1">Arch Linux Installation & Configuration</h3>
+                    <div class="underline"></div>
+                    <div class="content">
+                        <p class="guide">BIOS / Firmware Setup:</p>
+                        <ul>
+                            <li>Boot into BIOS</li>
+                            <li>Enabled AMD SVM support (optional)</li>
+                            <li>Set boot mode: UEFI</li>
+                            <li>Disabled unnecessary devices or secure boot for simplicity</li>
+                            <li>Hotkey Mode left default</li>
+                        </ul>
+                        
+                        <p class="guide">Prepare Installation Media:</p>
+                        <ul>
+                            <li>Created Ventoy USB drive</li>
+                            <li>Copied latest Arch Linux ISO</li>
+                            <li>Verified ISO integrity (SHA256)</li>
+                        </ul>
+                        
+                        <p class="guide">Booting & Disk Setup:</p>
+                        <ul>
+                            <li>Booted from "EFI USB Device"</li>
+                            <li>Verified live environment:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">lsblk</span> shows <span class="cmd">sda</span> as HDD</li>
+                                    <li><span class="cmd">ls /sys/firmware/efi</span> → directory does not exist (legacy/BIOS fallback)</li>
+                                </ol>
+                            <li>Wiped HDD using:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">wipefs -a /dev/sda</span></li>
+                                    <li>Optional: <span class="cmd">sgdisk --zap-all /dev/sda</span></li>
+                                </ol>
+                            <li>Partitioning:</li>
+                                <ol class="eingerückt">
+                                    <li>Type: GPT</li>
+                                    <li>Created EFI + root partitions</li>
+                                </ol>
+                            <li>Filesystem:</li>
+                                <ol class="eingerückt">
+                                    <li>Ext4 on root</li>
+                                    <li>EFI: FAT32</li>
+                                    <li>Optional: zRAM swap enabled</li>
+                                </ol>
+                        </ul>
+                        
+                        <p class="guide">Install base system via archinstall tool:</p>
+                        <ul>
+                            <li>Installed base system via <span class="cmd">archinstall</span> tool</li>
+                            <li>Chose:</li>
+                                <ol class="eingerückt">
+                                    <li>Disk: <span class="cmd">sda</span></li>
+                                    <li>Filesystem: ext4</li>
+                                    <li>Bootloader: systemd-boot</li>
+                                    <li>Timezone: Europe/Berlin</li>
+                                    <li>Keyboard layout: de</li>
+                                </ol>
+                            <li>Encountered package signature errors:</li>
+                                <ol class="eingerückt">
+                                    <li>Resolved by updating ISO and skipping verification during install</li>
+                                </ol>
+                            <li>Confirmed installation:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">arch-chroot /mnt</span></li>
+                                    <li>System boots into installed Arch Linux</li>
+                                </ol>
+                        </ul>
+                        
+                        <p class="guide">User & Root Management:</p>
+                        <ul>
+                            <li>Create normal user:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo useradd -m -G wheel username</span></li>
+                                    <li><span class="cmd">sudo passwd username</span></li>
+                                </ol>
+                            <li>Enable sudo for wheel group:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo EDITOR=nano visudo</span></li>
+                                    <li>Uncomment: <span class="cmd">%wheel ALL=(ALL:ALL) ALL</span></li>
+                                </ol>
+                            <li>SSH / GUI login:</li>
+                                <ol class="eingerückt">
+                                    <li>Log in as normal user</li>
+                                    <li>Use sudo / pkexec for root actions</li>
+                                </ol>
+                        </ul>
+                        
+                        <p class="guide">Install and configure OpenSSH:</p>
+                        <ul>
+                            <li>Install OpenSSH:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo pacman -S openssh</span></li>
+                                </ol>
+                            <li>Enable SSH daemon:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo systemctl enable sshd</span></li>
+                                    <li><span class="cmd">sudo systemctl start sshd</span></li>
+                                    <li><span class="cmd">sudo systemctl status sshd</span> # verify</li>
+                                </ol>
+                            <li>Firewall (if ufw used):</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo ufw allow 22/tcp</span></li>
+                                </ol>
+                            <li>SSH login recommendations:</li>
+                                <ol class="eingerückt">
+                                    <li>Use a normal user for login</li>
+                                    <li>Avoid root login over SSH for security</li>
+                                </ol>
+                            <li>SSH configuration file:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo nano /etc/ssh/sshd_config</span></li>
+                                    <li>Key line: <span class="cmd">PermitRootLogin no</span></li>
+                                </ol>
+                            <li>Restart SSH after edits:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo systemctl restart sshd</span></li>
+                                </ol>
+                        </ul>
+                        
+                        <p class="guide">XFCE Root Login Handling:</p>
+                        <ul>
+                            <li>Root login in XFCE4 is disabled by default. Recommended: log in as normal user and use sudo/pkexec for root tasks</li>
+                            <li>Optional: enable manual root login in LightDM:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo nano /etc/lightdm/lightdm.conf</span></li>
+                                    <li>Add under [Seat:*]: <span class="cmd">greeter-show-manual-login=true</span></li>
+                                </ol>
+                            <li>Set root password (if needed):</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo passwd root</span></li>
+                                </ol>
+                            <li>Restart LightDM:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo systemctl restart lightdm</span></li>
+                                </ol>
+                            <li>Run apps as root safely:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo thunar</span> # file manager</li>
+                                    <li><span class="cmd">pkexec gparted</span> # gparted</li>
+                                </ol>
+                        </ul>
+                        
+                        <p class="guide">Disabling System Sounds / Bell:</p>
+                        <ul>
+                            <li>Terminal bell test:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">echo -e "\a"</span></li>
+                                </ol>
+                            <li>Disable PC speaker permanently:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo rmmod pcspkr</span></li>
+                                    <li><span class="cmd">echo "blacklist pcspkr" | sudo tee /etc/modprobe.d/nobeep.conf</span></li>
+                                </ol>
+                            <li>Disable audible bell in terminal:</li>
+                                <ol class="eingerückt">
+                                    <li>Add to ~/.inputrc: <span class="cmd">set bell-style none</span></li>
+                                    <li>Reload: <span class="cmd">bind -f ~/.inputrc</span></li>
+                                </ol>
+                            <li>XFCE GUI sound:</li>
+                                <ol class="eingerückt">
+                                    <li>Settings → Notifications → disable event sounds</li>
+                                    <li>Settings → Keyboard → Behavior → uncheck "Audible bell"</li>
+                                </ol>
+                            <li>Optional: mute all system audio:</li>
+                                <ol class="eingerückt">
+                                    <li>PulseAudio: <span class="cmd">pactl set-sink-mute @DEFAULT_SINK@ 1</span></li>
+                                    <li>PipeWire: <span class="cmd">pw-cli set-node-volume &lt;node_id&gt; 0</span></li>
+                                </ol>
+                        </ul>
+                        
+                        <p class="guide">Network Configuration:</p>
+                        <ul>
+                            <li>Switched to NetworkManager for simplicity:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo systemctl enable NetworkManager</span></li>
+                                    <li><span class="cmd">sudo systemctl start NetworkManager</span></li>
+                                </ol>
+                        </ul>
+                        
+                        <p class="guide">Post-Install Essentials / Packages:</p>
+                        <ul>
+                            <li>Update system:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">sudo pacman -Syu</span></li>
+                                </ol>
+                            <li>Essential packages installed:</li>
+                                <ol class="eingerückt">
+                                    <li>esphome, python, gcc, git, browser</li>
+                                </ol>
+                            <li>Lightweight programming setup:</li>
+                                <ol class="eingerückt">
+                                    <li>Programming focus: ESPHome, Python, HTML/CSS/JS, YAML</li>
+                                    <li>Browser: lightweight (qutebrowser / firefox with custom profile)</li>
+                                </ol>
+                        </ul>
+                    </div>
+
+                    <h3 id="Part 2">IDE Setup for Low-Resource Development</h3>
+                    <div class="underline"></div>
+                    <div class="content">
+                        <p class="guide">Hardware Specifications:</p>
+                        <ul>
+                            <li>Hardware: Lenovo G50-45</li>
+                            <li>OS: ArchLinux</li>
+                            <li>RAM: 4GB</li>
+                            <li>Storage: HDD</li>
+                        </ul>
+                        
+                        <p class="guide">Step 1: Install VS Code Insiders (bare minimum):</p>
+                        <ul>
+                            <li><span class="cmd">sudo pacman -S code-insiders</span></li>
+                        </ul>
+                        
+                        <p class="guide">Step 2: Configure VS Code Insiders for Low RAM / HDD:</p>
+                        <ul>
+                            <li>Create or edit <span class="cmd">~/.config/Code - Insiders/User/settings.json</span>:</li>
+                                <ol class="eingerückt">
+                                    <li>
+                                        <span class="cmd">{<br>
+                                        &nbsp;&nbsp;"telemetry.enableTelemetry": false,<br>
+                                        &nbsp;&nbsp;"telemetry.enableCrashReporter": false,<br>
+                                        &nbsp;&nbsp;"update.mode": "none",<br>
+                                        &nbsp;&nbsp;"files.watcherExclude": {<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;"**/.git/objects/**": true,<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;"**/.git/subtree-cache/**": true,<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;"**/node_modules/**": true<br>
+                                        &nbsp;&nbsp;},<br>
+                                        &nbsp;&nbsp;"editor.minimap.enabled": false<br>
+                                        }</span>
+                                    </li>
+                                </ol>
+                            <li>Install only necessary extensions:</li>
+                                <ol class="eingerückt">
+                                    <li>PlatformIO IDE (ESPHome)</li>
+                                    <li>Live Server (Web dev)</li>
+                                    <li>YAML (optional, for ESPHome YAML)</li>
+                                </ol>
+                        </ul>
+                        
+                        <p class="guide">Step 3: Set up ESPHome:</p>
+                        <ul>
+                            <li>Create folder and virtual environment:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">mkdir ~/esphome</span></li>
+                                    <li><span class="cmd">cd ~/esphome</span></li>
+                                    <li><span class="cmd">python -m venv venv</span></li>
+                                </ol>
+                            <li>Activate virtual environment:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">source venv/bin/activate</span></li>
+                                </ol>
+                            <li>Upgrade pip inside venv (optional):</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">pip install --upgrade pip</span></li>
+                                </ol>
+                            <li>Install ESPHome inside venv:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">pip install esphome</span></li>
+                                </ol>
+                            <li>Verify installation:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">esphome version</span></li>
+                                </ol>
+                        </ul>
+                        
+                        <p class="guide">Step 4: Install PlatformIO Core inside venv:</p>
+                        <ul>
+                            <li>With the venv active:</li>
+                                <ol class="eingerückt">
+                                    <li><span class="cmd">pip install platformio</span></li>
+                                    <li><span class="cmd">platformio --version</span></li>
+                                </ol>
+                            <li>PlatformIO IDE in VS Code Insiders should now detect PlatformIO Core automatically</li>
+                        </ul>
+                    </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </main>
+        <script>
+            (function () {
+                const toggle = document.querySelector(".nav-toggle");
+                const nav = document.querySelector(".main-nav");
+                if (!toggle || !nav) return;
+                toggle.addEventListener("click", () => {
+                    const isOpen = nav.classList.toggle("open");
+                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            })();
+        </script>
+    </body>
+</html>

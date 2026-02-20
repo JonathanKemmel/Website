@@ -1,0 +1,25 @@
+/* Custom Build IoT styles - copied from NAS.css */
+
+.NAS {
+    color: var(--text);
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin-bottom: 18px;
+}
+
+.nas-overview {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+}
+
+.nas-card {
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 28px;
+}
+
+@media (max-width: 768px) {
+    .nas-overview { grid-template-columns: 1fr; }
+}

@@ -65,7 +65,8 @@
     justify-content: center;
     width: 80px; /* Größe */
     height: 80px;
-    background: linear-gradient(135deg, rgba(31, 122, 140, 0.12), rgba(224, 138, 46, 0.12)); /* Farbverlauf */
+    /* Angleichung an globale Farben: --primary (#20639b) und --accent (#d77a3f) */
+    background: linear-gradient(135deg, rgba(32, 99, 155, 0.12), rgba(215, 122, 63, 0.12)); /* Farbverlauf */
     border-radius: 12px; /* Abgerundet */
 }
 
@@ -182,25 +183,26 @@
 }
 
 .tech-list li {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
-    color: white;
-    padding: 10px 18px;
-    border-radius: 20px;
+    /* Make list items neutral so buttons themselves control appearance */
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
     font-size: 0.95rem;
     font-weight: 500;
-    box-shadow: 0 4px 15px rgba(31, 122, 140, 0.28);
-    transition: all 0.3s ease;
+    box-shadow: none;
+    transition: none;
 }
 
 .tech-list .plain {
-    background: linear-gradient(135deg, rgba(31, 122, 140, 0.22) 0%, rgba(224, 138, 46, 0.18) 100%);
+    background: transparent;
     color: var(--text);
-    padding: 10px 18px;
-    border-radius: 20px;
+    padding: 0;
+    border-radius: 8px;
     font-size: 0.95rem;
     font-weight: 500;
-    box-shadow: 0 4px 15px rgba(31, 122, 140, 0.22);
-    transition: all 0.3s ease;
+    box-shadow: none;
+    transition: none;
     text-decoration: none;
 }
 
@@ -210,8 +212,105 @@
 }
 
 .tech-list li:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(31, 122, 140, 0.35);
+    /* prevent extra shadow/box behind buttons; button handles hover visuals */
+    transform: none;
+    box-shadow: none;
+}
+
+/* Enhanced visual style for tech-list buttons (pills) */
+.tech-list {
+    align-items: center;
+}
+
+.tech-list a.btn {
+    position: relative;
+    overflow: hidden;
+    padding: 8px 16px;
+    border-radius: 999px; /* full pill */
+    font-size: 0.95rem;
+    font-weight: 700;
+    background: linear-gradient(180deg, var(--surface), var(--surface-alt));
+    color: var(--primary);
+    border: 1px solid rgba(32, 99, 155, 0.12);
+    box-shadow: 0 8px 24px rgba(15, 23, 36, 0.06);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, color 0.22s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tech-list a.btn::after {
+    /* subtle sheen */
+    content: "";
+    position: absolute;
+    left: -40%;
+    top: -40%;
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(closest-side, rgba(255,255,255,0.38), rgba(255,255,255,0));
+    transform: rotate(20deg);
+    opacity: 0.55;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+.tech-list a.btn:hover,
+.tech-list a.btn:focus {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(32, 99, 155, 0.18);
+}
+
+.tech-list a.btn:hover::after,
+.tech-list a.btn:focus::after {
+    opacity: 0.18;
+    transform: translateX(10%) rotate(10deg);
+}
+
+.tech-list a.btn:active {
+    transform: translateY(-2px) scale(0.995);
+    box-shadow: 0 8px 20px rgba(32, 99, 155, 0.12);
+}
+
+@media (max-width: 480px) {
+    .tech-list a.btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Stronger specificity fallback to ensure tech-list buttons are styled */
+.detail-content .tech-list a.btn {
+    position: relative;
+    overflow: hidden;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    background: linear-gradient(180deg, var(--surface), var(--surface-alt));
+    color: var(--primary);
+    border: 1px solid rgba(32, 99, 155, 0.12);
+    box-shadow: 0 8px 24px rgba(15, 23, 36, 0.06);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, color 0.22s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-content .tech-list a.btn:hover,
+.detail-content .tech-list a.btn:focus {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(32, 99, 155, 0.18);
+}
+
+.detail-content .tech-list a.btn:active {
+    transform: translateY(-2px) scale(0.995);
+    box-shadow: 0 8px 20px rgba(32, 99, 155, 0.12);
 }
 
 /* Feature list */
@@ -269,15 +368,15 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--accent-strong));
-    color: white;
-    box-shadow: 0 4px 15px rgba(31, 122, 140, 0.28);
+    /* Match 'Get in Touch' from home hero: white background, primary text */
+    background: white;
+    color: var(--primary);
+    box-shadow: none;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(31, 122, 140, 0.35);
-    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary {

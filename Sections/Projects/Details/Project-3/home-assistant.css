@@ -1,0 +1,90 @@
+/* Home Assistant page styles - copied from Proxmox-LW.css */
+
+.Proxmox {
+    color: var(--text);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    font-size: 2.4rem;
+    margin-bottom: 18px;
+    position: relative;
+    padding-bottom: 14px;
+    text-align: center;
+}
+
+.Proxmox::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 90px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent-strong));
+    border-radius: 2px;
+}
+
+.proxmox-lw-overview {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 20px;
+}
+
+.proxmox-lw-card {
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    padding: 28px;
+}
+
+.proxmox-lw-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 28px;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    padding: 20px 40px 40px;
+    align-items: start;
+}
+
+.proxmox-lw-sidebar {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+}
+
+.proxmox-lw-sidebar .container1 {
+    padding: 24px;
+}
+
+.proxmox-lw-sidebar .content-table {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.proxmox-lw-sidebar .content-table li {
+    margin-bottom: 8px;
+}
+
+.proxmox-lw-main .container2 {
+    padding: 32px;
+}
+
+.project-detail-section .container1,
+.Content-table-section .container1,
+.Content-section .container2 {
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    padding: 32px;
+}
+
+@media (max-width: 768px) {
+    .proxmox-lw-overview { grid-template-columns: 1fr; }
+    .proxmox-lw-card { padding: 22px; }
+    .proxmox-lw-layout { grid-template-columns: 1fr; padding: 12px 20px 20px; }
+}

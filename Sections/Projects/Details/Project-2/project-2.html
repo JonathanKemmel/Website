@@ -1,16 +1,24 @@
+
+<!--
+    PROJECT-1.HTML
+    Diese Datei zeigt die Detailseite für das Projekt "Web Application".
+    Jeder Block und wichtige Zeile ist mit deutschen Kommentaren versehen.
+-->
 <!DOCTYPE html>
 <html lang="de">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Design System — Jonathan Kemmel</title>
-        <link rel="stylesheet" href="../../../styles.css" />
-        <link rel="stylesheet" href="../project-detail.css" />
+        <!-- Meta-Informationen und Einbindung der Stylesheets -->
+        <meta charset="utf-8" /> <!-- Zeichencodierung UTF-8 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive -->
+        <title>Web Application — Jonathan Kemmel</title> <!-- Titel im Browser-Tab -->
+        <link rel="stylesheet" href="../../../styles.css" /> <!-- Basis-Styles -->
+        <link rel="stylesheet" href="../project-detail.css" /> <!-- Detailseiten-Styles -->
     </head>
     <body>
+        <!-- Kopfbereich mit Navigation -->
         <header class="site-header">
             <div class="container header-inner">
-                <h1 class="site-title">JK Portfolio</h1>
+                <h1 class="site-title">JK Portfolio</h1> <!-- Logo/Seitentitel -->
                 <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
                     <span></span>
                     <span></span>
@@ -19,69 +27,65 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="../../../Home/index.html">Home</a></li>
-                        <li><a href="../../../About/about.html">About</a></li>
-                        <li><a href="../../projects.html">Projects</a></li>
-                        <li><a href="../../../Contact/contact.html">Contact</a></li>
+                        <li><a href="../../../Home/index.html">Home</a></li> <!-- Link zur Startseite -->
+                        <li><a href="../../../About/about.html">About</a></li> <!-- Link zu Über mich -->
+                        <li><a href="../../projects.html">Projects</a></li> <!-- Link zu Projekten -->
+                        <li><a href="../../../Contact/contact.html">Contact</a></li> <!-- Link zu Kontakt -->
                     </ul>
                 </nav>
             </div>
         </header>
 
+        <!-- Main content of the page -->
         <main class="container project-detail">
-            <a href="../../projects.html" class="btn-back">← Zurück zu den Projekten</a>
+            <!-- Back button -->
+            <a href="../../projects.html" class="btn-back">← Back to Projects</a>
             
             <article class="detail-content">
+                <!-- Header section with icon and title -->
                 <div class="detail-header">
-                    <div class="detail-icon">🎨</div>
-                    <h1>Design System</h1>
+                    <div class="detail-icon">🌐</div> <!-- Icon for the project: Networking -->
+                    <h1>Networking</h1> <!-- Project name -->
                 </div>
 
+                <!-- Section: Overview -->
                 <section class="detail-section">
-                    <h2>Übersicht</h2>
+                    <h2>Overview</h2>
                     <p>
-                        Ein umfassendes Designsystem, das die Grundlagen für konsistentes Design über 
-                        alle Produkte und Seiten hinweg bietet. Das System beinhaltet Komponenten, 
-                        Richtlinien und Best Practices.
+                        Here are all my networking projects that I have implemented over time. Each project demonstrates my skills in network configuration, optimization, and management across various devices.
                     </p>
                 </section>
 
+                <!-- Section: Technologies -->
                 <section class="detail-section">
-                    <h2>Technologien</h2>
+                    <h2>Technologies</h2>
                     <ul class="tech-list">
-                        <li>CSS Custom Properties (CSS Variables)</li>
-                        <li>Figma für Design-Mockups</li>
-                        <li>Storybook für Komponenten-Katalog</li>
-                        <li>Jest für Component Testing</li>
-                    </ul>
+                        <li class="plain"><a class="btn btn-primary" href="Network Rack.html">Network Rack</a></li> <!-- Virtualization -->
+                        <li class="plain"><a class="btn btn-primary" href="VLAN Segmentation.html">VLAN Segmentation</a></li> <!-- Virtualization -->
                 </section>
 
+                <!-- Section: Features -->
                 <section class="detail-section">
                     <h2>Features</h2>
                     <ul class="feature-list">
-                        <li>Wiederverwendbare Komponenten</li>
-                        <li>Konsistente Farbpalette und Typografie</li>
-                        <li>Umfangreiche Dokumentation</li>
-                        <li>Einfache Customization durch CSS Variables</li>
+                        <li>Network Rack for hosting 24/7 uptime systems</li> <!-- Mobile capability -->
+                        <li>VLAN Segmentation for hosting on-demand systems</li> <!-- Performance -->
+                        <li>NAS as storage solution for multiple devices</li> <!-- Accessibility -->
+                        <li>Laptop as mobile workstation</li> <!-- UI/UX -->
                     </ul>
                 </section>
 
+                <!-- Section: Challenges & Solutions -->
                 <section class="detail-section">
-                    <h2>Herausforderungen & Lösungen</h2>
+                    <h2>Challenges & Solutions</h2>
                     <p>
-                        Die Herausforderung bestand darin, ein flexibles System zu schaffen, das einfach 
-                        zu verwenden ist, aber dennoch ausreichende Customization-Optionen bietet. 
-                        Dies wurde durch eine gut durchdachte Architektur mit CSS Variables erreicht.
+                        The biggest challenge was working with old device components and optimizing them to ensure they function stably in the future. Using Proxmox for self-hosting systems to save money, NAS as an affordable cloud storage for data, and repurposing an old laptop as a mobile workstation.
                     </p>
                 </section>
-
-                <div class="detail-cta">
-                    <a href="#" class="btn btn-primary">Design System anschauen</a>
-                    <a href="#" class="btn btn-secondary">Dokumentation</a>
-                </div>
             </article>
         </main>
 
+        <!-- Footer mit Copyright -->
         <footer class="site-footer">
             <div class="container">
                 <p>2026 Jonathan Kemmel</p>
