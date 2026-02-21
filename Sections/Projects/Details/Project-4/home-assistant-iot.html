@@ -39,6 +39,7 @@
                             <div class="underline"></div>
                             <ul class="project-hardware"> 
                                 <li>Visual Studio Code</li>
+                                <li>Arduino IDE</li>
                                 <li>YAML</li>
                                 <li>C++</li>
                                 <li>Python</li>
@@ -64,8 +65,12 @@
                             <h2>Content:</h2>
                             <div class="underline"></div>
                             <ul class="content-table">
-                                <li><a href="#Part 1">Create Ubuntu VM (Programming)</a></li>
-                                <li><a href="#Part 2">Create Kali VM (Hacking/Security)</a></li>
+                                <li><a href="#Part 1">Which Extensions to Install in IDE</a></li>
+                                <li><a href="#Part 2">What should the Code do?</a></li>
+                                <li><a href="#Part 3">When and how to write in YAML</a></li>
+                                <li><a href="#Part 4">When and how to write in C++</a></li>
+                                <li><a href="#Part 5">When and how to write in Python</a></li>
+                                <li><a href="#Part 6">Flashing on Controller and Testing</a></li>
                             </ul>
                         </div>
                     </div>
@@ -73,157 +78,47 @@
                 <div class="proxmox-hw-main">
                     <section class="Content-section">
                         <div class="container2">
-                    <h3 id="Part 1">Create Ubuntu VM (Programming)</h3>
-                    <div class="underline"></div>
-                    <div class="content">
-                        <p class="guide">Upload ISO:</p>
-                        <ul>
-                            <li>Proxmox GUI → Datacenter → Storage(local) → ISO Images → Upload</li>
-                            <li>Choose Ubuntu ISO file</li>
-                        </ul>
-                        
-                        <p class="guide">Create VM:</p>
-                        <ul>
-                            <li>Proxmox GUI → Create VM</li>
-                            <li>Node: &lt;your-host&gt;</li>
-                            <li>VM ID: auto</li>
-                            <li>Name: ubuntu-dev</li>
-                            <li>OS tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Use uploaded Ubuntu ISO</li>
-                                    <li>Leave other default</li>
-                                </ol>
-                            <li>System tab:</li>
-                                <ol class="eingerückt">
-                                    <li>BIOS: default (OVMF only if UEFI is needed)</li>
-                                    <li>Machine: default</li>
-                                    <li>Qemu Agent: checked (enables better shutdowns & status)</li>
-                                </ol>
-                            <li>Disk tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Bus/Device: SCSI0 on VIRTIO-SCSI controller</li>
-                                    <li>Disk size: &lt;your-choice&gt;</li>
-                                    <li>Format: qcow2 or raw (raw slightly faster on SSD)</li>
-                                </ol>
-                            <li>CPU tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Sockest: 1</li>
-                                    <li>Core: 4 (2 if host smaller)</li>
-                                </ol>
-                            <li>Memory tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Memory: 8192 (recommended for dev work)</li>
-                                </ol>
-                            <li>Network tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Bridge: vmbr0</li>
-                                    <li>Model: VIRTIO (fast)</li>
-                                </ol>
-                            <li>Finish → Start VM → Console → run Ubuntu installer</li>
-                        </ul>
-                        
-                        <p class="guide">Post-install:</p>
-                        <ul>
-                            <li>Update the guest and install typical dev tools:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">sudo apt update && sudo apt upgrade -y</span></li>
-                                    <li><span class="cmd">sudo apt install -y build-essential git curl qemu-guest-agent</span></li>
-                                </ol>
-                            <li>Install docker:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">sudo apt install -y ca-certificates gnupg lsb-release</span></li>
-                                    <li><span class="cmd">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span></li>
-                                    <li><span class="cmd">echo \
-                                        "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
-                                        https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
-                                        sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span></li>
-                                    <li><span class="cmd">sudo apt update</span></li>
-                                    <li><span class="cmd">sudo apt install -y docker-ce docker-ce-cli containerd.io</span></li>
-                                    <li><span class="cmd">sudo usermod -aG docker $USER</span></li>
-                                </ol>
-                            <li>Install code-server (VS Code in browser) if remote IDE needed:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">curl -fsSL https://code-server.dev/install.sh | sh</span></li>
-                                </ol>
-                        </ul>
-                        
-                        <p class="guide">Make a template:</p>
-                        <ul>
-                            <li>Once your done, right click VM → clone</li>
-                            <li>right click cloned VM → convert to template</li>
-                            <li>Now your able to clone fresh dev VMs quick</li>
-                        </ul>
-                    </div>
+                            <h3 id="Part 1">Which Extensions to Install in IDE</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">Upload ISO:</p>
+                            </div>
 
-                    <h3 id="Part 2">Create Kali VM (Hacking/Security)</h3>
-                    <div class="underline"></div>
-                    <div class="content">
-                        <p class="guide">Important safety note:</p>
-                        <ul>
-                            <li>Treat Kali as a risky toolkit</li>
-                            <li>Keep it isolated from your main LAN</li>
-                            <li>Only use it on systems/networks you own or have explicit permission to test</li>
-                        </ul>
-                        
-                        <p class="guide">Upload ISO:</p>
-                        <ul>
-                            <li>Proxmox GUI → Datacenter → Storage(local) → ISO Images → Upload</li>
-                            <li>Choose Kali ISO file</li>
-                        </ul>
-                        
-                        <p class="guide">Create isolated network without physical NIC:</p>
-                        <ul>
-                            <li>Proxmox GUI → Datacenter → Node → System → Network → Create → Linux Bridge</li>
-                            <li>Name: vmbr1</li>
-                            <li>Leave rest empty</li>
-                            <li>This way Kali can only talk to VMs on isolated Bridge (vmbr1)</li>
-                        </ul>
-                        
-                        <p class="guide">Create VM:</p>
-                        <ul>
-                            <li>Proxmox GUI → Create VM</li>
-                            <li>Node: &lt;your-host&gt;</li>
-                            <li>VM ID: auto</li>
-                            <li>Name: kali-lab</li>
-                            <li>OS tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Use uploaded Kali ISO</li>
-                                    <li>Leave other default</li>
-                                </ol>
-                            <li>System tab:</li>
-                                <ol class="eingerückt">
-                                    <li>BIOS: default (OVMF only if UEFI is needed)</li>
-                                    <li>Machine: default</li>
-                                    <li>Qemu Agent: checked (enables better shutdowns & status)</li>
-                                </ol>
-                            <li>Disk tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Bus/Device: SCSI0 on VIRTIO-SCSI controller</li>
-                                    <li>Disk size: &lt;your-choice&gt;</li>
-                                    <li>Format: qcow2 or raw (raw slightly faster on SSD)</li>
-                                </ol>
-                            <li>CPU tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Sockest: 1</li>
-                                    <li>Core: 4 (2 if host smaller)</li>
-                                </ol>
-                            <li>Memory tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Memory: 8192 (recommended for dev work)</li>
-                                </ol>
-                            <li>Network tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Bridge: vmbr1 (isolated bridge, no Network)</li>
-                                    <li>Model: VIRTIO (fast)</li>
-                                </ol>
-                            <li>Finish → Start VM → Console → run Kali installer</li>
-                        </ul>
-                    </div>
+                            <h3 id="Part 2">What should the Code do?</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">Important safety note:</p>
+                            </div>
+
+                            <h3 id="Part 3">When and how to write in YAML</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">Important safety note:</p>
+                            </div>
+
+                            <h3 id="Part 4">When and how to write in C++</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">Important safety note:</p>
+                            </div>
+
+                            <h3 id="Part 5">When and how to write in Python</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">Important safety note:</p>
+                            </div>
+
+                            <h3 id="Part 6">Flashing on Controller and Testing</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">Important safety note:</p>
+                            </div>
                         </div>
                     </section>
                 </div>
             </section>
         </main>
+        
         <script>
             (function () {
                 const toggle = document.querySelector(".nav-toggle");

@@ -67,13 +67,9 @@
                             <h2>Content:</h2>
                             <div class="underline"></div>
                             <ul class="content-table">
-                                <li><a href="#Proxmox">Proxmox</a></li>
-                                <li><a href="#Setup and Installation">Setup and Installation</a></li>
-                                <li><a href="#Install MyDokuWiki">Install myDokuWiki</a></li>
-                                <li><a href="#MyDokuWiki USB Backup">MyDokuWiki USB Backup</a></li>
-                                <li><a href="#Install Tailscale VPN Server">Install Tailscale VPN Server</a></li>
-                                <li><a href="#Setup Debian 12 VM template">Setup Debian 12 VM template</a></li>
-                                <li><a href="#Setup HDD as SMB-Share">Setup HDD as SMB-Share</a></li>
+                                <li><a href="#Part 1">Planning Rack Layout</a></li>
+                                <li><a href="#Part 2">Installing and Mounting Hardware</a></li>
+                                <li><a href="#Part 3">Future Hardware to add or optimizations</a></li>
                             </ul>
                         </div>
                     </div>
@@ -81,84 +77,29 @@
                 <div class="proxmox-lw-main">
                     <section class="Content-section">
                         <div class="container2">
-                    <h3 id="Setup and Installation">Setup and Installation:</h3>
-                    <div class="underline"></div>
-                    <div class="content">
-                        <p class="guide">How to Install and Setup Proxmox VE on Your Server:</p>
-                        <ul>
-                            <li>Download Proxmox VE ISO from the official website.</li>
-                            <li>Create a bootable USB drive using tools like Rufus or Etcher.</li>
-                            <li>Boot the server from the USB drive and follow the installation prompts.</li>
-                            <li>On Target Hard-Disk:</li>
-                                <ol class="eingerückt">
-                                    <li>hdsize: Full Disk Size</li>
-                                    <li>swapsize: Swap Size should match RAM Size</li>
-                                    <li>maxroot: Maximum Root Partition Size (leave Room for backups/VMs)</li>
-                                    <li>minfree: 2GB (Reserved Space to prevent full Disk) </li>
-                                    <li> => leaves the rest for VM/CT Storage</li>
-                                </ol>
-                            <li>Configure network settings (recommend static IP) and set a strong root password during installation.</li>
-                            <li>After installation, access the Proxmox web interface via https://your-proxmox-ip:8006.</li>
-                            <li> Post Install:</li>
-                                <ol class="eingerückt">
-                                    <li>Update Proxmox VE to the latest version</li>
-                                    <li>Enable No-Subscription Repository</li>
-                                    <li>Enable Firewall, configure if needed</li>
-                                    <ol class="eingerückt-doppelt">
-                                        <li>Security and Maintenance:</li>
-                                        <li>Enable 2FA on Login</li>
-                                        <li>Schedule regular backups (atleast for important things)</li>
-                                        <li>Setup Update and Upgrade monthly</li>
-                                    </ol>
-                                </ol>
-                        </ul>
-                    </div>
+                            <h3 id="Part 1">Planning Rack Layout</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">NEED TO COMPLETE!!!</p>
+                            </div>
 
-                    <h3 id="Install MyDokuWiki">Install MyDokuWiki:</h3>
-                    <div class="underline"></div>
-                    <div class="content">
-                        <p class="guide">How to Install MyDokuWiki on Proxmox VE:</p>
-                        <ul>
-                            <li>Log in to the Proxmox web interface and download template (recommended ubuntu-24.04-standard-...)</li>
-                            <li>Create a new Linux Container.</li>
-                                <ol class="eingerückt">
-                                    <li>Unprivileged Container: check</li>
-                                    <li>Root Disk: 8GB</li>
-                                    <li>CPU: 1 core</li>
-                                    <li>Memory & Swap: 512MB</li>
-                                    <li>Start at Boot: Check optional</li>
-                                </ol>
-                            <li>Inside LXC Terminal Update and Install Web Stack:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">apt update && apt upgrade -y</span></li>
-                                    <li><span class="cmd">apt install apache2 php php-gd php-xml php-json php-mbstring libapache2-mod-php unzip wget nano ufw -y</span></li>
-                                    <li><span class="cmd">systemctl enable apache2</span></li>
-                                </ol>
-                            <li>Install myDokuWiki:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">cd /tmp</span></li>
-                                    <li><span class="cmd">wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz</span></li>
-                                    <li><span class="cmd">tar -xvzf dokuwiki-stable.tgz</span></li>
-                                    <li><span class="cmd">mv dokuwiki-*/ /var/www/html/dokuwiki</span></li>
-                                    <li><span class="cmd">chown -R www-data:www-data /var/www/html/dokuwiki</span></li>
-                                </ol>
-                            <li>Access MyDokuWiki via http://&lt;container-ip&gt;/install.php in a web browser</li>
-                            <li>Follow the on-screen instructions to complete the installation and configuration of MyDokuWiki</li>
-                            <li>Now you can access it via http://&lt;container-ip&gt;/doku.php in a web browser</li>
-                            <li>Configure UFW Firewall to allow HTTP traffic:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">ufw allow 80/tcp & 443/tcp</span></li>
-                                    <li><span class="cmd">ufw enable</span></li>
-                                </ol>
-                            <li>Regularly update MyDokuWiki and the underlying OS to ensure security and stability</li>
-                            <li>Setup an automated backup system for MyDokuWiki data (highly recommended)</li>
-                        </ul>
-                    </div>
-                    </div>
+                            <h3 id="Part 2">Installing and Mounting Hardware</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">NEED TO COMPLETE!!!</p>
+                            </div>
+
+                            <h3 id="Part 3">Future Hardware to add or optimizations</h3>
+                            <div class="underline"></div>
+                            <div class="content">
+                                <p class="guide">Planned!!!</p>
+                            </div>
+                        </div>
                     </section>
                 </div>
             </section>
         </main>
+        
         <script>
             (function () {
                 const toggle = document.querySelector(".nav-toggle");

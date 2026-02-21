@@ -1,3 +1,5 @@
+/* Project-3: Home Assistant (match Project-1 detail layout & styles) */
+
 .Proxmox {
     color: var(--text);
     font-weight: 700;
@@ -81,8 +83,108 @@
     padding: 32px;
 }
 
+/* Remove outer box for hardware/use-case area (match Project-1 behavior) */
+.project-detail-section .container1 {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0 40px 20px;
+}
+
+.project-detail-section .underline,
+.Content-table-section .underline,
+.Content-section .underline {
+    background: linear-gradient(90deg, var(--primary), var(--accent-strong));
+    height: 2px;
+    border-radius: 2px;
+    margin-bottom: 18px;
+}
+
+.project-detail-section .project-hardware li::marker,
+.project-detail-section .project-use-case li::marker {
+    color: var(--primary);
+}
+
+.Content-table-section .content-table a {
+    color: var(--primary);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    display: block;
+    border: 1px solid var(--border);
+}
+
+.Content-table-section .content-table {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.Content-table-section .content-table li {
+    margin: 0 0 8px;
+}
+
+.Content-table-section .content-table li:last-child {
+    margin-bottom: 0;
+}
+
+.Content-table-section .content-table a:hover {
+    color: var(--primary-strong);
+    background: rgba(31, 122, 140, 0.08);
+    text-decoration: none;
+}
+
+.content .guide {
+    color: var(--text);
+    font-weight: 600;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--primary);
+    padding: 10px 14px;
+    border-radius: 6px;
+    letter-spacing: -0.1px;
+}
+
+.content .cmd {
+    background-color: var(--surface-alt);
+    border-color: var(--border);
+    color: var(--primary-strong);
+}
+
+/* Subtle section spacing for readability */
+.Content-section .content > ul,
+.Content-section .content > ol {
+    padding-top: 4px;
+}
+
 @media (max-width: 768px) {
-    .proxmox-lw-overview { grid-template-columns: 1fr; }
-    .proxmox-lw-card { padding: 22px; }
-    .proxmox-lw-layout { grid-template-columns: 1fr; padding: 12px 20px 20px; }
+    .proxmox-lw-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .proxmox-lw-card {
+        padding: 22px;
+    }
+
+    .proxmox-lw-layout {
+        grid-template-columns: 1fr;
+        padding: 12px 20px 20px;
+    }
+
+    .proxmox-lw-sidebar {
+        position: static;
+    }
+
+    .project-detail-section .container1,
+    .Content-table-section .container1,
+    .Content-section .container2 {
+        padding: 24px 20px;
+    }
+
+    .Content-table-section .content-table a {
+        display: block;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+    }
 }
