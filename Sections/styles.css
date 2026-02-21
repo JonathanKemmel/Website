@@ -1,153 +1,71 @@
-/* ========================================
-   GLOBAL COLOR VARIABLES
-   These colors are used throughout the site.
-   Change them here to update the entire design!
-   ======================================== */
 :root {
-    /* Core surfaces */
     --bg: #f5f7fb;
     --surface: #ffffff;
     --surface-alt: #f7fafc;
-
-    /* Text colors */
     --text: #0f1724;
     --muted: #546377;
-
-    /* Brand accents (professional: deep blue + warm accent) */
     --primary: #20639b;
     --primary-strong: #164f75;
     --accent: #d77a3f;
     --accent-strong: #b65a2a;
-
-    /* Header */
     --header-bg: #0f1724;
     --header-text: #ffffff;
-
-    /* UI helpers */
     --border: rgba(15, 23, 36, 0.08);
     --max-width: 1000px;
 }
-
-/* ========================================
-   RESET & BOX MODEL
-   Remove default browser margins/padding
-   and make sizing calculations easier
-   ======================================== */
 * {
-    /* Prevents padding/border from making elements wider */
     box-sizing: border-box;
-    /* Remove default spacing browsers add */
     margin: 0;
     padding: 0;
 }
-
-/* ========================================
-   BASE STYLES
-   Styles applied to all HTML elements
-   ======================================== */
 html, body {
-    /* Make body fill the full screen height */
     height: 100%;
 }
 
 body {
-    /* Google font: clean, modern look */
     font-family: 'Poppins', sans-serif;
-    /* Space between lines of text (1.6 = readable line-height) */
     line-height: 1.6;
-    /* Page background color */
     background: var(--bg);
-    /* Default text color */
     color: var(--text);
-    /* Smooth font rendering on webkit browsers (Chrome, Safari) */
     -webkit-font-smoothing: antialiased;
 }
-
-/* ========================================
-   CONTAINER CLASS
-   Centers content and limits width
-   Used by header, main, and footer
-   ======================================== */
 .container {
-    /* Max width so content doesn't stretch too wide */
     max-width: var(--max-width);
-    /* Centers container horizontally */
     margin: 0 auto;
-    /* Space inside container from edges */
     padding: 20px;
 }
-
-/* ========================================
-   HEADER & NAVIGATION BAR
-   Top section of the page with logo/title
-   and navigation links
-   ======================================== */
-
-/* Main header bar at top of page */
 header.site-header {
-    /* Dark background for contrast */
     background: var(--header-bg);
-    /* White text */
     color: var(--header-text);
-    /* Space above/below header content */
     padding: 20px 0;
 }
-
-/* Inner container inside header - holds title and nav side-by-side */
 .header-inner {
-    /* Flexbox lays items in a row horizontally */
     display: flex;
-    /* Vertically align items in the middle */
     align-items: center;
-    /* Space title on left, nav on right */
     justify-content: space-between;
-    /* Gap between title and nav links */
     gap: 20px;
 }
-
-/* The main title/logo on the left */
 .site-title {
-    /* Large text for the main title */
     font-size: 1.75rem;
-    /* Inherit white color from header */
     color: var(--header-text);
 }
-
-/* Navigation menu */
 .main-nav ul {
-    /* Remove default bullet points */
     list-style: none;
-    /* Arrange links horizontally in a row */
     display: flex;
-    /* Space between each link */
     gap: 12px;
-    /* Vertically center nav items */
     align-items: center;
 }
-
-/* Navigation links styling */
 .main-nav a {
-    /* White text like the header */
     color: var(--header-text);
-    /* Remove underline from links */
     text-decoration: none;
-    /* Space around link text */
     padding: 6px 10px;
-    /* Slightly rounded corners */
     border-radius: 6px;
-    /* Bold text for visibility */
     font-weight: 600;
 }
-
-/* What happens when you hover over a nav link */
 .main-nav a:hover {
-    /* Semi-transparent white background on hover */
     background: rgba(255, 255, 255, 0.06);
-    /* Change color to the primary color (red-orange) */
     color: var(--primary);
 }
-
-/* Mobile hamburger button (hidden on desktop) */
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -171,61 +89,29 @@ header.site-header {
     border-radius: 2px;
 }
 
-/* ========================================
-   MAIN CONTENT AREA
-   The main section with text and sections
-   ======================================== */
-
-/* Main content area (after header) */
 main.container {
-    /* Add space below the header */
     margin-top: 28px;
 }
 
-/* Styled box for content sections (hero banner, panels, etc.) */
 section.hero {
-    /* White background for the section */
     background: var(--surface);
-    /* Inside padding (space between edge and content) */
     padding: 24px;
-    /* Rounded corners for modern look */
     border-radius: 8px;
-    /* Subtle shadow for depth/separation from background */
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-    /* Flexbox to stack content vertically inside the section */
     display: flex;
-    /* Stack content vertically inside the section */
     flex-direction: column;
 }
 
-/* ========================================
-   HEADINGS
-   Styles for h1, h2, h3 titles
-   ======================================== */
-
-/* Subheadings (h2 tags) */
 h2 {
-    /* Large font size for section titles */
     font-size: 1.8rem;
-    /* Dark text color */
     color: var(--text);
-    /* Space below the heading */
     margin-bottom: 14px;
 }
 
-/* ========================================
-   PARAGRAPH TEXT
-   Styles for regular paragraphs
-   ======================================== */
-
 p {
-    /* Limit width so lines aren't too long (easier to read) */
     max-width: 800px;
-    /* Regular text size */
     font-size: 1.2rem;
-    /* Medium gray color (softer than pure black) */
     color: var(--muted);
-    /* Small space below each paragraph */
     margin-bottom: 1px;
 }
 
@@ -234,68 +120,32 @@ p {
    Side-by-side and multi-column layouts
    ======================================== */
 
-/* Note: Layout grids are defined in page-specific CSS files */
-/* - index.css for index page layouts */
-/* - about.css for about page layouts */
-
-/* ========================================
-   QUICK LINKS COMPONENT
-   Small button-style links section
-   ======================================== */
-
-/* Container for quick link buttons */
 .quick-links ul {
-    /* Remove bullet points */
+.quick-links ul {
     list-style: none;
-    /* Arrange buttons horizontally */
     display: flex;
-    /* Space between buttons */
     gap: 10px;
-    /* Add space above the buttons */
     margin-top: 12px;
 }
 
-/* Individual link buttons */
 .quick-links a {
-    /* Makes the link a block element (can have padding/width) */
     display: inline-block;
-    /* Bright red-orange background */
     background: var(--primary);
-    /* White text */
     color: #fff;
-    /* Remove underline from link */
     text-decoration: none;
-    /* Inside padding for the button */
     padding: 8px 12px;
-    /* Rounded corners for modern button look */
     border-radius: 6px;
-    /* Bold text for emphasis */
     font-weight: 600;
 }
 
-/* Button hover effect */
 .quick-links a:hover {
-    /* Slightly transparent (97% opacity) for hover effect */
     opacity: 0.95;
 }
 
-/* ========================================
-   FOOTER
-   Bottom section of the page
-   ======================================== */
-
 footer.site-footer {
-    /* Add space above the footer */
     margin-top: 24px;
-    /* Medium gray text (lighter than body text) */
     color: var(--muted);
 }
-
-/* ========================================
-   RESPONSIVE DESIGN
-   Adjusts layout for smaller screens
-   (tablets, phones - screens 768px or smaller)
-   ======================================== */
 
 @media (max-width: 768px) {
     header.site-header {
@@ -306,21 +156,15 @@ footer.site-footer {
         font-size: 1.3rem;
         line-height: 1.1;
     }
-    /* Two-column layout becomes one column on mobile */
     main.two-col {
-        /* Single column instead of two */
         grid-template-columns: 1fr;
     }
 
-    /* Three-column layout becomes one column on mobile */
     main.three-column {
-        /* Single column instead of three */
         grid-template-columns: 1fr;
     }
 
-    /* Header changes to vertical stack on mobile */
     .header-inner {
-        /* Keep title left and toggle right, nav on next line */
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
@@ -352,11 +196,8 @@ footer.site-footer {
         width: 100%;
     }
 
-    /* Navigation menu stacks vertically on mobile */
     .main-nav ul {
-        /* Stack links vertically instead of horizontally */
         flex-direction: row;
-        /* Smaller gap between links on mobile */
         gap: 4px;
         width: 100%;
         display: grid;
@@ -374,9 +215,7 @@ footer.site-footer {
         border: 0;
     }
 
-    /* Reduce padding on smaller screens to save space */
     .container {
-        /* Smaller padding for mobile screens */
         padding: 16px;
     }
 }

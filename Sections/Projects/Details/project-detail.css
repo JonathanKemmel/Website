@@ -1,94 +1,70 @@
-
-/* ====== PROJECT DETAIL PAGE STYLES ======
-   Dieses Stylesheet gestaltet die Detailseiten einzelner Projekte mit modernen Karten und Abschnitten.
-*/
-
-
-/* Haupt-Container für die Projekt-Detailseite */
 .project-detail {
-    padding: 60px 20px; /* Abstand oben/unten und seitlich */
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%); /* Heller Verlauf */
-    min-height: 100vh; /* Mindestens volle Höhe */
+    padding: 60px 20px;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    min-height: 100vh;
 }
 
-
-/* Zurück-Button oben auf der Seite */
 .btn-back {
-    display: inline-flex; /* Flexbox für Icon + Text */
-    align-items: center; /* Vertikal zentriert */
-    margin-bottom: 40px; /* Abstand nach unten */
-    color: var(--primary); /* Hauptfarbe */
-    text-decoration: none; /* Kein Unterstrich */
-    font-weight: 600; /* Fett */
-    transition: all 0.3s ease; /* Weiche Übergänge */
-    font-size: 0.95rem; /* Etwas kleiner */
-    letter-spacing: 0.5px; /* Buchstabenabstand */
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 40px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
 }
 
-
-/* Hover-Effekt für Zurück-Button */
 .btn-back:hover {
-    color: var(--primary-strong); /* Dunkler beim Hover */
-    transform: translateX(-4px); /* Leicht nach links verschieben */
+    color: var(--primary-strong);
+    transform: translateX(-4px);
 }
 
-
-/* Wrapper für den gesamten Detail-Inhalt */
 .detail-content {
-    max-width: 820px; /* Maximalbreite */
-    margin: 0 auto; /* Zentriert */
-    background: var(--surface); /* Weißer Hintergrund */
-    border-radius: 12px; /* Abgerundete Ecken */
-    padding: 50px; /* Innenabstand */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Schatten */
-    border: 1px solid var(--border); /* Dezente Umrandung */
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 50px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border);
 }
 
-
-/* Kopfbereich mit Icon und Titel */
 .detail-header {
-    display: flex; /* Flexbox für Icon + Titel */
-    align-items: center; /* Vertikal zentriert */
-    margin-bottom: 50px; /* Abstand nach unten */
-    padding-bottom: 40px; /* Abstand nach unten */
-    border-bottom: 2px solid var(--border); /* Linie als Trennung */
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid var(--border);
 }
 
-
-/* Icon-Box im Header */
 .detail-icon {
-    font-size: 3.5rem; /* Großes Emoji/Icon */
-    margin-right: 35px; /* Abstand zum Titel */
-    line-height: 1; /* Kein zusätzlicher Abstand */
-    display: flex; /* Zentriert Icon */
+    font-size: 3.5rem;
+    margin-right: 35px;
+    line-height: 1;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 80px; /* Größe */
+    width: 80px;
     height: 80px;
-    /* Angleichung an globale Farben: --primary (#20639b) und --accent (#d77a3f) */
-    background: linear-gradient(135deg, rgba(32, 99, 155, 0.12), rgba(215, 122, 63, 0.12)); /* Farbverlauf */
-    border-radius: 12px; /* Abgerundet */
+    background: linear-gradient(135deg, rgba(32, 99, 155, 0.12), rgba(215, 122, 63, 0.12));
+    border-radius: 12px;
 }
 
-
-/* Titel im Header */
 .detail-header h1 {
-    font-size: 2.5rem; /* Sehr groß */
-    color: var(--text); /* Primäre Textfarbe */
-    margin: 0; /* Kein Abstand */
-    font-weight: 700; /* Fett */
-    letter-spacing: -0.5px; /* Leicht enger */
+    font-size: 2.5rem;
+    color: var(--text);
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
-
-/* Einzelne Inhaltsabschnitte */
 .detail-section {
-    margin-bottom: 45px; /* Abstand nach unten */
-    line-height: 1.8; /* Zeilenabstand */
+    margin-bottom: 45px;
+    line-height: 1.8;
 }
 
-
-/* Letzter Abschnitt ohne Abstand nach unten */
 .detail-section:last-of-type {
     margin-bottom: 0;
 }
@@ -111,7 +87,6 @@
     line-height: 1.8;
 }
 
-/* Content area lists */
 .content ul,
 .project-hardware,
 .project-use-case,
@@ -148,7 +123,6 @@
     margin-bottom: 6px;
 }
 
-/* Nested lists with custom classes */
 .content .eingerückt {
     margin-left: 40px;
     margin-top: 8px;
@@ -159,7 +133,6 @@
     margin-top: 8px;
 }
 
-/* Command/Code styling */
 .cmd {
     font-family: 'Courier New', Courier, monospace;
     background-color: var(--surface-alt);
@@ -172,7 +145,6 @@
     word-break: break-word;
 }
 
-/* Technology list */
 .tech-list {
     list-style: none;
     padding: 0;
@@ -183,7 +155,6 @@
 }
 
 .tech-list li {
-    /* Make list items neutral so buttons themselves control appearance */
     background: transparent;
     color: inherit;
     padding: 0;
@@ -212,12 +183,10 @@
 }
 
 .tech-list li:hover {
-    /* prevent extra shadow/box behind buttons; button handles hover visuals */
     transform: none;
     box-shadow: none;
 }
 
-/* Enhanced visual style for tech-list buttons (pills) */
 .tech-list {
     align-items: center;
 }
@@ -226,7 +195,7 @@
     position: relative;
     overflow: hidden;
     padding: 8px 16px;
-    border-radius: 999px; /* full pill */
+    border-radius: 999px;
     font-size: 0.95rem;
     font-weight: 700;
     background: linear-gradient(180deg, var(--surface), var(--surface-alt));
@@ -241,7 +210,6 @@
 }
 
 .tech-list a.btn::after {
-    /* subtle sheen */
     content: "";
     position: absolute;
     left: -40%;
@@ -281,7 +249,6 @@
     }
 }
 
-/* Stronger specificity fallback to ensure tech-list buttons are styled */
 .detail-content .tech-list a.btn {
     position: relative;
     overflow: hidden;
@@ -313,7 +280,6 @@
     box-shadow: 0 8px 20px rgba(32, 99, 155, 0.12);
 }
 
-/* Feature list */
 .feature-list {
     list-style: none;
     padding: 0;
@@ -344,7 +310,6 @@
     line-height: 1;
 }
 
-/* CTA buttons section */
 .detail-cta {
     margin-top: 60px;
     padding-top: 40px;
@@ -368,7 +333,6 @@
 }
 
 .btn-primary {
-    /* Match 'Get in Touch' from home hero: white background, primary text */
     background: white;
     color: var(--primary);
     box-shadow: none;
@@ -392,7 +356,6 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
     .project-detail {
         padding: 30px 20px;

@@ -1,39 +1,24 @@
-/* =========================================
-    HERO SECTION: Hauptbereich der Startseite
-    Enthält Hintergrund, Überschrift, Untertitel, Beschreibung und Call-to-Action-Buttons
-========================================= */
 .hero-section {
-     /* Farbverlauf von Blau zu Lila als Hintergrund */
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
-     /* Textfarbe weiß für Kontrast */
     color: white;
-     /* Innenabstand oben/unten 100px, seitlich 20px */
     padding: 100px 20px;
-     /* Zentriert den Text */
     text-align: center;
-     /* Für absolute Positionierung der Deko-Elemente */
     position: relative;
-     /* Verhindert Überlauf von animierten Kreisen */
     overflow: hidden;
 }
 
-/* Dekorative animierte Blase oben rechts */
 .hero-section::before {
     content: "";
-     /* Absolut positioniert außerhalb des sichtbaren Bereichs */
     position: absolute;
     top: -50%;
     right: -10%;
     width: 500px;
     height: 500px;
-     /* Halbtransparenter weißer Kreis */
     background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
-     /* Animiert das Element vertikal */
     animation: float 8s ease-in-out infinite;
 }
 
-/* Dekorative animierte Blase unten links */
 .hero-section::after {
     content: "";
     position: absolute;
@@ -46,13 +31,11 @@
     animation: float 6s ease-in-out infinite reverse;
 }
 
-/* Keyframes für das Schweben der Blasen */
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-30px); }
 }
 
-/* Container für den Inhalt der Hero Section */
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
@@ -60,17 +43,14 @@
     z-index: 1;
 }
 
-/* Hauptüberschrift im Hero-Bereich */
 .hero-section h1 {
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 20px;
     letter-spacing: -1px;
-     /* Schwarzer Schatten für bessere Lesbarkeit */
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Untertitel und Beschreibung: sehr helle Farbe und starker Schatten für Lesbarkeit */
 .hero-subtitle {
     font-size: 1.3rem;
     margin-bottom: 20px;
@@ -90,7 +70,6 @@
     letter-spacing: 0.02em;
 }
 
-/* Container für die Call-to-Action-Buttons */
 .hero-cta {
     display: flex;
     gap: 20px;
@@ -98,7 +77,6 @@
     flex-wrap: wrap;
 }
 
-/* Grundstil für Buttons */
 .hero-cta .btn {
     padding: 14px 32px;
     border-radius: 8px;
@@ -109,7 +87,6 @@
     letter-spacing: 0.5px;
 }
 
-/* Primärer Button: weißer Hintergrund, blauer Text */
 .btn-primary {
     background: white;
     color: var(--primary);
@@ -120,7 +97,6 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Sekundärer Button: transparenter Hintergrund, weißer Text */
 .btn-secondary {
     background: rgba(255, 255, 255, 0.15);
     color: white;
@@ -133,7 +109,6 @@
     transform: translateY(-3px);
 }
 
-/* Updates-Bereich unter dem Hero-Block */
 .updates-section {
     padding: 80px 20px;
     background: linear-gradient(180deg, var(--surface-alt) 0%, var(--surface) 100%);
@@ -147,7 +122,6 @@
     font-weight: 700;
 }
 
-/* Dekorative Linie unter der Überschrift */
 .underline {
     width: 80px;
     height: 4px;
@@ -163,7 +137,6 @@
     margin: 0 auto;
 }
 
-/* Responsive Design für Mobilgeräte */
 @media (max-width: 768px) {
     .hero-section {
         padding: 60px 20px;
