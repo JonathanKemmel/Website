@@ -1,24 +1,16 @@
-
-<!--
-    PROJECT-1.HTML
-    Diese Datei zeigt die Detailseite für das Projekt "Web Application".
-    Jeder Block und wichtige Zeile ist mit deutschen Kommentaren versehen.
--->
 <!DOCTYPE html>
 <html lang="de">
     <head>
-        <!-- Meta-Informationen und Einbindung der Stylesheets -->
-        <meta charset="utf-8" /> <!-- Zeichencodierung UTF-8 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive -->
-        <title>Web Application — Jonathan Kemmel</title> <!-- Titel im Browser-Tab -->
-        <link rel="stylesheet" href="../../../styles.css" /> <!-- Basis-Styles -->
-        <link rel="stylesheet" href="../project-detail.css" /> <!-- Detailseiten-Styles -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Web Application — Jonathan Kemmel</title>
+        <link rel="stylesheet" href="../../../styles.css" />
+        <link rel="stylesheet" href="../project-detail.css" />
     </head>
     <body>
-        <!-- Kopfbereich mit Navigation -->
         <header class="site-header">
             <div class="container header-inner">
-                <h1 class="site-title">JK Portfolio</h1> <!-- Logo/Seitentitel -->
+                <h1 class="site-title">JK Portfolio</h1>
                 <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
                     <span></span>
                     <span></span>
@@ -27,28 +19,24 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="../../../Home/index.html">Home</a></li> <!-- Link zur Startseite -->
-                        <li><a href="../../../About/about.html">About</a></li> <!-- Link zu Über mich -->
-                        <li><a href="../../projects.html">Projects</a></li> <!-- Link zu Projekten -->
-                        <li><a href="../../../Contact/contact.html">Contact</a></li> <!-- Link zu Kontakt -->
+                        <li><a href="../../../Home/index.html">Home</a></li>
+                        <li><a href="../../../About/about.html">About</a></li>
+                        <li><a href="../../projects.html">Projects</a></li>
+                        <li><a href="../../../Contact/contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
 
-        <!-- Main content of the page -->
         <main class="container project-detail">
-            <!-- Back button -->
             <a href="../../projects.html" class="btn-back">← Back to Projects</a>
             
             <article class="detail-content">
-                <!-- Header section with icon and title -->
                 <div class="detail-header">
-                    <div class="detail-icon">🌐</div> <!-- Icon for the project: Networking -->
-                    <h1>Networking</h1> <!-- Project name -->
+                    <div class="detail-icon">🌐</div>
+                    <h1>Networking</h1>
                 </div>
 
-                <!-- Section: Overview -->
                 <section class="detail-section">
                     <h2>Overview</h2>
                     <p>
@@ -56,24 +44,22 @@
                     </p>
                 </section>
 
-                <!-- Section: Technologies -->
                 <section class="detail-section">
                     <h2>Technologies</h2>
                     <ul class="tech-list">
-                        <li class="plain"><a class="btn btn-primary" href="Network Rack.html">Network Rack</a></li> <!-- Virtualization -->
-                        <li class="plain"><a class="btn btn-primary" href="VLAN Segmentation.html">VLAN Segmentation</a></li> <!-- Virtualization -->
-                </section>
-
-                <!-- Section: Features -->
-                <section class="detail-section">
-                    <h2>Features</h2>
-                    <ul class="feature-list">
-                        <li>Network Rack for organized network infrastructure</li> <!-- Mobile capability -->
-                        <li>VLAN Segmentation for security and performance</li> <!-- Performance -->
+                        <li class="plain"><a class="btn btn-primary" href="Rack-System.html">10" Rack System</a></li>
+                        <li class="plain"><a class="btn btn-primary" href="Home-Network-System.html">Home Network System</a></li>
                     </ul>
                 </section>
 
-                <!-- Section: Challenges & Solutions -->
+                <section class="detail-section">
+                    <h2>Features</h2>
+                    <ul class="feature-list">
+                        <li>Network Rack for organized network infrastructure</li>
+                        <li>VLAN Segmentation for security and performance</li>
+                    </ul>
+                </section>
+
                 <section class="detail-section">
                     <h2>Challenges & Solutions</h2>
                     <p>
@@ -83,7 +69,6 @@
             </article>
         </main>
 
-        <!-- Footer mit Copyright -->
         <footer class="site-footer">
             <div class="container">
                 <p>2026 Jonathan Kemmel</p>

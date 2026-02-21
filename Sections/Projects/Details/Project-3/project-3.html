@@ -1,24 +1,17 @@
 
-<!--
-    PROJECT-1.HTML
-    Diese Datei zeigt die Detailseite für das Projekt "Web Application".
-    Jeder Block und wichtige Zeile ist mit deutschen Kommentaren versehen.
--->
 <!DOCTYPE html>
 <html lang="de">
     <head>
-        <!-- Meta-Informationen und Einbindung der Stylesheets -->
-        <meta charset="utf-8" /> <!-- Zeichencodierung UTF-8 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1" /> <!-- Responsive -->
-        <title>Web Application — Jonathan Kemmel</title> <!-- Titel im Browser-Tab -->
-        <link rel="stylesheet" href="../../../styles.css" /> <!-- Basis-Styles -->
-        <link rel="stylesheet" href="../project-detail.css" /> <!-- Detailseiten-Styles -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Web Application — Jonathan Kemmel</title>
+        <link rel="stylesheet" href="../../../styles.css" />
+        <link rel="stylesheet" href="../project-detail.css" />
     </head>
     <body>
-        <!-- Kopfbereich mit Navigation -->
         <header class="site-header">
             <div class="container header-inner">
-                <h1 class="site-title">JK Portfolio</h1> <!-- Logo/Seitentitel -->
+                <h1 class="site-title">JK Portfolio</h1>
                 <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
                     <span></span>
                     <span></span>
@@ -27,28 +20,24 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="../../../Home/index.html">Home</a></li> <!-- Link zur Startseite -->
-                        <li><a href="../../../About/about.html">About</a></li> <!-- Link zu Über mich -->
-                        <li><a href="../../projects.html">Projects</a></li> <!-- Link zu Projekten -->
-                        <li><a href="../../../Contact/contact.html">Contact</a></li> <!-- Link zu Kontakt -->
+                        <li><a href="../../../Home/index.html">Home</a></li>
+                        <li><a href="../../../About/about.html">About</a></li>
+                        <li><a href="../../projects.html">Projects</a></li>
+                        <li><a href="../../../Contact/contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
 
-        <!-- Main content of the page -->
         <main class="container project-detail">
-            <!-- Back button -->
             <a href="../../projects.html" class="btn-back">← Back to Projects</a>
-            
+
             <article class="detail-content">
-                <!-- Header section with icon and title -->
                 <div class="detail-header">
-                    <div class="detail-icon">🏠</div> <!-- Icon for the project: Home Automation -->
-                    <h1>Home Automation</h1> <!-- Project name -->
+                    <div class="detail-icon">🏠</div>
+                    <h1>Home Automation</h1>
                 </div>
 
-                <!-- Section: Overview -->
                 <section class="detail-section">
                     <h2>Overview</h2>
                     <p>
@@ -56,26 +45,24 @@
                     </p>
                 </section>
 
-                <!-- Section: Technologies -->
                 <section class="detail-section">
                     <h2>Technologies</h2>
                     <ul class="tech-list">
                         <li class="plain"><a class="btn btn-primary" href="home-assistant.html">Home Assistant</a></li>
                         <li class="plain"><a class="btn btn-primary" href="off-the-shelf-iot.html">Off-the-Shelf IoT</a></li>
                         <li class="plain"><a class="btn btn-primary" href="custom-build-iot.html">Custom Build IoT</a></li>
-                </section>
-
-                <!-- Section: Features -->
-                <section class="detail-section">
-                    <h2>Features</h2>
-                    <ul class="feature-list">
-                        <li>Home Assistant for central management of smart home devices</li> <!-- Mobile capability -->
-                        <li>Off-the-Shelf IoT for easy integration of critical devices</li> <!-- Performance -->
-                        <li>Custom Build IoT for budget-friendly solutions</li> <!-- Accessibility -->
                     </ul>
                 </section>
 
-                <!-- Section: Challenges & Solutions -->
+                <section class="detail-section">
+                    <h2>Features</h2>
+                    <ul class="feature-list">
+                        <li>Home Assistant for central management of smart home devices</li>
+                        <li>Off-the-Shelf IoT for easy integration of critical devices</li>
+                        <li>Custom Build IoT for budget-friendly solutions</li>
+                    </ul>
+                </section>
+
                 <section class="detail-section">
                     <h2>Challenges & Solutions</h2>
                     <p>
@@ -85,7 +72,6 @@
             </article>
         </main>
 
-        <!-- Footer mit Copyright -->
         <footer class="site-footer">
             <div class="container">
                 <p>2026 Jonathan Kemmel</p>
