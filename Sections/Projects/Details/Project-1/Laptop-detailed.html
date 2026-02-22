@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Laptop — Detailed Guide</title>
+        <link rel="stylesheet" href="../../../styles.css" />
+        <link rel="stylesheet" href="../project-detail.css" />
+        <link rel="stylesheet" href="Laptop.css" />
+    </head>
+    <body>
+        <header class="site-header"><div class="container header-inner"><h1 class="site-title">JK Portfolio</h1></div></header>
+        <main class="container project-detail">
+            <article class="detail-content">
+                <h1>Laptop — Full Detailed Guide</h1>
+
+                <section>
+                    <h2>BIOS / Firmware & Media</h2>
+                    <ol>
+                        <li>Enter BIOS/UEFI and set boot order to USB; enable AHCI if using NVMe/HDD.</li>
+                        <li>Create Ventoy USB and copy Arch Linux ISO; verify with SHA256.</li>
+                        <li>Boot to live environment and verify disks with <code>lsblk</code>.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Installation & Partitioning</h2>
+                    <ol>
+                        <li>Partition disk (GPT) with EFI and root partitions.</li>
+                        <li>Create filesystems (ext4 for root, FAT32 for EFI) and mount them.</li>
+                        <li>Install base system (archinstall or manual) and set timezone/locale.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>User, SSH & Post-Install</h2>
+                    <ul>
+                        <li>Create normal user and add to wheel group; configure sudo.</li>
+                        <li>Install and enable OpenSSH; secure configuration (Disable root login if desired).</li>
+                        <li>Install essential packages: <code>python, git, esphome</code> and a lightweight browser.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>IDE & Performance</h2>
+                    <ul>
+                        <li>Use lightweight editors (neovim, geany) or code-server for remote editing.</li>
+                        <li>Reduce file-watcher load and exclude large folders in IDE settings.</li>
+                        <li>Enable zram/swap tuning for low-RAM systems and disable unnecessary services.</li>
+                    </ul>
+                </section>
+
+            </article>
+        </main>
+        <footer class="site-footer"><div class="container">2026 Jonathan Kemmel</div></footer>
+    </body>
+</html>

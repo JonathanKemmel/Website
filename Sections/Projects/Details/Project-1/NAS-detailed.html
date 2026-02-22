@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>NAS — Detailed Guide</title>
+        <link rel="stylesheet" href="../../../styles.css" />
+        <link rel="stylesheet" href="../project-detail.css" />
+        <link rel="stylesheet" href="NAS.css" />
+    </head>
+    <body>
+        <header class="site-header"><div class="container header-inner"><h1 class="site-title">JK Portfolio</h1></div></header>
+        <main class="container project-detail">
+            <article class="detail-content">
+                <h1>NAS — Full Detailed Guide</h1>
+
+                <section>
+                    <h2>Debian Installation (Detailed)</h2>
+                    <ol>
+                        <li>Download Debian netinst ISO and write it to a Ventoy USB drive.</li>
+                        <li>Boot installer, configure language/keyboard and network (static IP recommended).</li>
+                        <li>Partition disks (guided or custom), consider LVM for flexibility.</li>
+                        <li>Install minimal system, enable SSH during package selection.</li>
+                        <li>Install GRUB to the main disk and reboot into the new system.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>OpenMediaVault Installation</h2>
+                    <ol>
+                        <li>Add OMV repository keys and repository as documented by OMV.</li>
+                        <li>Install openmediavault packages and initialize the system (<code>omv-initsystem</code>).</li>
+                        <li>Open the OMV web GUI, change admin password and configure storage modules.</li>
+                        <li>Create Shared Folders and user accounts for SMB/NFS access.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Storage & Shares</h2>
+                    <ul>
+                        <li>Manage disks via OMV → Storage: wipe if needed, create filesystems, mountpoints.</li>
+                        <li>Use EXT4 for simplicity or plan RAID/LVM for redundancy/performance.</li>
+                        <li>Enable SMB and NFS services, configure permissions and test from clients.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Maintenance</h2>
+                    <ul>
+                        <li>Schedule updates and backups; consider offsite copies for critical data.</li>
+                        <li>Monitor disk health (SMART) and plan replacements before failure.</li>
+                        <li>Document share mappings and backup procedures.</li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+        <footer class="site-footer"><div class="container">2026 Jonathan Kemmel</div></footer>
+    </body>
+</html>

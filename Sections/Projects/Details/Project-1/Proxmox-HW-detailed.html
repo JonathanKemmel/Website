@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Proxmox HW — Detailed Guide</title>
+        <link rel="stylesheet" href="../../../styles.css" />
+        <link rel="stylesheet" href="../project-detail.css" />
+        <link rel="stylesheet" href="Proxmox-HW.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+            </div>
+        </header>
+        <main class="container project-detail">
+            <article class="detail-content">
+                <h1>Proxmox HW — Full Details</h1>
+
+                <section>
+                    <h2>Create Ubuntu VM (Detailed)</h2>
+                    <ol>
+                        <li>Upload the Ubuntu ISO to Proxmox: Datacenter → Storage (local) → ISO Images → Upload.</li>
+                        <li>Create a VM: set name, VM ID, OS type and point to the uploaded ISO.</li>
+                        <li>System tab: set BIOS/UEFI as required, enable QEMU guest agent for better control.</li>
+                        <li>Disk: choose size and format (qcow2 for space-efficiency, raw for speed).</li>
+                        <li>CPU/Memory: allocate according to workload (e.g., 4 cores / 8GB for dev VM).</li>
+                        <li>Network: select bridge (vmbr0) and model (virtio) for performance.</li>
+                        <li>Start VM and run through the Ubuntu installer; then install guest tools and updates.</li>
+                        <li>Optional: install Docker and code-server for remote development use.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Create Kali VM (Detailed)</h2>
+                    <ol>
+                        <li>Upload Kali ISO and create a VM as above.</li>
+                        <li>Use an isolated network bridge (e.g., vmbr1) to keep Kali separated from production LAN.</li>
+                        <li>Allocate resources and enable snapshots before performing risky tests.</li>
+                        <li>Keep Kali updated and only use it on systems/networks you own or have permission to test.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Post-install tips</h2>
+                    <ul>
+                        <li>Create VM templates for frequent deployments.</li>
+                        <li>Use snapshots before major changes or security tests.</li>
+                        <li>Document VM configurations so you can reproduce environments precisely.</li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+        <footer class="site-footer"><div class="container">2026 Jonathan Kemmel</div></footer>
+    </body>
+</html>

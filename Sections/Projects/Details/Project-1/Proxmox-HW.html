@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,7 +20,7 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="project-1.html">Geräte/Server</a></li>
+                        <li><a href="project-1.html">Devices / Servers</a></li>
                         <li><a href="../Project-2/project-2.html">Networking</a></li>
                         <li><a href="../Project-3/project-3.html">Home Automation</a></li>
                         <li><a href="../Project-4/project-4.html">Coding</a></li>
@@ -78,147 +78,38 @@
                     <h3 id="Part 1">Create Ubuntu VM (Programming)</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <p class="guide">Upload ISO:</p>
+                        <div style="display:flex;align-items:flex-start;gap:14px;">
+                            <a class="btn btn-primary" href="Proxmox-HW-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                        </div>
                         <ul>
-                            <li>Proxmox GUI → Datacenter → Storage(local) → ISO Images → Upload</li>
-                            <li>Choose Ubuntu ISO file</li>
+                            <li>Upload the Ubuntu ISO to your Proxmox storage (Datacenter → Storage → ISO Images).</li>
+                            <li>Create a VM and assign CPU, RAM and disk size (choose qcow2 or raw).</li>
+                            <li>Set the VM network to the cluster bridge (e.g. <code>vmbr0</code>) and use VIRTIO drivers.</li>
+                            <li>Install the OS, enable SSH and apply system updates.</li>
+                            <li>Install development tooling (build-essential, git; Docker optional).</li>
+                            <li>Enable the QEMU guest agent inside the VM for better management.</li>
+                            <li>Adjust VM cache and balloon settings only if you need extra performance tuning.</li>
+                            <li>Convert the VM to a template for repeatable deployments when ready.</li>
                         </ul>
+
                         
-                        <p class="guide">Create VM:</p>
-                        <ul>
-                            <li>Proxmox GUI → Create VM</li>
-                            <li>Node: &lt;your-host&gt;</li>
-                            <li>VM ID: auto</li>
-                            <li>Name: ubuntu-dev</li>
-                            <li>OS tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Use uploaded Ubuntu ISO</li>
-                                    <li>Leave other default</li>
-                                </ol>
-                            <li>System tab:</li>
-                                <ol class="eingerückt">
-                                    <li>BIOS: default (OVMF only if UEFI is needed)</li>
-                                    <li>Machine: default</li>
-                                    <li>Qemu Agent: checked (enables better shutdowns & status)</li>
-                                </ol>
-                            <li>Disk tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Bus/Device: SCSI0 on VIRTIO-SCSI controller</li>
-                                    <li>Disk size: &lt;your-choice&gt;</li>
-                                    <li>Format: qcow2 or raw (raw slightly faster on SSD)</li>
-                                </ol>
-                            <li>CPU tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Sockest: 1</li>
-                                    <li>Core: 4 (2 if host smaller)</li>
-                                </ol>
-                            <li>Memory tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Memory: 8192 (recommended for dev work)</li>
-                                </ol>
-                            <li>Network tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Bridge: vmbr0</li>
-                                    <li>Model: VIRTIO (fast)</li>
-                                </ol>
-                            <li>Finish → Start VM → Console → run Ubuntu installer</li>
-                        </ul>
-                        
-                        <p class="guide">Post-install:</p>
-                        <ul>
-                            <li>Update the guest and install typical dev tools:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">sudo apt update && sudo apt upgrade -y</span></li>
-                                    <li><span class="cmd">sudo apt install -y build-essential git curl qemu-guest-agent</span></li>
-                                </ol>
-                            <li>Install docker:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">sudo apt install -y ca-certificates gnupg lsb-release</span></li>
-                                    <li><span class="cmd">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span></li>
-                                    <li><span class="cmd">echo \
-                                        "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
-                                        https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
-                                        sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span></li>
-                                    <li><span class="cmd">sudo apt update</span></li>
-                                    <li><span class="cmd">sudo apt install -y docker-ce docker-ce-cli containerd.io</span></li>
-                                    <li><span class="cmd">sudo usermod -aG docker $USER</span></li>
-                                </ol>
-                            <li>Install code-server (VS Code in browser) if remote IDE needed:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">curl -fsSL https://code-server.dev/install.sh | sh</span></li>
-                                </ol>
-                        </ul>
-                        
-                        <p class="guide">Make a template:</p>
-                        <ul>
-                            <li>Once your done, right click VM → clone</li>
-                            <li>right click cloned VM → convert to template</li>
-                            <li>Now your able to clone fresh dev VMs quick</li>
-                        </ul>
                     </div>
 
                     <h3 id="Part 2">Create Kali VM (Hacking/Security)</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <p class="guide">Important safety note:</p>
+                        <div style="display:flex;align-items:flex-start;gap:14px;">
+                            <a class="btn btn-primary" href="Proxmox-HW-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                        </div>
                         <ul>
-                            <li>Treat Kali as a risky toolkit</li>
-                            <li>Keep it isolated from your main LAN</li>
-                            <li>Only use it on systems/networks you own or have explicit permission to test</li>
-                        </ul>
-                        
-                        <p class="guide">Upload ISO:</p>
-                        <ul>
-                            <li>Proxmox GUI → Datacenter → Storage(local) → ISO Images → Upload</li>
-                            <li>Choose Kali ISO file</li>
-                        </ul>
-                        
-                        <p class="guide">Create isolated network without physical NIC:</p>
-                        <ul>
-                            <li>Proxmox GUI → Datacenter → Node → System → Network → Create → Linux Bridge</li>
-                            <li>Name: vmbr1</li>
-                            <li>Leave rest empty</li>
-                            <li>This way Kali can only talk to VMs on isolated Bridge (vmbr1)</li>
-                        </ul>
-                        
-                        <p class="guide">Create VM:</p>
-                        <ul>
-                            <li>Proxmox GUI → Create VM</li>
-                            <li>Node: &lt;your-host&gt;</li>
-                            <li>VM ID: auto</li>
-                            <li>Name: kali-lab</li>
-                            <li>OS tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Use uploaded Kali ISO</li>
-                                    <li>Leave other default</li>
-                                </ol>
-                            <li>System tab:</li>
-                                <ol class="eingerückt">
-                                    <li>BIOS: default (OVMF only if UEFI is needed)</li>
-                                    <li>Machine: default</li>
-                                    <li>Qemu Agent: checked (enables better shutdowns & status)</li>
-                                </ol>
-                            <li>Disk tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Bus/Device: SCSI0 on VIRTIO-SCSI controller</li>
-                                    <li>Disk size: &lt;your-choice&gt;</li>
-                                    <li>Format: qcow2 or raw (raw slightly faster on SSD)</li>
-                                </ol>
-                            <li>CPU tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Sockest: 1</li>
-                                    <li>Core: 4 (2 if host smaller)</li>
-                                </ol>
-                            <li>Memory tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Memory: 8192 (recommended for dev work)</li>
-                                </ol>
-                            <li>Network tab:</li>
-                                <ol class="eingerückt">
-                                    <li>Bridge: vmbr1 (isolated bridge, no Network)</li>
-                                    <li>Model: VIRTIO (fast)</li>
-                                </ol>
-                            <li>Finish → Start VM → Console → run Kali installer</li>
+                            <li>Only run Kali on controlled lab networks where you have explicit permission.</li>
+                            <li>Upload the Kali ISO to Proxmox storage (ISO Images).</li>
+                            <li>Provide an isolated network (bridge or VLAN) for lab VMs to avoid production exposure.</li>
+                            <li>Create the Kali VM and attach it to the isolated bridge (use VIRTIO network/devices).</li>
+                            <li>Install the OS, then enable the QEMU guest agent inside the guest.</li>
+                            <li>Take snapshots before running risky tests so you can roll back quickly.</li>
+                            <li>Limit network exposure with firewall rules and strict ACLs.</li>
+                            <li>Store backups and snapshots securely and keep a retention plan.</li>
                         </ul>
                     </div>
                         </div>

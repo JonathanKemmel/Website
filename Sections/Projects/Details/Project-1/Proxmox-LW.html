@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,7 +20,7 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="project-1.html">Geräte/Server</a></li>
+                        <li><a href="project-1.html">Devices / Servers</a></li>
                         <li><a href="../Project-2/project-2.html">Networking</a></li>
                         <li><a href="../Project-3/project-3.html">Home Automation</a></li>
                         <li><a href="../Project-4/project-4.html">Coding</a></li>
@@ -32,7 +32,7 @@
         <main>
             <section class="project-detail-section">
                 <div class="container1">
-                    <h1 class="Proxmox">Proxmox</h1>
+                    <h1 id="proxmox" class="Proxmox">Proxmox-LW (Lightweight Server)</h1>
                     <div class="proxmox-lw-overview">
                         <div class="proxmox-lw-card">
                             <h2>Hardware:</h2>
@@ -50,10 +50,10 @@
                             <h2>Use Case:</h2>
                             <div class="underline"></div>
                             <ul class="project-use-case"> 
-                                <li>Hosten von lightweight Anwendungen</li>
-                                <li>Stromgünstiger 24/7 Betrieb</li>
-                                <li>Einfaches Management von Diensten über eine benutzerfreundliche Weboberfläche</li>
-                                <li>Skalierbarkeit und Flexibilität für zukünftige Erweiterungen</li>
+                                <li>Host lightweight applications</li>
+                                <li>Low-power 24/7 operation</li>
+                                <li>Easy service management via a user-friendly web interface</li>
+                                <li>Scalability and flexibility for future expansion</li>
                             </ul>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             <h2>Content:</h2>
                             <div class="underline"></div>
                             <ul class="content-table">
-                                <li><a href="#Proxmox">Proxmox</a></li>
+                                <li><a href="#proxmox">Proxmox</a></li>
                                 <li><a href="#Setup and Installation">Setup and Installation</a></li>
                                 <li><a href="#Install MyDokuWiki">Install myDokuWiki</a></li>
                                 <li><a href="#MyDokuWiki USB Backup">MyDokuWiki USB Backup</a></li>
@@ -84,177 +84,102 @@
                     <h3 id="Setup and Installation">Setup and Installation:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <p class="guide">How to Install and Setup Proxmox VE on Your Server:</p>
+                        <div style="display:flex;align-items:flex-start;gap:14px;">
+                            <a class="btn btn-primary" href="Proxmox-LW-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                        </div>
                         <ul>
-                            <li>Download Proxmox VE ISO from the official website.</li>
-                            <li>Create a bootable USB drive using tools like Rufus or Etcher.</li>
-                            <li>Boot the server from the USB drive and follow the installation prompts.</li>
-                            <li>On Target Hard-Disk:</li>
-                                <ol class="eingerückt">
-                                    <li>hdsize: Full Disk Size</li>
-                                    <li>swapsize: Swap Size should match RAM Size</li>
-                                    <li>maxroot: Maximum Root Partition Size (leave Room for backups/VMs)</li>
-                                    <li>minfree: 2GB (Reserved Space to prevent full Disk) </li>
-                                    <li> => leaves the rest for VM/CT Storage</li>
-                                </ol>
-                            <li>Configure network settings (recommend static IP) and set a strong root password during installation.</li>
-                            <li>After installation, access the Proxmox web interface via https://your-proxmox-ip:8006.</li>
-                            <li> Post Install:</li>
-                                <ol class="eingerückt">
-                                    <li>Update Proxmox VE to the latest version</li>
-                                    <li>Enable No-Subscription Repository</li>
-                                    <li>Enable Firewall, configure if needed</li>
-                                    <ol class="eingerückt-doppelt">
-                                        <li>Security and Maintenance:</li>
-                                        <li>Enable 2FA on Login</li>
-                                        <li>Schedule regular backups (atleast for important things)</li>
-                                        <li>Setup Update and Upgrade monthly</li>
-                                    </ol>
-                                </ol>
+                            <li>Create a bootable USB with the Proxmox VE ISO (Rufus/Etcher/Ventoy) and boot the target machine.</li>
+                            <li>Select installation target, verify partitioning scheme and set a strong root password.</li>
+                            <li>Configure networking (static IP recommended) and DNS according to your environment.</li>
+                            <li>After first boot: update the host (<span class="cmd">apt update && apt upgrade</span>).</li>
+                            <li>Configure storage (LVM, ZFS or directories) and establish a backup plan.</li>
+                            <li>Enable the QEMU guest agent on guests and create VM templates for common images.</li>
+                            <li>Harden SSH, review firewall rules and consider enabling 2FA for web access.</li>
+                            <li>Optionally set up centralized logs and monitoring (Prometheus/Grafana) for alerts.</li>
+                            <li>Schedule regular maintenance tasks (updates, snapshots, backup verification).</li>
                         </ul>
                     </div>
 
                     <h3 id="Install MyDokuWiki">Install MyDokuWiki:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <p class="guide">How to Install MyDokuWiki on Proxmox VE:</p>
+                        <div style="display:flex;align-items:flex-start;gap:14px;">
+                            <a class="btn btn-primary" href="MyDokuWiki-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                        </div>
                         <ul>
-                            <li>Log in to the Proxmox web interface and download template (recommended ubuntu-24.04-standard-...)</li>
-                            <li>Create a new Linux Container.</li>
-                                <ol class="eingerückt">
-                                    <li>Unprivileged Container: check</li>
-                                    <li>Root Disk: 8GB</li>
-                                    <li>CPU: 1 core</li>
-                                    <li>Memory & Swap: 512MB</li>
-                                    <li>Start at Boot: Check optional</li>
-                                </ol>
-                            <li>Inside LXC Terminal Update and Install Web Stack:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">apt update && apt upgrade -y</span></li>
-                                    <li><span class="cmd">apt install apache2 php php-gd php-xml php-json php-mbstring libapache2-mod-php unzip wget nano ufw -y</span></li>
-                                    <li><span class="cmd">systemctl enable apache2</span></li>
-                                </ol>
-                            <li>Install myDokuWiki:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">cd /tmp</span></li>
-                                    <li><span class="cmd">wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz</span></li>
-                                    <li><span class="cmd">tar -xvzf dokuwiki-stable.tgz</span></li>
-                                    <li><span class="cmd">mv dokuwiki-*/ /var/www/html/dokuwiki</span></li>
-                                    <li><span class="cmd">chown -R www-data:www-data /var/www/html/dokuwiki</span></li>
-                                </ol>
-                            <li>Access MyDokuWiki via http://&lt;container-ip&gt;/install.php in a web browser</li>
-                            <li>Follow the on-screen instructions to complete the installation and configuration of MyDokuWiki</li>
-                            <li>Now you can access it via http://&lt;container-ip&gt;/doku.php in a web browser</li>
-                            <li>Configure UFW Firewall to allow HTTP traffic:</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">ufw allow 80/tcp & 443/tcp</span></li>
-                                    <li><span class="cmd">ufw enable</span></li>
-                                </ol>
-                            <li>Regularly update MyDokuWiki and the underlying OS to ensure security and stability</li>
-                            <li>Setup an automated backup system for MyDokuWiki data (highly recommended)</li>
+                            <li>Create an LXC container from a suitable Ubuntu template (unprivileged recommended).</li>
+                            <li>Verify SSH access, apply base updates and create required user accounts.</li>
+                            <li>Install Apache2 and PHP with recommended modules (php-gd, php-xml, php-mbstring).</li>
+                            <li>Download DokuWiki to <code>/var/www/html</code> and set correct filesystem permissions.</li>
+                            <li>Configure a VirtualHost and reload the web server.</li>
+                            <li>Verify storage options—DokuWiki uses the filesystem; plan backups accordingly.</li>
+                            <li>Allow HTTP/HTTPS in UFW and secure the site with HTTPS (Let's Encrypt).</li>
+                            <li>Automate regular backups of DokuWiki directories and configuration files.</li>
+                            <li>Set proper user permissions and ACLs for content directories.</li>
                         </ul>
                     </div>
 
                     <h3 id="MyDokuWiki USB Backup">MyDokuWiki USB Backup:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <p class="guide">How to Set Up Automated USB Backups on Proxmox VE:</p>
+                        <div style="display:flex;align-items:flex-start;gap:14px;">
+                            <a class="btn btn-primary" href="USB-Backup-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                        </div>
                         <ul>
-                            <li>Connect a USB drive to the Proxmox server and identify it using the command line</li>
-                            <li>Create a mount point for the USB drive, e.g., /mnt/usb</li>
-                            <li>Mount the USB drive to the mount point and ensure it is accessible</li>
-                            <li>Create a manual Backup via vzdump</li>
-                            <li>Verify and Test Backup File</li>
-                            <li>Create a backup script to back up the MyDokuWiki data directory to the USB drive (should include mount at start and unmount at the end)</li>
-                            <li>Schedule the backup script to run at regular intervals using cron</li>
-                            <li>Ensure that the backup process is working correctly by checking the contents of the USB drive after the first backup</li>
+                            <li>Attach the USB drive to the host and identify it with <span class="cmd">lsblk</span>.</li>
+                            <li>Create a mount point (e.g. <code>/mnt/usb</code>) and set appropriate permissions.</li>
+                            <li>Perform a test backup with <span class="cmd">vzdump</span> for a VM and verify integrity.</li>
+                            <li>Create a script to mount the drive, run the backup, and safely unmount the media.</li>
+                            <li>Ensure backups are stored securely or encrypted if required.</li>
+                            <li>Schedule a cron job and define a retention policy (daily/weekly rotations).</li>
+                            <li>Set up monitoring/alerts to notify on backup failures.</li>
                         </ul>
                     </div>
 
                     <h3 id="Install Tailscale VPN Server">Install Tailscale VPN Server:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <p class="guide">How to Install Tailscale on Proxmox VE:</p>
+                        <div style="display:flex;align-items:flex-start;gap:14px;">
+                            <a class="btn btn-primary" href="Tailscale-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                        </div>
                         <ul>
-                            <li>I used a <a href="https://community-scripts.github.io/ProxmoxVE/scripts?id=add-tailscale-lxc" target="_blank">VE-Helper-Script</a></li>
-                            <li>After installation, access website link and configure Tailscale</li>
-                            <li>Enable Subnet routing in LXC Shell (optional as Exit Node)</li>
-                                <ol class="eingerückt">
-                                    <li><span class="cmd">sudo sysctl -w net.ipv4.ip_forwarding=1</span></li>
-                                    <li><span class="cmd">sudo tailscale up --advertise-routes=192.168.X.0/24 (--advertise-exit-node)</span></li>
-                                </ol>
-                            <li>Register other devices, like phone and Laptop to access the VPN network</li>
+                            <li>Install the Tailscale package or use the community helper script.</li>
+                            <li>Sign in with your Tailscale account and authorize devices.</li>
+                            <li>Optionally enable subnet routing if you need to expose network segments.</li>
+                            <li>Review firewall and routing configurations to avoid conflicts.</li>
+                            <li>Test connectivity (ping, SSH) over the Tailscale network.</li>
+                            <li>Use ACLs to restrict access to specific services as needed.</li>
                         </ul>
                     </div>
 
                     <h3 id="Setup Debian 12 VM template">Setup Debian 12 VM template:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <p class="guide">How to Create a Debian 12 VM Template on Proxmox VE:</p>
+                        <div style="display:flex;align-items:flex-start;gap:14px;">
+                            <a class="btn btn-primary" href="Debian-Template-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                        </div>
                         <ul>
-                            <li>In Proxmox WEB GUI, download Debian 12 netinst ISO</li>
-                            <li>Create a VM, for me it was following configuration:</li>
-                                <ol class="eingerückt">
-                                    <li>Name: Debian-12-Template</li>
-                                    <li>OS Type: Linux, Debian 12/Bookworm</li>
-                                    <li>CD/DVD: Use the downloaded Debian 12 ISO</li>
-                                    <li>Hard Disk: 12GB (or more if you want to install more software)</li>
-                                    <li>CPU: 1 core (can be adjusted based on needs) and importantly set type to host</li>
-                                    <li>Memory: 512MB (can be adjusted based on needs)</li>
-                                    <li>Network: Default (Bridged mode)</li>
-                                </ol>
-                            <li>Start the VM and go through the Debian installation process (set up a user, configure network, etc.)</li>
-                            <li>After installation, log in to the VM and perform any necessary updates and configurations (e.g., install SSH server, set up firewall, etc.)</li>
-                            <li>Once the OS is set up, shut down the VM and convert it into a template using the Proxmox web interface</li>
-                            <li>Test cloning the template by creating a new VM from it</li>
-                            <li>Use the Debian 12 template to quickly deploy new VMs with the same configuration in the future</li>
+                            <li>Install Debian, enable SSH and update the system.</li>
+                            <li>Install standard tools (SSH, sudo, cron, monitoring agents).</li>
+                            <li>Test configuration and disable services that are not required.</li>
+                            <li>Shut down the VM and convert it to a template in the Proxmox GUI.</li>
+                            <li>Clone the template, test the image and apply adjustments if necessary.</li>
                         </ul>
                     </div>
 
                     <h3 id="Setup HDD as SMB-Share">Setup HDD as SMB-Share:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <p class="guide">How to Set Up an HDD as an SMB-Share on Proxmox VE:</p>
+                        <div style="display:flex;align-items:flex-start;gap:14px;">
+                            <a class="btn btn-primary" href="SMB-Share-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                        </div>
                         <ul>
-                            <li>Connect an additional hard drive to the Proxmox server and identify it using the command line</li>
-                            <li>Format and mount the hard drive on the Proxmox server</li>
-                            <li>Install and configure Samba on the Proxmox server to share the mounted hard drive over the network:</li>
-                                <ol class="eingerückt">
-                                    <li>Install Samba: <span class="cmd">apt install samba -y</span></li>
-                                    <li>Edit the Samba configuration file: <span class="cmd">nano /etc/samba/smb.conf</span></li>
-                                    <li>Add:</li>
-                                        <ol class="eingerückt-doppelt">
-                                            <li>At the end of the file, add a new section for the shared folder:</li>
-                                            <li>[Shared]</li>
-                                            <li>path = /mnt/shared/files</li>
-                                            <li>browseable = yes</li>
-                                            <li>writable = yes</li>
-                                            <li>read only = no</li>
-                                            <li>guest ok = no</li>
-                                            <li>valid users = @smbshare</li>
-                                            <li>force group = smbshare</li>
-                                            <li>create mask = 0664</li>
-                                            <li>directory mask = 2775</li>
-                                        </ol>
-                                    <li>Restart the Samba service to apply the changes: <span class="cmd">systemctl restart smbd</span></li>
-                                </ol>
-                            <li>Set appropriate permissions and user for the shared folder and access it from other devices on the network</li>
-                            <li>Configure Proxmox Firewall to allow access to the SMB share if needed:</li>
-                                <ul class="eingerückt">
-                                    <li>Protocol: TCP</li>
-                                    <li>Port: 445</li>
-                                    <li>Source: Your local network or specific IPs</li>
-                                </ul>
-                                <ul class="eingerückt">
-                                    <li>Protocol: TCP</li>
-                                    <li>Port: 139</li>
-                                    <li>Source: Your local network or specific IPs</li>
-                                </ul>
-                            <li>Test the SMB share from a client machine to ensure it is accessible and properly configured</li>
-                                <ul class="eingerückt">
-                                    <li>On Windows: Open File Explorer and enter \\&lt;proxmox-ip&gt;\Shared</li>
-                                    <li>On Linux: Use the command line or file manager to access smb://&lt;proxmox-ip&gt;/Shared</li>
-                                </ul>
+                            <li>Attach the drive and identify it with <span class="cmd">lsblk</span>.</li>
+                            <li>Partition/format the drive (EXT4 or preferred FS) and mount it.</li>
+                            <li>Install Samba and create shares in <span class="cmd">/etc/samba/smb.conf</span>.</li>
+                            <li>Create users/passwords for network access and set filesystem permissions.</li>
+                            <li>Restart the Samba service and test access from a client (Windows/NAS).</li>
+                            <li>Review and secure firewall rules for SMB ports.</li>
                         </ul>
                     </div>
                         </div>

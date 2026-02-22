@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,7 +20,7 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="project-1.html">Geräte/Server</a></li>
+                        <li><a href="project-1.html">Devices / Servers</a></li>
                         <li><a href="../Project-2/project-2.html">Networking</a></li>
                         <li><a href="../Project-3/project-3.html">Home Automation</a></li>
                         <li><a href="../Project-4/project-4.html">Coding</a></li>
@@ -83,184 +83,70 @@
                     <h3 id="Debian Installation">Debian Installation:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <div class="nas-guide-card">
-                            <p class="guide">Prepare ISO:</p>
-                            <ul>
-                                <li>Download Debian 13 netinst ISO</li>
-                                <li>Write to Ventoy USB Drive</li>
-                            </ul>
+                        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
+                            <a class="btn btn-primary" href="NAS-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
                         </div>
-
-                        <div class="nas-guide-card">
-                            <p class="guide">BIOS Settings:</p>
-                            <ul>
-                                <li>Boot into BIOS</li>
-                                <li>Enable AHCI (not Raid) for NVMe</li>
-                                <li>Enable UEFI boot (recommended)</li>
-                                <li>Disable secure boot</li>
-                                <li>Save & reboot into USB installer</li>
-                            </ul>
-                        </div>
-
-                        <div class="nas-guide-card">
-                            <p class="guide">Debian 13 Minimal Install:</p>
-                            <ul>
-                                <li>Boot installer: Select Install</li>
-                                <li>Choose language, country, keyboard layout</li>
-                                <li>Network Configuration:</li>
-                                    <ol class="eingerückt">
-                                        <li>Select network interface (Ethernet preferred)</li>
-                                        <li>If using DHCP, automatically IP</li>
-                                        <li>If static IP:</li>
-                                        <ol class="eingerückt-doppelt">
-                                            <li>IP: 192.168.X.XXX</li>
-                                            <li>Netmask: 255.255.255.0</li>
-                                            <li>Gateway: 192.168.X.1</li>
-                                            <li>DNS: 8.8.8.8</li>
-                                        </ol>
-                                    </ol>
-                                <li>Set Hostname & Domain:</li>
-                                    <ol class="eingerückt">
-                                        <li>Hostname: your-hostname (e.g., nasserver)</li>
-                                        <li>Domain: leave empty</li>
-                                    </ol>
-                                <li>Set Root & User:</li>
-                                    <ol class="eingerückt">
-                                        <li>Root password: strong one</li>
-                                        <li>Create a user: your-username</li>
-                                    </ol>
-                                <li>Partition Disk:</li>
-                                    <ol class="eingerückt">
-                                        <li>Guided → use entire disk</li>
-                                        <li>Optional, choose LVM if expanded in future</li>
-                                        <li>Confirm changes and write partitions</li>
-                                    </ol>
-                                <li>Package Selection:</li>
-                                    <ol class="eingerückt">
-                                        <li>Deselect all except:</li>
-                                        <ol class="eingerückt-doppelt">
-                                            <li>SSH server</li>
-                                            <li>Standard system utilities</li>
-                                        </ol>
-                                        <li>Do not install desktop environments for minimal OMV!!!</li>
-                                    </ol>
-                                <li>Install Grub:</li>
-                                    <ol class="eingerückt">
-                                        <li>Install Grub on main disk (/dev/nvme0n1)</li>
-                                        <li>Confirm installation</li>
-                                    </ol>
-                                <li>Finish & Reboot:</li>
-                                    <ol class="eingerückt">
-                                        <li>Remove USB and reboot</li>
-                                        <li>Log in with your user or root</li>
-                                    </ol>
-                            </ul>
-                        </div>
-
-                        <div class="nas-guide-card">
-                            <p class="guide">Post-Install Essentials:</p>
-                            <ul>
-                                <li>Update & Upgrade:</li>
-                                    <ol class="eingerückt">
-                                        <li><span class="cmd">sudo apt update && apt upgrade -y</span></li>
-                                        <li><span class="cmd">sudo reboot</span></li>
-                                    </ol>
-                                <li>Enable SSH:</li>
-                                    <ol class="eingerückt">
-                                        <li><span class="cmd">sudo systemctl enable ssh</span></li>
-                                        <li><span class="cmd">sudo systemctl start ssh</span></li>
-                                    </ol>
-                                <li>Install required tools:</li>
-                                    <ol class="eingerückt">
-                                        <li><span class="cmd">sudo apt install -y sudo curl gnupg lsb-release</span></li>
-                                    </ol>
-                            </ul>
-                        </div>
+                        <ul>
+                            <li>Boot the Debian installer and choose "Install"; select language, country and keyboard layout.</li>
+                            <li>Network: prefer Ethernet. Use DHCP or set a static IP (placeholder: IP 192.168.x.x, Netmask 255.255.255.0, Gateway 192.168.x.1, DNS 8.8.8.8).</li>
+                            <li>Set hostname to <code>omvserver</code> and leave domain empty.</li>
+                            <li>Set a strong root password and create an administrative user (e.g. <code>admin</code>).</li>
+                            <li>Partition: choose Guided → use entire disk; optionally enable LVM for future expansion.</li>
+                            <li>Package selection: deselect desktop environments; select only "SSH server" and "standard system utilities" for a minimal OMV host.</li>
+                            <li>Install the bootloader (GRUB) on the main disk (example: <code>/dev/nvme0n1</code>) and confirm.</li>
+                            <li>Finish installation, remove installer media and reboot into the new system.</li>
+                            <li>Log in as your user or root and update the system: <span class="cmd">apt update && apt upgrade -y</span>.</li>
+                        </ul>
                     </div>
 
                     <h3 id="Install OpenMediaVault">Install OpenMediaVault:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <div class="nas-guide-card">
-                            <p class="guide">Note: OMV 7 is designed for Debian 13</p>
-                            <ul>
-                                <li>Add OMV Repo:</li>
-                                    <ol class="eingerückt">
-                                        <li><span class="cmd">sudo curl -fsSL https://packages.openmediavault.org/public/archive.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/openmediavault.gpg</span></li>
-                                        <li><span class="cmd">echo "deb https://packages.openmediavault.org/public arrakis main" | sudo tee /etc/apt/sources.list.d/openmediavault.list</span></li>
-                                        <li><span class="cmd">sudo apt update</span></li>
-                                    </ol>
-                                <li>Install OMV:</li>
-                                    <ol class="eingerückt">
-                                        <li><span class="cmd">sudo apt install openmediavault-keyring postfix -y</span></li>
-                                        <li><span class="cmd">sudo apt update</span></li>
-                                        <li><span class="cmd">sudo apt install openmediavault -y</span></li>
-                                    </ol>
-                                <li>Initialize OMV:</li>
-                                    <ol class="eingerückt">
-                                        <li><span class="cmd">sudo omv-initsystem</span></li>
-                                    </ol>
-                                <li>Access OMV Web GUI:</li>
-                                    <ol class="eingerückt">
-                                        <li>Default URL: http://&lt;your-server-ip&gt;/</li>
-                                        <li>Default credentials:</li>
-                                        <ol class="eingerückt-doppelt">
-                                            <li>Username: admin</li>
-                                            <li>Password: openmediavault</li>
-                                        </ol>
-                                        <li>Change password immediately after login</li>
-                                    </ol>
-                            </ul>
+                        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
+                            <a class="btn btn-primary" href="NAS-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
                         </div>
+                        <ul>
+                            <li>Note: OMV 7 targets Debian 13 — prefer matching OS version.</li>
+                            <li>Import OMV repository and archive key, then run <span class="cmd">apt update</span>.</li>
+                            <li>Install OMV packages and required dependencies (postfix, openmediavault).</li>
+                            <li>Run <span class="cmd">omv-initsystem</span> to initialize configuration.</li>
+                            <li>Open the OMV web GUI at http://&lt;server-ip&gt; and change the default admin password.</li>
+                            <li>Configure storage backends, users and shared folders from the GUI.</li>
+                            <li>Enable desired services (SMB/NFS/FTP) and set access permissions.</li>
+                            <li>Install `omv-extras` if you need Docker/Plugins (optional).</li>
+                        </ul>
                     </div>
 
                     <h3 id="Configure Storage">Configure Storage:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <div class="nas-guide-card">
-                            <p class="guide">Add and format drives in OpenMediaVault:</p>
-                            <ul>
-                                <li>Network:</li>
-                                    <ol class="eingerückt">
-                                        <li>Configure static IP if not done</li>
-                                        <li>Disable IPv6 if unused</li>
-                                    </ol>
-                                <li>Storage:</li>
-                                    <ol class="eingerückt">
-                                        <li>Add drives under Storage > Disks</li>
-                                        <li>Wipe and create file systems (EXT4 recommended for simplicity)</li>
-                                    </ol>
-                            </ul>
+                        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
+                            <a class="btn btn-primary" href="NAS-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
                         </div>
+                        <ul>
+                            <li>Set a static IP for reliable access and disable IPv6 if unused.</li>
+                            <li>Add drives in OMV → Storage → Disks and wipe if reusing media.</li>
+                            <li>Create filesystems (EXT4 or your chosen FS) and set mountpoints.</li>
+                            <li>Consider RAID/LVM/ZFS depending on redundancy and performance needs.</li>
+                            <li>Enable SMART monitoring and schedule periodic SMART tests.</li>
+                            <li>Plan backups and retention; test restores regularly.</li>
+                        </ul>
                     </div>
 
                     <h3 id="Setup Shared Folders">Setup Shared Folders:</h3>
                     <div class="underline"></div>
                     <div class="content">
-                        <div class="nas-guide-card">
-                            <p class="guide">Create and configure network shares:</p>
-                            <ul>
-                                <li>Shared Folders:</li>
-                                    <ol class="eingerückt">
-                                        <li>Create shared folders on drives</li>
-                                        <li>Assign permissions</li>
-                                    </ol>
-                                <li>SMB / NFS / FTP:</li>
-                                    <ol class="eingerückt">
-                                        <li>Enable desired services under Services</li>
-                                        <li>Create users for network access</li>
-                                    </ol>
-                                <li>Updates:</li>
-                                    <ol class="eingerückt">
-                                        <li>Regularly check System > Update Management</li>
-                                    </ol>
-                                <li>Optional:</li>
-                                    <ol class="eingerückt">
-                                        <li>Docker Plugin (omv-extras) for containers</li>
-                                        <li>SnapRAID / MergerFS if needed for advanced storage</li>
-                                    </ol>
-                            </ul>
+                        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
+                            <a class="btn btn-primary" href="NAS-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
                         </div>
+                        <ul>
+                            <li>Create shared folders on the chosen mountpoints and assign permissions per user/group.</li>
+                            <li>Enable SMB and/or NFS services and configure exports/shares.</li>
+                            <li>Create users for network access and use strong passwords or external auth.</li>
+                            <li>Set quotas or ACLs if you need per-user limits.</li>
+                            <li>Enable update management and check for plugin updates periodically.</li>
+                            <li>Optional: install Docker via omv-extras and advanced storage tools (SnapRAID/MergerFS).</li>
+                        </ul>
                     </div>
                         </div>
                     </section>

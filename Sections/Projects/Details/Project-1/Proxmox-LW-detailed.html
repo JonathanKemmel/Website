@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Proxmox VE — Detailed Guide</title>
+        <link rel="stylesheet" href="../../../styles.css" />
+        <link rel="stylesheet" href="../project-detail.css" />
+        <link rel="stylesheet" href="Proxmox-LW.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+            </div>
+        </header>
+        <main class="container project-detail">
+            <article class="detail-content">
+                <div class="detail-header">
+                    <h1>Proxmox VE — Detailed Guide</h1>
+                </div>
+
+                <section class="detail-section">
+                    <h2>Setup & Installation</h2>
+                    <p>This guide documents the full steps I used to install and configure Proxmox VE.</p>
+                    <ol>
+                        <li>Download the latest Proxmox VE ISO from the official site.</li>
+                        <li>Create a bootable USB (Rufus/Etcher/Ventoy) and verify the image checksum.</li>
+                        <li>Boot the target machine from USB and follow the installer prompts.</li>
+                        <li>Choose installation disk and partitioning scheme (LVM or ZFS depending on needs).</li>
+                        <li>Set a strong root password and the management IP (static recommended).</li>
+                        <li>Complete installation and reboot the host.</li>
+                        <li>Access the web UI via https://<your-host-ip>:8006 and login as root.</li>
+                    </ol>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Post-Install Configuration</h2>
+                    <ul>
+                        <li>Update the host: <code>apt update && apt full-upgrade -y</code>.</li>
+                        <li>Enable the QEMU guest agent on guests for better management.</li>
+                        <li>Configure storage: add LVM, ZFS pool or directory storage as needed.</li>
+                        <li>Create VM templates for common guest OSes to speed up deployments.</li>
+                        <li>Set up backups (vzdump) and test restore procedures regularly.</li>
+                        <li>Harden SSH (disable root login over SSH, use keys), enable 2FA where useful.</li>
+                        <li>Consider monitoring (Prometheus/Grafana) and log collection for alerts.</li>
+                    </ul>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Useful Commands</h2>
+                    <ul>
+                        <li>Update host: <code>apt update && apt full-upgrade -y</code></li>
+                        <li>List VMs: <code>qm list</code></li>
+                        <li>Backup VM: <code>vzdump <vmid> --mode snapshot --compress lzo</code></li>
+                        <li>Restore backup: <code>qmrestore</code> or <code>vzrestore</code> (depending on format)</li>
+                    </ul>
+                </section>
+
+                <section class="detail-section">
+                    <h2>Advanced Topics</h2>
+                    <ul>
+                        <li>Consider ZFS for data integrity and snapshots if storage and RAM allow.</li>
+                        <li>Use Ceph or shared storage for HA setups (complex, requires planning).</li>
+                        <li>Automate provisioning with cloud-init templates and configuration management.</li>
+                    </ul>
+                </section>
+
+            </article>
+        </main>
+        <footer class="site-footer">
+            <div class="container">2026 Jonathan Kemmel</div>
+        </footer>
+    </body>
+</html>
