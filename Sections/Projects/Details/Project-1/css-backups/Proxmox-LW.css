@@ -1,5 +1,8 @@
-/* Project-3: Home Assistant (match Project-1 detail layout & styles) */
+@import url("../../../styles.css");
+@import url("../project-detail.css");
+/* Proxmox-LW-specific styles (page-level overrides) */
 
+/* Use existing site palette for consistency */
 .Proxmox {
     color: var(--text);
     font-weight: 700;
@@ -83,7 +86,7 @@
     padding: 32px;
 }
 
-/* Remove outer box for hardware/use-case area (match Project-1 behavior) */
+/* Remove outer box for hardware/use-case area */
 .project-detail-section .container1 {
     background: transparent;
     border: 0;

@@ -1,7 +1,9 @@
-/* Proxmox-LW-specific styles (page-level overrides) */
+@import url("../../../styles.css");
+@import url("../project-detail.css");
+/* Laptop-specific styles (page-level overrides) */
 
 /* Use existing site palette for consistency */
-.Proxmox {
+.Laptop {
     color: var(--text);
     font-weight: 700;
     letter-spacing: -0.5px;
@@ -12,7 +14,7 @@
     text-align: center;
 }
 
-.Proxmox::after {
+.Laptop::after {
     content: "";
     position: absolute;
     left: 50%;
@@ -24,53 +26,54 @@
     border-radius: 2px;
 }
 
-.proxmox-lw-overview {
+.laptop-overview {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px;
     margin-top: 20px;
 }
 
-.proxmox-lw-card {
+.laptop-card {
     background: var(--surface);
     border-radius: 10px;
     border: 1px solid var(--border);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    max-width: none;
     padding: 28px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
-.proxmox-lw-layout {
+.laptop-layout {
     display: grid;
     grid-template-columns: 260px minmax(0, 1fr);
     gap: 28px;
     width: 100%;
     max-width: none;
-    margin: 0 auto;
+    margin: 0 auto; /* center layout to match .container elements */
     padding: 20px 40px 40px;
     align-items: start;
 }
 
-.proxmox-lw-sidebar {
+.laptop-sidebar {
     position: sticky;
     top: 20px;
     align-self: start;
 }
 
-.proxmox-lw-sidebar .container1 {
+.laptop-sidebar .container1 {
     padding: 24px;
 }
 
-.proxmox-lw-sidebar .content-table {
+.laptop-sidebar .content-table {
     list-style: none;
     margin-left: 0;
     padding-left: 0;
 }
 
-.proxmox-lw-sidebar .content-table li {
+.laptop-sidebar .content-table li {
     margin-bottom: 8px;
 }
 
-.proxmox-lw-main .container2 {
+.laptop-main .container2 {
     padding: 32px;
 }
 
@@ -80,8 +83,25 @@
     background: var(--surface);
     border-radius: 10px;
     border: 1px solid var(--border);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-    padding: 32px;
+    /* unified subtle shadow to match sidebar and content */
+    box-shadow: 0 8px 24px rgba(11,45,60,0.08);
+    box-sizing: border-box;
+    padding: 32px 40px; /* 40px left/right padding as requested */
+    max-width: none; /* no width limit */
+    margin: 0; /* no centering so box edges line up with layout */
+}
+
+.Content-section .container3 {
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    /* unified subtle shadow to match sidebar and content */
+    box-shadow: 0 8px 24px rgba(11,45,60,0.08);
+    box-sizing: border-box;
+    padding: 32px 40px; /* 40px left/right padding as requested */
+    max-width: 818px; /* width limit */
+    margin: 0 auto; /* center container3 */
+   
 }
 
 /* Remove outer box for hardware/use-case area */
@@ -142,15 +162,34 @@
     background: var(--surface-alt);
     border: 1px solid var(--border);
     border-left: 3px solid var(--primary);
-    padding: 10px 14px;
-    border-radius: 6px;
+     /* match NAS box appearance: subtle shadow used site-wide */
+     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
     letter-spacing: -0.1px;
 }
 
-.content .cmd {
-    background-color: var(--surface-alt);
-    border-color: var(--border);
-    color: var(--primary-strong);
+        .content .cmd {
+    background-color: #f5f7f8; /* subtle light grey */
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: block;
+    white-space: pre-wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+    margin: 12px 0;
+ }
+
+/* Ensure <pre class="cmd"> aligns with left edge of content and matches styling */
+.content pre.cmd { 
+    background-color: #a1a4a52d; /* subtle light grey */
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 16px;
+    border-radius: 8px;
+    overflow:auto;
+    white-space: pre;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+    margin: 12px 0;
 }
 
 /* Subtle section spacing for readability */
@@ -160,20 +199,20 @@
 }
 
 @media (max-width: 768px) {
-    .proxmox-lw-overview {
+    .laptop-overview {
         grid-template-columns: 1fr;
     }
 
-    .proxmox-lw-card {
+    .laptop-card {
         padding: 22px;
     }
 
-    .proxmox-lw-layout {
+    .laptop-layout {
         grid-template-columns: 1fr;
         padding: 12px 20px 20px;
     }
 
-    .proxmox-lw-sidebar {
+    .laptop-sidebar {
         position: static;
     }
 
@@ -181,6 +220,8 @@
     .Content-table-section .container1,
     .Content-section .container2 {
         padding: 24px 20px;
+        margin: 0 12px; /* reduce side gap on small screens */
+        max-width: none;
     }
 
     .Content-table-section .content-table a {

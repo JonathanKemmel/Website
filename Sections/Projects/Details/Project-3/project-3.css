@@ -1,0 +1,109 @@
+@import url("../../../styles.css");
+@import url("../project-detail.css");
+/* Consolidated Project-3 stylesheet (custom-build, home-assistant, off-the-shelf) */
+
+/* --- NAS-like rules (custom-build) --- */
+.NAS { color: var(--text); font-weight:700; font-size:2.4rem; margin-bottom:18px }
+.nas-overview { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px }
+.nas-card { background:var(--surface); border-radius:10px; border:1px solid var(--border); padding:28px }
+
+/* --- Home Assistant / proxmox-lw rules --- */
+.proxmox-lw-overview { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; margin-top:20px }
+.proxmox-lw-card { background:var(--surface); border-radius:10px; border:1px solid var(--border); box-shadow:0 6px 16px rgba(0,0,0,0.06); padding:28px }
+.proxmox-lw-layout { display:grid; grid-template-columns:260px minmax(0,1fr); gap:28px; padding:20px 40px 40px }
+
+/* --- Off-the-shelf IoT (proxmox-hw subset) --- */
+.proxmox-hw-overview { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; margin-top:20px }
+.proxmox-hw-card { background:var(--surface); border-radius:10px; border:1px solid var(--border); box-shadow:0 6px 16px rgba(0,0,0,0.06); padding:28px }
+
+/* Shared project-detail / content helpers */
+.project-detail-section .container1,
+.Content-table-section .container1,
+.Content-section .container2 {
+	background: var(--surface);
+	border-radius: 10px;
+	border: 1px solid var(--border);
+	box-shadow: 0 8px 24px rgba(11,45,60,0.08);
+	box-sizing: border-box;
+	padding: 32px 40px;
+	max-width: none;
+	margin: 0;
+}
+
+.Content-section .container3 {
+	background: var(--surface);
+	border-radius: 10px;
+	border: 1px solid var(--border);
+	box-shadow: 0 8px 24px rgba(11,45,60,0.08);
+	box-sizing: border-box;
+	padding: 32px 40px;
+	max-width: 818px;
+	margin: 0 auto;
+}
+
+.project-detail-section .container1 { background: transparent; border: 0; box-shadow: none; padding: 0 40px 20px; }
+.project-detail-section .underline, .Content-table-section .underline, .Content-section .underline {
+	background: linear-gradient(90deg, var(--primary), var(--accent-strong));
+	height: 2px; border-radius: 2px; margin-bottom: 18px;
+}
+
+.project-detail-section .project-hardware li::marker, .project-detail-section .project-use-case li::marker { color: var(--primary); }
+
+.Content-table-section .content-table a { color: var(--primary); text-decoration: none; padding: 4px 8px; border-radius: 6px; transition: color 0.2s ease, background-color 0.2s ease; display: block; border: 1px solid var(--border); }
+.Content-table-section .content-table { list-style: none; margin: 0; padding: 0; }
+.Content-table-section .content-table li { margin: 0 0 8px; }
+.Content-table-section .content-table li:last-child { margin-bottom: 0; }
+.Content-table-section .content-table a:hover { color: var(--primary-strong); background: rgba(31, 122, 140, 0.08); text-decoration: none; }
+
+.content .guide { color: var(--text); font-weight: 600; background: var(--surface-alt); border: 1px solid var(--border); border-left: 3px solid var(--primary); box-shadow: 0 6px 18px rgba(0,0,0,0.06); letter-spacing: -0.1px; }
+
+.content .cmd { background-color: #f5f7f8; border: 1px solid var(--border); color: var(--text); padding: 12px 16px; border-radius: 8px; display: block; white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; margin: 12px 0; }
+.content pre.cmd { background-color: #a1a4a52d; border: 1px solid var(--border); color: var(--text); padding: 12px 16px; border-radius: 8px; overflow:auto; white-space: pre; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; margin: 12px 0; }
+
+.Content-section .content > ul, .Content-section .content > ol { padding-top: 4px; }
+
+@media (max-width: 768px) {
+	.nas-overview { grid-template-columns: 1fr; }
+	.nas-card { padding: 22px; }
+	.proxmox-lw-overview { grid-template-columns: 1fr; }
+	.proxmox-hw-overview { grid-template-columns: 1fr; }
+	.proxmox-lw-card { padding: 22px; }
+	.proxmox-lw-layout { grid-template-columns: 1fr; padding: 12px 20px 20px; }
+	.project-detail-section .container1, .Content-table-section .container1, .Content-section .container2 { padding: 24px 20px; margin: 0 12px; max-width: none; }
+	.Content-table-section .content-table a { display: block; padding: 10px 12px; margin-bottom: 8px; }
+}
+
+/* Final override: remove outer box for header/hardware/use-case areas across project
+   This must come last so it wins over duplicated earlier rules. */
+.project-detail-section > .container1,
+.project-detail-section .project-hardware,
+.project-detail-section .project-use-case {
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	padding: 0 40px 20px !important;
+}
+
+/* Header styles (match Project-1) */
+.Laptop, .NAS, .Proxmox {
+	color: var(--text);
+	font-weight: 700;
+	letter-spacing: -0.5px;
+	font-size: 2.4rem;
+	margin-bottom: 18px;
+	position: relative;
+	padding-bottom: 14px;
+	text-align: center;
+}
+
+.Laptop::after, .NAS::after, .Proxmox::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 0;
+	width: 90px;
+	height: 3px;
+	background: linear-gradient(90deg, var(--primary), var(--accent-strong));
+	border-radius: 2px;
+}
