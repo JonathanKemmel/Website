@@ -35,8 +35,9 @@
     background: var(--surface);
     border-radius: 10px;
     border: 1px solid var(--border);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+    max-width: none;
     padding: 28px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
 .laptop-layout {
@@ -45,7 +46,7 @@
     gap: 28px;
     width: 100%;
     max-width: none;
-    margin: 0 auto;
+    margin: 0 auto; /* center layout to match .container elements */
     padding: 20px 40px 40px;
     align-items: start;
 }
@@ -80,11 +81,25 @@
     background: var(--surface);
     border-radius: 10px;
     border: 1px solid var(--border);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    /* unified subtle shadow to match sidebar and content */
+    box-shadow: 0 8px 24px rgba(11,45,60,0.08);
     box-sizing: border-box;
     padding: 32px 40px; /* 40px left/right padding as requested */
-    max-width: 1000px; /* limit the box width */
-    margin: 0 auto; /* center the box while keeping padding for page-edge gap */
+    max-width: none; /* no width limit */
+    margin: 0; /* no centering so box edges line up with layout */
+}
+
+.Content-section .container3 {
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    /* unified subtle shadow to match sidebar and content */
+    box-shadow: 0 8px 24px rgba(11,45,60,0.08);
+    box-sizing: border-box;
+    padding: 32px 40px; /* 40px left/right padding as requested */
+    max-width: 818px; /* width limit */
+    margin: 0 auto; /* center container3 */
+   
 }
 
 /* Remove outer box for hardware/use-case area */
@@ -145,8 +160,8 @@
     background: var(--surface-alt);
     border: 1px solid var(--border);
     border-left: 3px solid var(--primary);
-    padding: 10px 14px;
-    border-radius: 6px;
+     /* match NAS box appearance: subtle shadow used site-wide */
+     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
     letter-spacing: -0.1px;
 }
 
