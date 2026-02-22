@@ -3,55 +3,141 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Laptop — Detailed Guide</title>
+        <title>Web Application — Jonathan Kemmel</title>
         <link rel="stylesheet" href="../../../styles.css" />
         <link rel="stylesheet" href="../project-detail.css" />
         <link rel="stylesheet" href="Laptop.css" />
     </head>
     <body>
-        <header class="site-header"><div class="container header-inner"><h1 class="site-title">JK Portfolio</h1></div></header>
-        <main class="container project-detail">
-            <article class="detail-content">
-                <h1>Laptop — Full Detailed Guide</h1>
-
-                <section>
-                    <h2>BIOS / Firmware & Media</h2>
-                    <ol>
-                        <li>Enter BIOS/UEFI and set boot order to USB; enable AHCI if using NVMe/HDD.</li>
-                        <li>Create Ventoy USB and copy Arch Linux ISO; verify with SHA256.</li>
-                        <li>Boot to live environment and verify disks with <code>lsblk</code>.</li>
-                    </ol>
-                </section>
-
-                <section>
-                    <h2>Installation & Partitioning</h2>
-                    <ol>
-                        <li>Partition disk (GPT) with EFI and root partitions.</li>
-                        <li>Create filesystems (ext4 for root, FAT32 for EFI) and mount them.</li>
-                        <li>Install base system (archinstall or manual) and set timezone/locale.</li>
-                    </ol>
-                </section>
-
-                <section>
-                    <h2>User, SSH & Post-Install</h2>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li>Create normal user and add to wheel group; configure sudo.</li>
-                        <li>Install and enable OpenSSH; secure configuration (Disable root login if desired).</li>
-                        <li>Install essential packages: <code>python, git, esphome</code> and a lightweight browser.</li>
+                        <li><a href="project-1.html">Devices / Servers</a></li>
+                        <li><a href="../Project-2/project-2.html">Networking</a></li>
+                        <li><a href="../Project-3/project-3.html">Home Automation</a></li>
+                        <li><a href="../Project-4/project-4.html">Coding</a></li>
                     </ul>
-                </section>
+                </nav>
+            </div>
+        </header>
+    
+        <main>
+            <section class="project-detail-section">
+                <div class="container1">
+                    <h1 class="Laptop">Laptop (Mobile Workstation)</h1>
+                </div>
+            </section>
 
-                <section>
-                    <h2>IDE & Performance</h2>
-                    <ul>
-                        <li>Use lightweight editors (neovim, geany) or code-server for remote editing.</li>
-                        <li>Reduce file-watcher load and exclude large folders in IDE settings.</li>
-                        <li>Enable zram/swap tuning for low-RAM systems and disable unnecessary services.</li>
-                    </ul>
-                </section>
+            <section class="Content-section">
+                <div class="container2">
+                    <div class="content">
+                        <h2 id="os">Operating System</h2>
+                        <p>Prepare media and a minimal Debian 13 netinst for OpenMediaVault (OMV 7).</p>
 
-            </article>
+                        <h2 id="prepare-iso">Prepare ISO</h2>
+                        <ul>
+                            <li>Download Debian 13 netinst ISO and verify its checksum (SHA256).</li>
+                            <li>Write the ISO to a Ventoy USB drive.</li>
+                        </ul>
+
+                        <h2 id="bios">BIOS Settings</h2>
+                        <ul>
+                            <li>Boot into BIOS.</li>
+                            <li>Enable AHCI (not RAID) for NVMe.</li>
+                            <li>Enable UEFI boot (recommended).</li>
+                            <li>Disable Secure Boot.</li>
+                            <li>Save &amp; reboot into the USB installer.</li>
+                        </ul>
+
+                        <h2 id="install">Debian 13 Minimal Install</h2>
+                        <ol>
+                            <li>Boot the installer and select <strong>Install</strong>. Choose language, country and keyboard layout.</li>
+                            <li>Network Configuration: select the network interface (Ethernet preferred). If DHCP is used, an IP is assigned automatically.</li>
+                            <li>If using a static IP, use these placeholders:</li>
+                        </ol>
+                        <pre class="cmd"><code>IP: 192.168.X.XXX
+Netmask: 255.255.255.0
+Gateway: 192.168.X.1
+DNS: 8.8.8.8</code></pre>
+                        <ol start="4">
+                            <li>Set hostname: <code>omvserver</code>. Leave domain empty.</li>
+                            <li>Set a strong root password and create a user named <code>admin</code>.</li>
+                            <li>Partition disk: Guided → use entire disk. Optionally choose LVM for future expansion. Confirm changes and write partitions.</li>
+                            <li>Package selection: deselect desktop environments. Select only <em>SSH server</em> and <em>standard system utilities</em>. Do not install desktop environments for minimal OMV.</li>
+                            <li>Install GRUB on the main disk (for example <code>/dev/nvme0n1</code>), confirm and finish.</li>
+                            <li>Remove USB, reboot and log in with your user or root.</li>
+                        </ol>
+
+                        <h2 id="post-install">Post-Install Essentials</h2>
+                        <ul>
+                            <li>Update &amp; Upgrade:</li>
+                        </ul>
+                        <pre class="cmd"><code>sudo apt update && sudo apt upgrade -y
+sudo reboot</code></pre>
+                        <ul>
+                            <li>Enable SSH:</li>
+                        </ul>
+                        <pre class="cmd"><code>sudo systemctl enable ssh
+sudo systemctl start ssh</code></pre>
+                        <ul>
+                            <li>Install required tools:</li>
+                        </ul>
+                        <pre class="cmd"><code>sudo apt install -y sudo curl gnupg lsb-release</code></pre>
+                        <ul>
+                        </ul>
+
+                        <h2 id="install-omv">Install OpenMediaVault</h2>
+                        <p>Note: OMV 7 is designed for Debian 13.</p>
+
+                        <h3>Add OMV Repo</h3>
+                        <pre class="cmd"><code>sudo curl -fsSL https://packages.openmediavault.org/public/archive.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/openmediavault.gpg
+echo "deb https://packages.openmediavault.org/public arrakis main" | sudo tee /etc/apt/sources.list.d/openmediavault.list
+sudo apt update</code></pre>
+
+                        <h3>Install OMV</h3>
+                        <pre class="cmd"><code>sudo apt install openmediavault-keyring postfix -y
+sudo apt update
+sudo apt install openmediavault -y</code></pre>
+
+                        <h3>Initialize OMV</h3>
+                        <pre class="cmd"><code>sudo omv-initsystem</code></pre>
+
+                        <h3>Access OMV Web GUI</h3>
+                        <p>Open the web GUI at:</p>
+                        <pre class="cmd"><code>http://&lt;your-server-ip&gt;/</code></pre>
+                        <p><strong>Default credentials</strong><br>Username: <code>admin</code><br>Password: <code>openmediavault</code><br>Change the password immediately after login.</p>
+
+                        <h2 id="post-omv">Post-OMV Configuration</h2>
+                        <ul>
+                            <li>Network: configure a static IP if not already set; disable IPv6 if unused.</li>
+                            <li>Storage: add drives under <em>Storage &gt; Disks</em>, wipe and create filesystems (EXT4 recommended).</li>
+                            <li>Shared Folders: create shared folders and assign permissions; create users for network access.</li>
+                            <li>SMB/NFS/FTP: enable desired services in <em>Services</em> and verify firewall rules.</li>
+                            <li>Updates: regularly check <em>System &gt; Update Management</em> and apply updates.</li>
+                            <li>Optional: install Docker plugin (omv-extras), SnapRAID or MergerFS for advanced storage setups.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
         </main>
-        <footer class="site-footer"><div class="container">2026 Jonathan Kemmel</div></footer>
+        <script>
+            (function () {
+                const toggle = document.querySelector(".nav-toggle");
+                const nav = document.querySelector(".main-nav");
+                if (!toggle || !nav) return;
+                toggle.addEventListener("click", () => {
+                    const isOpen = nav.classList.toggle("open");
+                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            })();
+        </script>
     </body>
 </html>
