@@ -10,7 +10,12 @@
 /* --- Home Assistant / proxmox-lw rules --- */
 .proxmox-lw-overview { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; margin-top:20px }
 .proxmox-lw-card { background:var(--surface); border-radius:10px; border:1px solid var(--border); box-shadow:0 6px 16px rgba(0,0,0,0.06); padding:28px }
-.proxmox-lw-layout { display:grid; grid-template-columns:260px minmax(0,1fr); gap:28px; padding:20px 40px 40px }
+.proxmox-lw-layout { display:grid; grid-template-columns:260px minmax(0,1fr); gap:28px; padding:20px 40px 40px; width:100%; max-width:none; margin:0 auto; align-items:start }
+.proxmox-lw-sidebar { position:sticky; top:20px; align-self:start }
+.proxmox-lw-sidebar .container1 { padding:24px }
+.proxmox-lw-sidebar .content-table { list-style:none; margin-left:0; padding-left:0 }
+.proxmox-lw-sidebar .content-table li { margin-bottom:8px }
+.proxmox-lw-main .container2 { padding:32px }
 
 /* --- Off-the-shelf IoT (proxmox-hw subset) --- */
 .proxmox-hw-overview { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; margin-top:20px }
@@ -69,8 +74,23 @@
 	.proxmox-hw-overview { grid-template-columns: 1fr; }
 	.proxmox-lw-card { padding: 22px; }
 	.proxmox-lw-layout { grid-template-columns: 1fr; padding: 12px 20px 20px; }
+	.proxmox-lw-sidebar { position: static; }
 	.project-detail-section .container1, .Content-table-section .container1, .Content-section .container2 { padding: 24px 20px; margin: 0 12px; max-width: none; }
 	.Content-table-section .content-table a { display: block; padding: 10px 12px; margin-bottom: 8px; }
+	.box-buttons {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 480px) {
+	.box-buttons {
+		grid-template-columns: 1fr;
+	}
+	
+	.box-btn {
+		padding: 10px 16px;
+		font-size: 0.9rem;
+	}
 }
 
 /* Final override: remove outer box for header/hardware/use-case areas across project
@@ -106,4 +126,62 @@
 	height: 3px;
 	background: linear-gradient(90deg, var(--primary), var(--accent-strong));
 	border-radius: 2px;
+}
+
+/* Box buttons navigation section */
+.box-buttons-section {
+	margin: 32px 0;
+}
+
+.box-buttons {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 12px;
+	padding: 20px;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.box-btn {
+	background: var(--surface);
+	border: 2px solid var(--border);
+	color: var(--text);
+	padding: 12px 24px;
+	border-radius: 8px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.box-btn:hover {
+	background: var(--primary);
+	color: #fff;
+	border-color: var(--primary);
+	box-shadow: 0 4px 12px rgba(16, 78, 120, 0.2);
+	transform: translateY(-2px);
+}
+
+.box-btn.active {
+	background: linear-gradient(135deg, var(--primary), var(--accent-strong));
+	color: #fff;
+	border-color: var(--primary);
+	box-shadow: 0 6px 16px rgba(16, 78, 120, 0.3);
+}
+
+/* Collapsible box section */
+.collapsible-box {
+	animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
