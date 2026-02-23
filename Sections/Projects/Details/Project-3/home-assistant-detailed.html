@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Home Assistant — Detailed Guide</title>
+        <link rel="stylesheet" href="../Project-1/project-1.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="primary-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../Project-1/project-1.html">Devices / Servers</a></li>
+                        <li><a href="../Project-2/project-2.html">Networking</a></li>
+                        <li><a href="project-3.html">Home Automation</a></li>
+                        <li><a href="../Project-4/project-4.html">Coding</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="project-detail-section">
+                <div class="container1">
+                    <h1 class="HomeAssistant">Home Assistant - Detailed Guide</h1>
+                </div>
+            </section>
+
+            <section class="box-buttons-section">
+                <div class="container3">
+                    <div class="box-buttons">
+                        <button class="box-btn" onclick="toggleBox('setup-box')">Setup & Installation</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="setup-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Home Assistant Setup & Installation</h2>
+                        
+                        <h3>1. Hardware Preparation</h3>
+                        <h4>Required Hardware:</h4>
+                        <ul>
+                            <li><strong>Raspberry Pi 5 (8GB RAM recommended)</strong></li>
+                            <li><strong>1TB SSD</strong> - For Home Assistant OS and data storage</li>
+                            <li><strong>USB to SATA Adapter</strong> - Connect SSD to Raspberry Pi</li>
+                            <li><strong>Power Supply</strong> - Official Pi 5 PoE HAT or USB-C power adapter (27W)</li>
+                            <li><strong>Sonoff USB ZBDongle-E</strong> - For Zigbee device communication</li>
+                            <li><strong>Ethernet Cable</strong> - For stable network connection (recommended)</li>
+                        </ul>
+
+                        <h3>2. Download Home Assistant OS</h3>
+                        <ol>
+                            <li>Visit the official Home Assistant website: <code>https://www.home-assistant.io/installation/</code></li>
+                            <li>Select <strong>Raspberry Pi</strong> as installation method</li>
+                            <li>Download the <strong>Home Assistant OS image</strong> for Raspberry Pi 5 (64-bit)</li>
+                            <li>Verify image checksum (SHA256) to ensure download integrity</li>
+                        </ol>
+
+                        <h3>3. Flash Image to SSD</h3>
+                        <h4>Using Balena Etcher (Recommended):</h4>
+                        <ol>
+                            <li>Download and install <strong>Balena Etcher</strong> from <code>balena.io/etcher</code></li>
+                            <li>Connect SSD to your computer via USB adapter</li>
+                            <li>Open Balena Etcher and select the downloaded Home Assistant OS image</li>
+                            <li>Select your SSD as target drive (be careful not to select wrong drive!)</li>
+                            <li>Click <strong>Flash!</strong> and wait for process to complete (5-10 minutes)</li>
+                            <li>Safely eject SSD when done</li>
+                        </ol>
+
+                        <h4>Alternative: Raspberry Pi Imager</h4>
+                        <pre class="cmd"><code>1. Download Raspberry Pi Imager
+2. Choose OS → Other specific-purpose OS → Home Assistants
+3. Select your SSD
+4. Write image</code></pre>
+
+                        <h3>4. Initial Boot & Setup</h3>
+                        <ol>
+                            <li>Connect SSD to Raspberry Pi via USB adapter</li>
+                            <li>Connect Ethernet cable to Pi (recommended for initial setup)</li>
+                            <li>Connect power supply and boot up Raspberry Pi</li>
+                            <li>Wait for initial Home Assistant installation (can take 5-20 minutes)</li>
+                            <li>Check your router for assigned IP address or use mDNS discovery</li>
+                        </ol>
+
+                        <h3>5. Access Web Interface</h3>
+                        <p>Open browser and navigate to one of these addresses:</p>
+                        <pre class="cmd"><code>http://homeassistant.local:8123
+or
+http://&lt;raspberry-pi-ip&gt;:8123</code></pre>
+                        
+                        <p><strong>Note:</strong> First time access may show "Preparing Home Assistant" - be patient!</p>
+
+                        <h3>6. Create User Account</h3>
+                        <ol>
+                            <li>Enter your <strong>Name</strong></li>
+                            <li>Create a <strong>Username</strong></li>
+                            <li>Set a strong <strong>Password</strong></li>
+                            <li>Confirm password</li>
+                        </ol>
+                        <p><strong>Important:</strong> This is your admin account - use a strong password!</p>
+
+                        <h3>7. Configure Location & Timezone</h3>
+                        <ul>
+                            <li>Set your <strong>Home Location</strong> on the map (or enter address)</li>
+                            <li>Select <strong>Timezone</strong> (e.g., Europe/Berlin)</li>
+                            <li>Choose <strong>Unit System</strong> (Metric or Imperial)</li>
+                            <li>Select <strong>Currency</strong> for energy monitoring</li>
+                        </ul>
+
+                        <h3>8. Enable Advanced Mode</h3>
+                        <ol>
+                            <li>Click your <strong>username</strong> in bottom left corner</li>
+                            <li>Scroll down to <strong>Advanced Mode</strong></li>
+                            <li>Toggle <strong>ON</strong></li>
+                        </ol>
+                        <p>This enables advanced settings and developer tools</p>
+
+                        <h3>9. Configure Zigbee USB Dongle</h3>
+                        <h4>Install Zigbee2MQTT Add-on:</h4>
+                        <ol>
+                            <li>Go to <strong>Settings → Add-ons → Add-on Store</strong></li>
+                            <li>Search for <strong>Zigbee2MQTT</strong></li>
+                            <li>Click <strong>Install</strong> and wait for completion</li>
+                            <li>Go to <strong>Configuration</strong> tab</li>
+                            <li>Set serial port:</li>
+                        </ol>
+                        <pre class="cmd"><code>serial:
+  port: /dev/ttyUSB0</code></pre>
+                        <ol start="6">
+                            <li>Start the add-on and enable <strong>Start on boot</strong></li>
+                            <li>Check logs for successful Zigbee coordinator connection</li>
+                        </ol>
+
+                        <h3>10. Install HACS (Home Assistant Community Store)</h3>
+                        <h4>Installation Steps:</h4>
+                        <ol>
+                            <li>Install <strong>Terminal & SSH</strong> add-on from Add-on Store</li>
+                            <li>Start Terminal and open web UI</li>
+                            <li>Run HACS installation command:</li>
+                        </ol>
+                        <pre class="cmd"><code>wget -O - https://get.hacs.xyz | bash -</code></pre>
+                        <ol start="4">
+                            <li>Restart Home Assistant: <strong>Settings → System → Restart</strong></li>
+                            <li>After restart, go to <strong>Settings → Devices & Services</strong></li>
+                            <li>Click <strong>+ Add Integration</strong> and search for <strong>HACS</strong></li>
+                            <li>Follow setup wizard and authorize with GitHub account</li>
+                            <li>HACS is now available in sidebar</li>
+                        </ol>
+
+                        <h3>11. Set Up Automatic Backups</h3>
+                        <h4>Configure Backup Schedule:</h4>
+                        <ol>
+                            <li>Go to <strong>Settings → System → Backups</strong></li>
+                            <li>Click <strong>Create Backup</strong> for initial backup</li>
+                            <li>Install <strong>Google Drive Backup</strong> from HACS (optional)</li>
+                            <li>Or use <strong>Samba Share</strong> add-on for network backups</li>
+                        </ol>
+
+                        <h4>Samba Share Setup:</h4>
+                        <pre class="cmd"><code>1. Install Samba Share add-on
+2. Configure username and password
+3. Start add-on
+4. Access backups at \\homeassistant\backup</code></pre>
+
+                        <h3>12. Essential Add-ons to Install</h3>
+                        <ul>
+                            <li><strong>File Editor</strong> - Edit configuration.yaml in browser</li>
+                            <li><strong>Mosquitto Broker</strong> - MQTT server for device communication</li>
+                            <li><strong>Terminal & SSH</strong> - Command-line access</li>
+                            <li><strong>Studio Code Server</strong> - Full VS Code IDE in browser</li>
+                            <li><strong>Node-RED</strong> - Visual automation editor (optional)</li>
+                        </ul>
+
+                        <h3>13. Configure SSL/HTTPS (Optional)</h3>
+                        <h4>Using DuckDNS Add-on:</h4>
+                        <ol>
+                            <li>Create account at <code>duckdns.org</code></li>
+                            <li>Install <strong>DuckDNS</strong> add-on</li>
+                            <li>Configure with your domain and token</li>
+                            <li>Start add-on - automatically gets Let's Encrypt certificate</li>
+                            <li>Update <code>configuration.yaml</code>:</li>
+                        </ol>
+                        <pre class="cmd"><code>http:
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem</code></pre>
+                        <ol start="6">
+                            <li>Restart Home Assistant</li>
+                            <li>Access via <code>https://yourdomain.duckdns.org:8123</code></li>
+                        </ol>
+
+                        <h3>14. First Automations</h3>
+                        <h4>Create Simple Automation:</h4>
+                        <ol>
+                            <li>Go to <strong>Settings → Automations & Scenes</strong></li>
+                            <li>Click <strong>Create Automation</strong></li>
+                            <li>Choose trigger (e.g., sunset)</li>
+                            <li>Choose action (e.g., turn on lights)</li>
+                            <li>Save and test automation</li>
+                        </ol>
+
+                        <h3>15. Performance Optimization</h3>
+                        <ul>
+                            <li>Disable unused integrations in <strong>Settings → Integrations</strong></li>
+                            <li>Set recorder purge days in <code>configuration.yaml</code>:</li>
+                        </ul>
+                        <pre class="cmd"><code>recorder:
+  purge_keep_days: 7
+  commit_interval: 30</code></pre>
+                        <ul>
+                            <li>Move database to SSD if using SD card</li>
+                            <li>Monitor system health: <strong>Settings → System → System Health</strong></li>
+                        </ul>
+
+                        <h3>16. Security Best Practices</h3>
+                        <ul>
+                            <li>Use strong passwords for all accounts</li>
+                            <li>Enable Two-Factor Authentication (2FA) for your account</li>
+                            <li>Don't expose Home Assistant directly to internet without VPN</li>
+                            <li>Use Tailscale or WireGuard VPN for remote access</li>
+                            <li>Regularly update Home Assistant and all add-ons</li>
+                            <li>Review <strong>Settings → System → Logs</strong> for suspicious activity</li>
+                        </ul>
+
+                        <h3>17. Useful Resources</h3>
+                        <ul>
+                            <li><strong>Official Documentation:</strong> <code>https://www.home-assistant.io/docs/</code></li>
+                            <li><strong>Community Forum:</strong> <code>https://community.home-assistant.io/</code></li>
+                            <li><strong>Reddit:</strong> <code>r/homeassistant</code></li>
+                            <li><strong>YouTube:</strong> Search for "Home Assistant tutorials"</li>
+                            <li><strong>Blueprint Exchange:</strong> Share automation blueprints</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script>
+            function toggleBox(boxId) {
+                // Hide all boxes and remove active state from all buttons
+                const allBoxes = document.querySelectorAll('.collapsible-box');
+                const allButtons = document.querySelectorAll('.box-btn');
+                
+                allBoxes.forEach(box => box.style.display = 'none');
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Show the selected box
+                const targetBox = document.getElementById(boxId);
+                if (targetBox) {
+                    targetBox.style.display = 'block';
+                    
+                    // Add active state to the clicked button
+                    const activeButton = Array.from(allButtons).find(btn => 
+                        btn.getAttribute('onclick').includes(boxId)
+                    );
+                    if (activeButton) {
+                        activeButton.classList.add('active');
+                    }
+                }
+            }
+
+            // Check URL parameters on page load
+            window.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const boxParam = params.get('box');
+                if (boxParam) {
+                    toggleBox(boxParam);
+                }
+            });
+
+            (function () {
+                const toggle = document.querySelector(".nav-toggle");
+                const nav = document.querySelector(".main-nav");
+                if (!toggle || !nav) return;
+                toggle.addEventListener("click", () => {
+                    const isOpen = nav.classList.toggle("open");
+                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            })();
+        </script>
+    </body>
+</html>

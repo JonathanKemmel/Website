@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Qutebrowser Key Cheat Sheet</title>
+        <link rel="stylesheet" href="project-1.css" />
+        <style>
+            .back-btn {
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                background: var(--primary);
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 6px;
+                font-size: 0.95rem;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-block;
+                transition: all 0.2s ease;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+            .back-btn:hover {
+                background: var(--primary-strong);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                transform: translateY(-1px);
+            }
+            .cheatsheet-container {
+                max-width: 900px;
+                margin: 80px auto 40px;
+                padding: 0 20px;
+            }
+            .cheatsheet-title {
+                color: var(--text);
+                font-weight: 700;
+                font-size: 2.2rem;
+                margin-bottom: 32px;
+                text-align: center;
+            }
+            .cheatsheet-section {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                padding: 24px;
+                margin-bottom: 24px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            }
+            .cheatsheet-section h2 {
+                color: var(--text);
+                font-size: 1.4rem;
+                margin-bottom: 16px;
+                border-bottom: 2px solid var(--primary);
+                padding-bottom: 8px;
+            }
+            .key-table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            .key-table th {
+                background: var(--surface-alt);
+                color: var(--text);
+                font-weight: 600;
+                text-align: left;
+                padding: 12px;
+                border: 1px solid var(--border);
+            }
+            .key-table td {
+                padding: 10px 12px;
+                border: 1px solid var(--border);
+                color: var(--text);
+            }
+            .key-table tr:hover {
+                background: var(--surface-alt);
+            }
+            .key-table td:first-child {
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+                font-weight: 600;
+                color: var(--primary);
+                white-space: nowrap;
+            }
+            .tip-box {
+                background: #f0f8ff;
+                border-left: 4px solid var(--primary);
+                padding: 12px 16px;
+                margin-top: 16px;
+                border-radius: 4px;
+            }
+            .tip-box strong {
+                color: var(--primary);
+            }
+        </style>
+    </head>
+    <body>
+        <a href="Laptop-detailed.html?box=ide-setup-box" class="back-btn">← Go Back</a>
+        
+        <div class="cheatsheet-container">
+            <h1 class="cheatsheet-title">qutebrowser Minimal Key Cheat Sheet</h1>
+
+            <div class="cheatsheet-section">
+                <h2>1️⃣ Modes</h2>
+                <table class="key-table">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Esc</td>
+                            <td>Go back to Normal mode</td>
+                        </tr>
+                        <tr>
+                            <td>i</td>
+                            <td>Enter Insert mode (forms)</td>
+                        </tr>
+                        <tr>
+                            <td>:</td>
+                            <td>Enter Command mode</td>
+                        </tr>
+                        <tr>
+                            <td>v</td>
+                            <td>Enter Caret mode (select text)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cheatsheet-section">
+                <h2>2️⃣ Scrolling / Moving</h2>
+                <table class="key-table">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>j / k</td>
+                            <td>Scroll down / up (small step)</td>
+                        </tr>
+                        <tr>
+                            <td>d / u</td>
+                            <td>Scroll half-page down / up</td>
+                        </tr>
+                        <tr>
+                            <td>gg / G</td>
+                            <td>Jump top / bottom of page</td>
+                        </tr>
+                        <tr>
+                            <td>h / l</td>
+                            <td>Scroll left / right (if wide page)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cheatsheet-section">
+                <h2>3️⃣ Tabs</h2>
+                <table class="key-table">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ctrl+t</td>
+                            <td>New tab</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+w</td>
+                            <td>Close tab</td>
+                        </tr>
+                        <tr>
+                            <td>J / K</td>
+                            <td>Next / previous tab</td>
+                        </tr>
+                        <tr>
+                            <td>Ctrl+Shift+t</td>
+                            <td>Reopen closed tab</td>
+                        </tr>
+                        <tr>
+                            <td>:tab-focus N</td>
+                            <td>Jump to tab N</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cheatsheet-section">
+                <h2>4️⃣ Link Navigation (Hint Mode)</h2>
+                <table class="key-table">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>f</td>
+                            <td>Open link in current tab</td>
+                        </tr>
+                        <tr>
+                            <td>F</td>
+                            <td>Open link in new tab</td>
+                        </tr>
+                        <tr>
+                            <td>af</td>
+                            <td>Open link in background tab</td>
+                        </tr>
+                        <tr>
+                            <td>yf</td>
+                            <td>Copy link URL to clipboard</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="tip-box">
+                    <strong>Tip:</strong> After pressing f/F, type the letters shown on the link hints.
+                </div>
+            </div>
+
+            <div class="cheatsheet-section">
+                <h2>5️⃣ Search</h2>
+                <table class="key-table">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>/text</td>
+                            <td>Search forward</td>
+                        </tr>
+                        <tr>
+                            <td>?text</td>
+                            <td>Search backward</td>
+                        </tr>
+                        <tr>
+                            <td>n / N</td>
+                            <td>Next / previous match</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cheatsheet-section">
+                <h2>6️⃣ Page & URL</h2>
+                <table class="key-table">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>r / R</td>
+                            <td>Reload / Reload ignoring cache</td>
+                        </tr>
+                        <tr>
+                            <td>yy</td>
+                            <td>Copy current URL</td>
+                        </tr>
+                        <tr>
+                            <td>pp</td>
+                            <td>Open URL from clipboard</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cheatsheet-section">
+                <h2>7️⃣ Zoom</h2>
+                <table class="key-table">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>+ / -</td>
+                            <td>Zoom in / out</td>
+                        </tr>
+                        <tr>
+                            <td>=</td>
+                            <td>Reset zoom</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="cheatsheet-section">
+                <h2>8️⃣ Command Mode Essentials</h2>
+                <table class="key-table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>:open URL</td>
+                            <td>Open website</td>
+                        </tr>
+                        <tr>
+                            <td>:quit</td>
+                            <td>Quit browser</td>
+                        </tr>
+                        <tr>
+                            <td>:bookmark-add</td>
+                            <td>Add bookmark</td>
+                        </tr>
+                        <tr>
+                            <td>:history</td>
+                            <td>Show history</td>
+                        </tr>
+                        <tr>
+                            <td>:set</td>
+                            <td>Change a setting</td>
+                        </tr>
+                        <tr>
+                            <td>:bind</td>
+                            <td>See all keybindings</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

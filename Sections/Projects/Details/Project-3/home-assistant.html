@@ -18,7 +18,7 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="project-1.html">Geräte/Server</a></li>
+                        <li><a href="../Project-1/project-1.html">Geräte/Server</a></li>
                         <li><a href="../Project-2/project-2.html">Networking</a></li>
                         <li><a href="../Project-3/project-3.html">Home Automation</a></li>
                         <li><a href="../Project-4/project-4.html">Coding</a></li>
@@ -76,19 +76,67 @@
                             <h3 id="Part 1">What is Home Assistant?</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p>Filler text </p>
+                                <p><strong>Home Assistant</strong> is an open-source smart home hub that runs completely locally on a Raspberry Pi or server. No cloud dependency, no data sharing – everything stays within your own network.</p>
+                                <ul>
+                                    <li>✓ Integrates 2,000+ devices & services</li>
+                                    <li>✓ Works without internet</li>
+                                    <li>✓ Powerful automations</li>
+                                    <li>✓ Single interface for everything</li>
+                                </ul>
                             </div>
 
                             <h3 id="Part 2">Setup & Installation:</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Install and Setup Home Assistant</p>
+                                <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
+                                    <a class="btn btn-primary" href="home-assistant-detailed.html?box=setup-box" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                                </div>
+                                <ul>
+                                    <li>Download Home Assistant OS image for Raspberry Pi from official website</li>
+                                    <li>Flash image to SSD using Balena Etcher or Raspberry Pi Imager</li>
+                                    <li>Connect SSD to Raspberry Pi via USB adapter and boot up</li>
+                                    <li>Wait for initial setup (5-20 minutes) and access web interface at http://homeassistant.local:8123</li>
+                                    <li>Create user account and set location/timezone</li>
+                                    <li>Enable advanced mode in user profile settings</li>
+                                    <li>Install HACS (Home Assistant Community Store) for additional integrations</li>
+                                    <li>Configure Zigbee USB dongle for wireless device communication</li>
+                                    <li>Set up automatic backups to external storage or cloud</li>
+                                    <li>Configure SSL certificate for secure remote access (optional)</li>
+                                </ul>
                             </div>
 
                             <h3 id="Part 3">Integrations:</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Install and Setup Integrations:</p>
+                                <h4>Core Integrations:</h4>
+                                <ul>
+                                    <li><strong>Zigbee2MQTT:</strong> Control Zigbee devices locally without proprietary hubs</li>
+                                    <li><strong>ESPHome:</strong> Integrate custom ESP32/ESP8266 devices with native support</li>
+                                    <li><strong>MQTT:</strong> Message broker for device communication</li>
+                                    <li><strong>Mobile App:</strong> iOS/Android app for notifications and remote control</li>
+                                </ul>
+                                
+                                <h4>Popular Add-ons:</h4>
+                                <ul>
+                                    <li><strong>File Editor:</strong> Edit configuration files directly in browser</li>
+                                    <li><strong>Mosquitto Broker:</strong> MQTT server for device messaging</li>
+                                    <li><strong>Node-RED:</strong> Visual automation flow editor</li>
+                                    <li><strong>Samba Share:</strong> Network file sharing for backups</li>
+                                    <li><strong>Terminal & SSH:</strong> Command-line access to Home Assistant</li>
+                                    <li><strong>Studio Code Server:</strong> Full VS Code IDE in browser</li>
+                                    <li><strong>AdGuard Home:</strong> Network-wide ad blocking</li>
+                                    <li><strong>Tailscale:</strong> Secure remote access via VPN</li>
+                                </ul>
+
+                                <h4>Device Integrations:</h4>
+                                <ul>
+                                    <li><strong>Shelly:</strong> Smart switches and sensors</li>
+                                    <li><strong>Tuya:</strong> Wide range of budget smart home devices</li>
+                                    <li><strong>Philips Hue:</strong> Smart lighting (via Zigbee or official integration)</li>
+                                    <li><strong>Sonoff:</strong> Smart switches and sensors</li>
+                                    <li><strong>IKEA Trådfri:</strong> Affordable smart lighting</li>
+                                    <li><strong>UniFi:</strong> Network device monitoring and presence detection</li>
+                                </ul>
                             </div>
                         </div>
                     </section>

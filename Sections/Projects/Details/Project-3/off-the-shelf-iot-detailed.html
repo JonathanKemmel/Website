@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Off-the-Shelf IoT — Detailed Guide</title>
+        <link rel="stylesheet" href="../Project-1/project-1.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="primary-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../Project-1/project-1.html">Devices / Servers</a></li>
+                        <li><a href="../Project-2/project-2.html">Networking</a></li>
+                        <li><a href="project-3.html">Home Automation</a></li>
+                        <li><a href="../Project-4/project-4.html">Coding</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="project-detail-section">
+                <div class="container1">
+                    <h1 class="IoT">Off-the-Shelf IoT - Detailed Guide</h1>
+                </div>
+            </section>
+
+            <section class="box-buttons-section">
+                <div class="container3">
+                    <div class="box-buttons">
+                        <button class="box-btn" onclick="toggleBox('tuya-integration-box')">NOUS A1 Tuya Integration</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tuya-integration-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>NOUS A1 Tuya Switches - Local Control Integration</h2>
+                        <p><strong>Option B — Local Control via LocalTuya (API‑KEY + Local Key)</strong></p>
+                        <p>If you want your switch to work locally (no cloud), you'll need its Local Key and Device ID. This approach uses the LocalTuya custom integration in Home Assistant.</p>
+
+                        <h3>1. Create a Tuya IoT Developer Account</h3>
+                        <ol>
+                            <li>Go to <code>https://iot.tuya.com</code> and sign up for a developer account</li>
+                            <li>Navigate to <strong>Cloud → Development</strong></li>
+                            <li>Create a new project</li>
+                            <li>Choose your Data Center region (e.g., <strong>Central Europe / EU</strong>)</li>
+                            <li>Link your Tuya/Smart Life app account to this project via QR code</li>
+                        </ol>
+
+                        <h3>2. Get API Credentials</h3>
+                        <p>In your Cloud project:</p>
+                        <ol>
+                            <li>Click on your project name</li>
+                            <li>Go to the <strong>Overview</strong> tab</li>
+                            <li>Copy your <strong>Access ID</strong> (Client ID)</li>
+                            <li>Copy your <strong>Access Secret</strong> (Client Secret)</li>
+                        </ol>
+                        <p><strong>Note:</strong> These are API credentials, similar to an API key. Keep them secure!</p>
+
+                        <h3>3. Retrieve Local Key and Device ID</h3>
+                        <p>Use Tuya's API Explorer in the IoT platform:</p>
+                        <ol>
+                            <li>Go to <strong>Cloud → API Explorer</strong></li>
+                            <li>Choose service:
+                                <ul>
+                                    <li><strong>Smart Home Device System → Device Management → Get Device List</strong></li>
+                                </ul>
+                            </li>
+                            <li>Click <strong>Submit Request</strong></li>
+                            <li>Look at the returned JSON — each device entry includes:
+                                <ul>
+                                    <li><strong>Device ID</strong> (<code>id</code> field)</li>
+                                    <li><strong>Local Key</strong> (<code>local_key</code> field)</li>
+                                </ul>
+                            </li>
+                            <li>Copy and store these values for your NOUS A1 switch</li>
+                        </ol>
+                        <p><strong>Example JSON response:</strong></p>
+                        <pre class="cmd"><code>{
+  "result": {
+    "devices": [
+      {
+        "id": "bf1234567890abcdef",
+        "local_key": "abc123def456",
+        "name": "Smart Switch",
+        ...
+      }
+    ]
+  }
+}</code></pre>
+
+                        <h3>4. Install LocalTuya in Home Assistant</h3>
+                        <p>You need the LocalTuya integration via HACS:</p>
+                        
+                        <h4>Install HACS (if not already installed):</h4>
+                        <ol>
+                            <li>Go to <strong>Settings → Add-ons → Add-on Store</strong></li>
+                            <li>Install <strong>Terminal & SSH</strong> add-on</li>
+                            <li>Start Terminal and run:</li>
+                        </ol>
+                        <pre class="cmd"><code>wget -O - https://get.hacs.xyz | bash -</code></pre>
+                        <ol start="4">
+                            <li>Restart Home Assistant</li>
+                            <li>Go to <strong>Settings → Devices & Services → Add Integration</strong></li>
+                            <li>Search for <strong>HACS</strong> and follow setup wizard</li>
+                        </ol>
+
+                        <h4>Install LocalTuya via HACS:</h4>
+                        <ol>
+                            <li>Open HACS in Home Assistant sidebar</li>
+                            <li>Click <strong>Integrations</strong></li>
+                            <li>Click the <strong>+ Explore & Download Repositories</strong> button</li>
+                            <li>Search for <strong>LocalTuya</strong></li>
+                            <li>Click <strong>Download</strong></li>
+                            <li>Restart Home Assistant after installation</li>
+                        </ol>
+
+                        <h3>5. Configure LocalTuya</h3>
+                        <ol>
+                            <li>Go to <strong>Settings → Devices & Services → Add Integration</strong></li>
+                            <li>Search for <strong>LocalTuya</strong></li>
+                            <li>In the config screen, enter:
+                                <ul>
+                                    <li><strong>Region:</strong> Select your data center region (e.g., EU)</li>
+                                    <li><strong>Client ID:</strong> Your Access ID from step 2</li>
+                                    <li><strong>Client Secret:</strong> Your Access Secret from step 2</li>
+                                    <li><strong>Tuya App Account UID:</strong> Found in IoT portal's linked account section</li>
+                                </ul>
+                            </li>
+                            <li>Click <strong>Submit</strong> and wait for connection</li>
+                        </ol>
+
+                        <h4>Get Tuya App Account UID:</h4>
+                        <ol>
+                            <li>In Tuya IoT portal, go to <strong>Cloud → Development → Your Project</strong></li>
+                            <li>Click <strong>Devices</strong> tab</li>
+                            <li>Look for <strong>UID</strong> field or check linked account details</li>
+                            <li>Alternatively, check the API response from "Get Device List" - it may include your UID</li>
+                        </ol>
+
+                        <h3>6. Add NOUS A1 Device</h3>
+                        <ol>
+                            <li>Once LocalTuya is configured, click <strong>Configure</strong> on the LocalTuya integration</li>
+                            <li>Click <strong>Add new device</strong></li>
+                            <li>LocalTuya should scan your local network and show your NOUS A1 switch</li>
+                            <li>If device is not automatically detected:
+                                <ul>
+                                    <li>Choose <strong>Manual configuration</strong></li>
+                                    <li>Enter <strong>Device ID</strong> from step 3</li>
+                                    <li>Enter <strong>Local Key</strong> from step 3</li>
+                                    <li>Enter device IP address (check your router's DHCP list)</li>
+                                </ul>
+                            </li>
+                            <li>Click <strong>Submit</strong></li>
+                        </ol>
+
+                        <h3>7. Configure Device Entities</h3>
+                        <ol>
+                            <li>After adding the device, you'll configure its entities (what it controls)</li>
+                            <li>For NOUS A1 switch, typically you need:
+                                <ul>
+                                    <li><strong>Switch entity (DPS 1):</strong> Main power switch</li>
+                                    <li><strong>Current (DPS 18):</strong> Current consumption in mA</li>
+                                    <li><strong>Power (DPS 19):</strong> Power consumption in W</li>
+                                    <li><strong>Voltage (DPS 20):</strong> Voltage in V</li>
+                                </ul>
+                            </li>
+                            <li>Select entity type (switch, sensor) for each DPS (Data Point)</li>
+                            <li>Click <strong>Submit</strong></li>
+                        </ol>
+
+                        <p><strong>Common DPS values for NOUS A1:</strong></p>
+                        <pre class="cmd"><code>DPS 1: switch (boolean) - Main switch
+DPS 9: countdown (integer) - Timer countdown
+DPS 18: sensor (integer) - Current (mA)
+DPS 19: sensor (integer) - Power (W × 10)
+DPS 20: sensor (integer) - Voltage (V × 10)</code></pre>
+
+                        <h3>8. Test the Device</h3>
+                        <ol>
+                            <li>Go to <strong>Settings → Devices & Services</strong></li>
+                            <li>Find your NOUS A1 device under LocalTuya integration</li>
+                            <li>Click on the device</li>
+                            <li>Test the switch entity by toggling it ON/OFF</li>
+                            <li>Check if power monitoring sensors update correctly</li>
+                        </ol>
+
+                        <h3>9. Add to Dashboard</h3>
+                        <ol>
+                            <li>Go to your Home Assistant dashboard</li>
+                            <li>Click <strong>Edit Dashboard</strong></li>
+                            <li>Click <strong>Add Card</strong></li>
+                            <li>Choose card type (e.g., <strong>Entities</strong> or <strong>Button</strong>)</li>
+                            <li>Select your NOUS A1 switch entity</li>
+                            <li>Customize name, icon if desired</li>
+                            <li>Save</li>
+                        </ol>
+
+                        <h3>10. Create Automations (Optional)</h3>
+                        <p><strong>Example: Turn on switch at sunset</strong></p>
+                        <ol>
+                            <li>Go to <strong>Settings → Automations & Scenes</strong></li>
+                            <li>Click <strong>Create Automation</strong></li>
+                            <li>Set trigger: <strong>Sun → Sunset</strong></li>
+                            <li>Set action: <strong>Call service → switch.turn_on</strong></li>
+                            <li>Select your NOUS A1 switch entity</li>
+                            <li>Save automation</li>
+                        </ol>
+
+                        <h3>Troubleshooting</h3>
+                        
+                        <h4>Device not found during scan:</h4>
+                        <ul>
+                            <li>Ensure device is powered on and connected to same network as Home Assistant</li>
+                            <li>Check if device IP is reachable: <code>ping &lt;device-ip&gt;</code></li>
+                            <li>Try manual configuration with Device ID and Local Key</li>
+                            <li>Set static IP for device in your router</li>
+                        </ul>
+
+                        <h4>Device shows as unavailable:</h4>
+                        <ul>
+                            <li>Verify Local Key is correct (it can change if device is reset or re-paired)</li>
+                            <li>Check if device firmware was updated (may change protocol)</li>
+                            <li>Restart LocalTuya integration</li>
+                            <li>Restart Home Assistant</li>
+                        </ul>
+
+                        <h4>Entities not updating:</h4>
+                        <ul>
+                            <li>Verify DPS configuration matches your device model</li>
+                            <li>Check LocalTuya logs: <strong>Settings → System → Logs</strong></li>
+                            <li>Try removing and re-adding the device</li>
+                        </ul>
+
+                        <h4>Local Key retrieval fails:</h4>
+                        <ul>
+                            <li>Ensure Tuya app account is properly linked to IoT project</li>
+                            <li>Check data center region matches your account region</li>
+                            <li>Verify API permissions in Cloud project settings</li>
+                            <li>Try using Tuya CLI tool as alternative: <code>tuya-cli wizard</code></li>
+                        </ul>
+
+                        <h3>Benefits of Local Control</h3>
+                        <ul>
+                            <li>✓ <strong>No internet required</strong> - Works during internet outages</li>
+                            <li>✓ <strong>Faster response time</strong> - Direct local communication</li>
+                            <li>✓ <strong>Privacy</strong> - No data sent to Tuya cloud</li>
+                            <li>✓ <strong>Reliability</strong> - Not dependent on Tuya's servers</li>
+                            <li>✓ <strong>Better integration</strong> - Native Home Assistant control</li>
+                        </ul>
+
+                        <h3>Notes</h3>
+                        <ul>
+                            <li>Keep your API credentials and Local Keys secure</li>
+                            <li>If device is factory reset, you'll need to retrieve the Local Key again</li>
+                            <li>Some Tuya devices may use different DPS values - check device documentation or HACS community forums</li>
+                            <li>LocalTuya requires devices to be on same network subnet as Home Assistant</li>
+                            <li>Regular firmware updates may require reconfiguration</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script>
+            function toggleBox(boxId) {
+                // Hide all boxes and remove active state from all buttons
+                const allBoxes = document.querySelectorAll('.collapsible-box');
+                const allButtons = document.querySelectorAll('.box-btn');
+                
+                allBoxes.forEach(box => box.style.display = 'none');
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Show the selected box
+                const targetBox = document.getElementById(boxId);
+                if (targetBox) {
+                    targetBox.style.display = 'block';
+                    
+                    // Add active state to the clicked button
+                    const activeButton = Array.from(allButtons).find(btn => 
+                        btn.getAttribute('onclick').includes(boxId)
+                    );
+                    if (activeButton) {
+                        activeButton.classList.add('active');
+                    }
+                }
+            }
+
+            // Check URL parameters on page load
+            window.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const boxParam = params.get('box');
+                if (boxParam) {
+                    toggleBox(boxParam);
+                }
+            });
+
+            (function () {
+                const toggle = document.querySelector(".nav-toggle");
+                const nav = document.querySelector(".main-nav");
+                if (!toggle || !nav) return;
+                toggle.addEventListener("click", () => {
+                    const isOpen = nav.classList.toggle("open");
+                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            })();
+        </script>
+    </body>
+</html>

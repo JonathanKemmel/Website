@@ -18,7 +18,7 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="project-1.html">Geräte/Server</a></li>
+                        <li><a href="../Project-1/project-1.html">Geräte/Server</a></li>
                         <li><a href="../Project-2/project-2.html">Networking</a></li>
                         <li><a href="../Project-3/project-3.html">Home Automation</a></li>
                         <li><a href="../Project-4/project-4.html">Coding</a></li>
@@ -73,19 +73,42 @@
                             <h3 id="Part 1">Quick Overview of IoT Devices</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">FILLER: Add integration steps here (e.g. pair device, add to Home Assistant, configure entities).</p>
+                                <ul>
+                                    <li><strong>2x Smart Switches:</strong> Control room lighting and other system devices (ON/OFF switching)</li>
+                                    <li><strong>Sonoff USB ZBDongle-E:</strong> Zigbee coordinator for local mesh network – future-proof expansion without internet dependency</li>
+                                </ul>
                             </div>
 
                             <h3 id="Part 2">Integration into HA</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">FILLER: Add integration steps here (e.g. pair device, add to Home Assistant, configure entities).</p>
+                                <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
+                                    <a class="btn btn-primary" href="off-the-shelf-iot-detailed.html?box=tuya-integration-box" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                                </div>
+                                <p><strong>NOUS A1 Tuya Switches - Local Control via LocalTuya:</strong></p>
+                                <ul>
+                                    <li>Create Tuya IoT Developer Account at <code>iot.tuya.com</code></li>
+                                    <li>Create Cloud project and link Tuya/Smart Life app account</li>
+                                    <li>Get API credentials: Access ID & Access Secret</li>
+                                    <li>Retrieve Local Key & Device ID via API Explorer</li>
+                                    <li>Install LocalTuya integration via HACS in Home Assistant</li>
+                                    <li>Configure LocalTuya with Region, Client ID, Client Secret & UID</li>
+                                    <li>Add device using Device ID & Local Key</li>
+                                    <li>Switch now operates locally without cloud dependency</li>
+                                </ul>
                             </div>
 
                             <h3 id="Part 3">Notes</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">FILLER: Add integration steps here (e.g. pair device, add to Home Assistant, configure entities).</p>
+                                <ul>
+                                    <li><strong>Check device capabilities:</strong> Verify power monitoring, energy tracking, and smart features before purchase</li>
+                                    <li><strong>Communication protocol:</strong> Ensure device supports Zigbee, WiFi, or local control (not just cloud-only)</li>
+                                    <li><strong>Firmware updates:</strong> Keep devices updated but test updates on non-critical devices first</li>
+                                    <li><strong>Network isolation:</strong> Consider VLAN separation for IoT devices to improve security</li>
+                                    <li><strong>Compatibility check:</strong> Verify Home Assistant integration support before buying new devices</li>
+                                    <li><strong>Documentation:</strong> Keep track of Device IDs, Local Keys, and integration configs</li>
+                                </ul>
                             </div>
                         </div>
                     </section>
