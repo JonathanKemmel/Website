@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Proxmox LW Detailed Guide</title>
+        <title>Proxmox LW — Detailed Guide</title>
         <link rel="stylesheet" href="project-1.css" />
     </head>
     <body>
@@ -34,9 +34,22 @@
                 </div>
             </section>
 
-            <section class="Content-section">
+            <section class="box-buttons-section">
                 <div class="container3">
-                    <div class="content"></div>
+                    <div class="box-buttons">
+                        <button class="box-btn" onclick="toggleBox('proxmox-install-box')">Proxmox VE Installation</button>
+                        <button class="box-btn" onclick="toggleBox('mydokuwiki-box')">MyDokuWiki</button>
+                        <button class="box-btn" onclick="toggleBox('usb-backup-box')">USB Backup</button>
+                        <button class="box-btn" onclick="toggleBox('tailscale-box')">Tailscale VPN</button>
+                        <button class="box-btn" onclick="toggleBox('debian-template-box')">Debian 12 VM Template</button>
+                        <button class="box-btn" onclick="toggleBox('smb-share-box')">SMB Network Share</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="proxmox-install-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
                         <h1>Proxmox VE Installation</h1>
                         <h2>Write ISO to USB (Windows, Ventoy)</h2>
                         <p>Using Ventoy (one-time setup):</p>
@@ -152,11 +165,171 @@ apt update && apt upgrade -y</code></pre>
                             <li>Backup VM: <code>vzdump &lt;vmid&gt; --mode snapshot --compress zstd</code></li>
                             <li>Restore backup: <code>qmrestore</code> (or <code>vzrestore</code> depending on backup type)</li>
                         </ul>
+
+                        <h2>Advanced Post-Install Configuration</h2>
+
+                        <h3>1. Upgrade Proxmox Distro</h3>
+                        
+                        <h4>Preparation</h4>
+                        <p><strong>Backup everything:</strong></p>
+                        <pre class="cmd"><code>vzdump --all --mode snapshot --compress zstd --storage local
+tar czf /root/pve-config-backup.tgz /etc/pve</code></pre>
+                        
+                        <p><strong>Update current Proxmox System:</strong></p>
+                        <pre class="cmd"><code>apt update && apt full-upgrade -y
+reboot</code></pre>
+                        
+                        <p><strong>After reboot:</strong></p>
+                        <pre class="cmd"><code>pveversion</code></pre>
+                        
+                        <p><strong>Check for Upgrade Issues:</strong></p>
+                        <pre class="cmd"><code>pve7to8 --full
+# or
+pve8to9 --full</code></pre>
+                        
+                        <h4>Switch Repositories</h4>
+                        <p><strong>Edit /etc/apt/sources.list</strong></p>
+                        <p>For Proxmox 7 → 8 (Debian 11 → 12):</p>
+                        <pre class="cmd"><code>sed -i 's/bullseye/bookworm/g' /etc/apt/sources.list</code></pre>
+                        
+                        <p>For Proxmox 8 → 9 (Debian 12 → 13):</p>
+                        <pre class="cmd"><code>sed -i 's/bookworm/trixie/g' /etc/apt/sources.list</code></pre>
+                        
+                        <p><strong>Update package list:</strong></p>
+                        <pre class="cmd"><code>apt update</code></pre>
+                        
+                        <h4>Run the Upgrade</h4>
+                        <p><strong>Full distribution upgrade:</strong></p>
+                        <pre class="cmd"><code>apt dist-upgrade -y</code></pre>
+                        <p><strong>Note:</strong> During upgrade, if asked about config file → keep currently installed version</p>
+                        
+                        <h4>Reboot & Verify</h4>
+                        <pre class="cmd"><code>reboot</code></pre>
+                        <p><strong>After reboot:</strong></p>
+                        <pre class="cmd"><code>pveversion -v  # expected: pve-manager/8or9.X
+uname -r       # expected: 6.2 or newer</code></pre>
+                        
+                        <h4>Post-upgrade Checks</h4>
+                        <p><strong>Check cluster (if any):</strong></p>
+                        <pre class="cmd"><code>pvecm status</code></pre>
+                        
+                        <p><strong>Check running guests:</strong></p>
+                        <pre class="cmd"><code>qm list
+pct list</code></pre>
+                        
+                        <p><strong>Check storage mounts:</strong></p>
+                        <pre class="cmd"><code>df -h</code></pre>
+                        
+                        <p><strong>Update tools:</strong></p>
+                        <pre class="cmd"><code>apt update && apt full-upgrade -y</code></pre>
+                        
+                        <h4>Clean up Old Packages</h4>
+                        <pre class="cmd"><code>apt --purge autoremove -y
+apt clean</code></pre>
+
+                        <h3>2. Firewall Setup on Proxmox</h3>
+                        
+                        <h4>Enable Firewall</h4>
+                        <ul>
+                            <li>Go to <strong>Datacenter → Firewall</strong></li>
+                            <li>Enable firewall at datacenter level first</li>
+                            <li>Then go to <strong>Node → Firewall</strong></li>
+                            <li>Enable firewall for each node</li>
+                            <li>Optional: Enable logging for Firewall actions to help troubleshoot later</li>
+                        </ul>
+                        <p><strong>Important:</strong> Enabling firewall at datacenter/node level doesn't automatically block anything, it just makes the rules active for everything that comes after those</p>
+                        
+                        <h4>Configure Default Policies</h4>
+                        <ul>
+                            <li>Go to <strong>Datacenter → Firewall → Options</strong></li>
+                            <li>Set default policies:
+                                <ul>
+                                    <li><strong>Input:</strong> DROP (block everything by default)</li>
+                                    <li><strong>Output:</strong> ACCEPT (usually safe to allow outbound)</li>
+                                    <li><strong>Forward:</strong> DROP (if you're using VMs/CTs, only allow explicitly)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <h4>Set Rules at Node Level</h4>
+                        <ul>
+                            <li>Go to <strong>Node → Firewall → Rules</strong></li>
+                            <li>Add rules for:
+                                <ul>
+                                    <li>SSH (TCP 22) from your trusted IPs</li>
+                                    <li>Web GUI (TCP 8006) from trusted IPs</li>
+                                    <li>Any other admin service you use</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p><strong>Important:</strong> Don't just allow 0.0.0.0/0 for SSH, huge security risk</p>
+                        
+                        <h4>Configure Rules for VMs and Containers</h4>
+                        <ul>
+                            <li>Go to <strong>VM/CT → Firewall</strong></li>
+                            <li>Enable firewall individually</li>
+                            <li>Add rules for:
+                                <ul>
+                                    <li>Necessary services (HTTP, HTTPS, Minecraft, etc.)</li>
+                                    <li>Optional: Internal network restrictions (allow only node → vm communication if needed)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <h4>Enable Logging & Monitoring</h4>
+                        <ul>
+                            <li>Firewall logs are under <strong>Node → Firewall → Logs</strong></li>
+                            <li>Keep an eye on blocked connections to catch misconfigurations or intrusion attempts</li>
+                        </ul>
+                        
+                        <h4>Avoid Common Errors</h4>
+                        <ul>
+                            <li>Don't block Proxmox GUI or SSH accidentally</li>
+                            <li>Test rules VM for VM after another, not all at the same time</li>
+                        </ul>
+
+                        <h3>3. Automatic Proxmox Updates</h3>
+                        
+                        <h4>Install Auto-update System</h4>
+                        <pre class="cmd"><code>apt update
+apt install unattended-upgrades</code></pre>
+                        
+                        <h4>Enable Unattended Upgrades</h4>
+                        <pre class="cmd"><code>dpkg-reconfigure unattended-upgrades</code></pre>
+                        <p>Select <strong>Yes</strong></p>
+                        <p>This activates automated security + system updates</p>
+                        
+                        <h4>Edit the Origin Whitelist</h4>
+                        <p><strong>File:</strong></p>
+                        <pre class="cmd"><code>nano /etc/apt/apt.conf.d/50unattended-upgrades</code></pre>
+                        <p><strong>Enable origins:</strong> (remove slashes if present)</p>
+                        <pre class="cmd"><code>"${distro_id}:${distro_codename}-security";
+"${distro_id}:${distro_codename}-updates";
+"Proxmox:${distro_codename}";</code></pre>
+                        
+                        <h4>Activate the Systemd Timers</h4>
+                        <pre class="cmd"><code>systemctl enable --now unattended-upgrades.service
+systemctl enable --now apt-daily.timer
+systemctl enable --now apt-daily-upgrade.timer</code></pre>
+                        <p>These run update & upgrade jobs automatically</p>
+                        
+                        <h4>Optional: Set a Precise Daily Upgrade Time</h4>
+                        <pre class="cmd"><code>systemctl edit --full apt-daily-upgrade.timer</code></pre>
+                        <p>Set for example:</p>
+                        <pre class="cmd"><code>OnCalendar=03:30
+RandomizedDelaySec=0</code></pre>
+                        
+                        <h4>Optional: Enable Automatic Reboot</h4>
+                        <p><strong>Inside config file:</strong></p>
+                        <pre class="cmd"><code>nano /etc/apt/apt.conf.d/50unattended-upgrades</code></pre>
+                        <p><strong>Enable:</strong> (via removing slashes)</p>
+                        <pre class="cmd"><code>Unattended-Upgrade::Automatic-Reboot "true";</code></pre>
+                        <p><strong>Note:</strong> This will reboot your Proxmox automatically after updates (Not recommended unless downtime is accepted)</p>
                     </div>
                 </div>
             </section>
 
-            <section id="mydokuwiki-box" class="Content-section">
+            <section id="mydokuwiki-box" class="Content-section collapsible-box" style="display:none;">
                 <div class="container3">
                     <div class="content">
                         <h2>MyDokuWiki — Container Setup (sanitized)</h2>
@@ -235,7 +408,371 @@ find $BACKUP_DIR -type f -mtime +14 -delete</code></pre>
                 </div>
             </section>
 
-            <section id="usb-backup-box" class="Content-section">
+            <section id="tailscale-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Tailscale VPN — Setup Guide</h2>
+                        
+                        <h3>Installation</h3>
+                        <p>Setup via VE-Helper-Script:</p>
+                        <pre class="cmd"><code>bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/tools/addon/add-tailscale-lxc.sh)"</code></pre>
+                        
+                        <h3>Post-Install</h3>
+                        <ol>
+                            <li>Follow website link</li>
+                            <li>Login via Google Account</li>
+                            <li>Register other devices, like phone and Laptop on the same Google Account</li>
+                            <li>Enable Subnet routing and Exit Node for VPN server:</li>
+                        </ol>
+                        <pre class="cmd"><code>sudo sysctl -w net.ipv4.ip_forwarding=1
+sudo tailscale up --advertise-routes=192.168.1.0/24 --advertise-exit-node</code></pre>
+                        
+                        <h3>Finished</h3>
+                        <ol>
+                            <li>Activate VPN on a client device, like phone or Laptop</li>
+                            <li>For Exit Node, choose VPN server</li>
+                            <li>Should connect to VPN server inside the home network</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section id="debian-template-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Debian 12 VM Template — Setup Guide</h2>
+                        
+                        <h3>Download Debian 12 ISO</h3>
+                        <ol>
+                            <li>Download netinst ISO (amd64) for Debian 12 (minimal installer)</li>
+                            <li>Upload ISO to Proxmox:
+                                <ul>
+                                    <li>Proxmox WEB UI → storage → ISO Images → Upload</li>
+                                    <li>Choose downloaded debian-12-netinst.iso</li>
+                                    <li>Upload and wait to finish</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <h3>Create the Base VM</h3>
+                        <p>Create VM with the following settings:</p>
+                        <ul>
+                            <li><strong>Name:</strong> debian12-base</li>
+                            <li><strong>Node:</strong> your Proxmox server</li>
+                            <li><strong>OS:</strong> Linux → Version: Debian</li>
+                            <li><strong>ISO:</strong> select uploaded Debian 12 netinst</li>
+                        </ul>
+                        
+                        <h4>System Settings</h4>
+                        <ul>
+                            <li><strong>Machine:</strong> q35</li>
+                            <li><strong>BIOS:</strong> UEFI</li>
+                            <li><strong>EFI Disk:</strong> default</li>
+                            <li><strong>SCSI Controller:</strong> VirtIO SCSI</li>
+                        </ul>
+                        
+                        <h4>Disk Settings</h4>
+                        <ul>
+                            <li><strong>Bus:</strong> SCSI</li>
+                            <li><strong>Storage:</strong> fastest available</li>
+                            <li><strong>Size:</strong> 12GB</li>
+                            <li><strong>Cache:</strong> Write back</li>
+                            <li><strong>Discard:</strong> enabled</li>
+                            <li><strong>SSD emulation:</strong> enabled</li>
+                        </ul>
+                        
+                        <h4>CPU Settings</h4>
+                        <ul>
+                            <li><strong>Core:</strong> 2</li>
+                            <li><strong>Type:</strong> host</li>
+                        </ul>
+                        
+                        <h4>Memory Settings</h4>
+                        <ul>
+                            <li><strong>Amount:</strong> 2048MB</li>
+                            <li><strong>Ballooning:</strong> ON</li>
+                        </ul>
+                        
+                        <h4>Network Settings</h4>
+                        <ul>
+                            <li><strong>Model:</strong> VirtIO (paravirtualized)</li>
+                            <li><strong>DHCP:</strong> enabled</li>
+                            <li><strong>Firewall:</strong> OFF (for now)</li>
+                        </ul>
+                        
+                        <p>Confirm and create VM, but <strong>do not start yet</strong>.</p>
+                        
+                        <h3>Install Debian 12 Minimal</h3>
+                        <p>Start VM → boot into Debian installer</p>
+                        
+                        <h4>Language & Locale</h4>
+                        <ul>
+                            <li><strong>Language:</strong> English</li>
+                            <li><strong>Locale:</strong> en_US.UTF-8</li>
+                            <li><strong>Keyboard:</strong> German</li>
+                        </ul>
+                        
+                        <h4>Network</h4>
+                        <ul>
+                            <li><strong>Hostname:</strong> debian-template</li>
+                            <li><strong>Domain:</strong> leave blank</li>
+                            <li>DHCP will assign IP automatically</li>
+                        </ul>
+                        
+                        <h4>User Setup</h4>
+                        <ul>
+                            <li><strong>Root password:</strong> optional</li>
+                            <li><strong>Create regular user:</strong> admin</li>
+                            <li>Give password and enable sudo</li>
+                        </ul>
+                        
+                        <h4>Partitioning</h4>
+                        <ul>
+                            <li>Guided → use entire disk</li>
+                            <li>All files in one partition</li>
+                            <li><strong>Filesystem:</strong> ext4</li>
+                            <li>No LVM</li>
+                        </ul>
+                        
+                        <h4>Software Selection</h4>
+                        <ul>
+                            <li>Deselect desktop environments</li>
+                            <li>Select only:
+                                <ul>
+                                    <li>SSH server</li>
+                                    <li>Standard system utilities</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <p>Install GRUB to default boot device. Reboot when installation completes.</p>
+                        
+                        <h3>Install Essential Packages</h3>
+                        <p>Login with admin user:</p>
+                        <pre class="cmd"><code>sudo apt update
+sudo apt install -y sudo vim curl wget git net-tools htop qemu-guest-agent
+sudo systemctl enable --now qemu-guest-agent</code></pre>
+                        
+                        <p><strong>Explanation of qemu-guest-agent:</strong></p>
+                        <ul>
+                            <li>Clean shutdown VM from UI</li>
+                            <li>Report IP addresses</li>
+                            <li>Enable consistent backups</li>
+                            <li>Proper memory/balloon stats</li>
+                            <li>Assist future automation</li>
+                        </ul>
+                        
+                        <h3>Clean System before Template</h3>
+                        <pre class="cmd"><code>sudo apt autoremove -y
+sudo apt clean
+sudo truncate -s 0 /etc/machine-id
+sudo rm /var/lib/dbus/machine-id
+sudo ln -s /etc/machine-id /var/lib/dbus/machine-id</code></pre>
+                        
+                        <p><strong>Reason:</strong> Avoid ID conflicts by removing machine ID</p>
+                        
+                        <h3>Convert VM to Template</h3>
+                        <pre class="cmd"><code>sudo shutdown -h now</code></pre>
+                        <ol>
+                            <li>Proxmox WEB UI, select VM</li>
+                            <li>Click <strong>More → Convert to Template</strong></li>
+                            <li>The VM is now a template</li>
+                        </ol>
+                        
+                        <h3>Test Cloning</h3>
+                        <ol>
+                            <li>Right-click template → Clone</li>
+                            <li><strong>Type:</strong> Full Clone</li>
+                            <li><strong>Name:</strong> debian12-test-1</li>
+                            <li>Start the clone VM</li>
+                            <li>Verify:
+                                <ul>
+                                    <li>Network works (can reach internet)</li>
+                                    <li>SSH login works</li>
+                                    <li>User account works</li>
+                                    <li>Nothing breaks</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section id="smb-share-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Proxmox HDD als SMB Netzwerkfreigabe</h2>
+                        
+                        <h3>Ziel</h3>
+                        <p>Eine 1TB SATA HDD, die direkt im Proxmox Host steckt, soll:</p>
+                        <ul>
+                            <li>als Proxmox Storage eingebunden sein</li>
+                            <li>zusätzlich als SMB-Freigabe nutzbar sein</li>
+                            <li>von Windows und Linux Geräten erreichbar sein</li>
+                            <li>per Proxmox Firewall abgesichert sein</li>
+                        </ul>
+                        <p>Die HDD bleibt Eigentum des Proxmox Hosts. Zugriff erfolgt ausschließlich über das Netzwerk (SMB).</p>
+                        
+                        <h3>Architektur</h3>
+                        <pre class="cmd"><code>1TB SATA HDD
+  ↓
+Proxmox Host
+(ext4, gemountet unter /mnt/shared)
+  ↓
+Samba (SMB)
+  ↓
+Windows / Linux Clients</code></pre>
+                        
+                        <h3>1. Festplatte vorbereiten (Proxmox GUI)</h3>
+                        
+                        <h4>1.1 Disk löschen</h4>
+                        <ol>
+                            <li>Node → Disks → Disks</li>
+                            <li>Festplatte auswählen → Wipe Disk</li>
+                            <li>GPT auswählen</li>
+                        </ol>
+                        
+                        <h4>1.2 Als Directory Storage einbinden</h4>
+                        <p>Node → Disks → Directory → Create</p>
+                        <ul>
+                            <li><strong>Filesystem:</strong> ext4</li>
+                            <li><strong>Mountpoint:</strong> /mnt/shared</li>
+                            <li><strong>Storage ID:</strong> shared-hdd</li>
+                        </ul>
+                        
+                        <p><strong>Ergebnis:</strong></p>
+                        <ul>
+                            <li>ext4 formatiert</li>
+                            <li>automatisch in /etc/fstab eingetragen</li>
+                            <li>Proxmox erstellt Standardordner:
+                                <ul>
+                                    <li>dump</li>
+                                    <li>images</li>
+                                    <li>private</li>
+                                    <li>snippets</li>
+                                    <li>template</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>Diese Ordner gehören Proxmox und bleiben bestehen.</p>
+                        
+                        <h3>2. Eigenen SMB-Ordner erstellen</h3>
+                        <p>Damit Proxmox-Ordner nicht gelöscht werden können, wird ein separater Ordner verwendet.</p>
+                        
+                        <h4>2.1 Ordner erstellen (Shell im Proxmox GUI)</h4>
+                        <pre class="cmd"><code>mkdir /mnt/shared/files</code></pre>
+                        
+                        <h4>2.2 Gruppe erstellen</h4>
+                        <pre class="cmd"><code>groupadd smbshare</code></pre>
+                        
+                        <h4>2.3 Rechte setzen</h4>
+                        <pre class="cmd"><code>chown -R root:smbshare /mnt/shared/files
+chmod -R 2775 /mnt/shared/files</code></pre>
+                        
+                        <p><strong>Ergebnis:</strong></p>
+                        <ul>
+                            <li>Nur der Ordner "files" ist für SMB nutzbar</li>
+                            <li>Proxmox-Systemordner bleiben geschützt</li>
+                        </ul>
+                        
+                        <h3>3. Samba installieren</h3>
+                        <pre class="cmd"><code>apt update
+apt install samba -y</code></pre>
+                        
+                        <h3>4. Samba konfigurieren</h3>
+                        <p>Datei öffnen:</p>
+                        <pre class="cmd"><code>nano /etc/samba/smb.conf</code></pre>
+                        
+                        <p>Am Ende hinzufügen:</p>
+                        <pre class="cmd"><code>[Shared]
+   path = /mnt/shared/files
+   browseable = yes
+   writable = yes
+   read only = no
+   guest ok = no
+   valid users = @smbshare
+   force group = smbshare
+   create mask = 0664
+   directory mask = 2775</code></pre>
+                        
+                        <p>Samba neu starten:</p>
+                        <pre class="cmd"><code>systemctl restart smbd
+systemctl enable smbd</code></pre>
+                        
+                        <h3>5. Benutzer anlegen</h3>
+                        <p>Linux User erstellen:</p>
+                        <pre class="cmd"><code>adduser winuser</code></pre>
+                        
+                        <p>Zur Gruppe hinzufügen:</p>
+                        <pre class="cmd"><code>usermod -aG smbshare winuser</code></pre>
+                        
+                        <p>Samba Passwort setzen:</p>
+                        <pre class="cmd"><code>smbpasswd -a winuser
+smbpasswd -e winuser</code></pre>
+                        
+                        <h3>6. Firewall konfigurieren (Proxmox GUI)</h3>
+                        <p>Firewall auf Datacenter- oder Node-Ebene aktiv. Regeln hinzufügen:</p>
+                        
+                        <h4>ICMP erlauben (Ping)</h4>
+                        <ul>
+                            <li><strong>Direction:</strong> IN</li>
+                            <li><strong>Interface:</strong> vmbr0</li>
+                            <li><strong>Protocol:</strong> ICMP</li>
+                            <li><strong>Source:</strong> 192.168.1.0/24</li>
+                        </ul>
+                        
+                        <h4>SMB erlauben</h4>
+                        <p><strong>Regel 1:</strong></p>
+                        <ul>
+                            <li><strong>Protocol:</strong> TCP</li>
+                            <li><strong>Port:</strong> 445</li>
+                            <li><strong>Source:</strong> 192.168.1.0/24</li>
+                        </ul>
+                        
+                        <p><strong>Regel 2:</strong></p>
+                        <ul>
+                            <li><strong>Protocol:</strong> TCP</li>
+                            <li><strong>Port:</strong> 139</li>
+                            <li><strong>Source:</strong> 192.168.1.0/24</li>
+                        </ul>
+                        
+                        <p><strong>Wichtig:</strong></p>
+                        <ul>
+                            <li>Subnetz muss mit CIDR angegeben werden (z.B. /24)</li>
+                            <li>192.168.1.0 alleine ist ungültig</li>
+                        </ul>
+                        
+                        <h3>7. Zugriff von Clients</h3>
+                        
+                        <h4>Windows</h4>
+                        <p>Explorer:</p>
+                        <pre class="cmd"><code>\\192.168.1.100\Shared</code></pre>
+                        
+                        <h4>Linux</h4>
+                        <pre class="cmd"><code>smb://192.168.1.100/Shared</code></pre>
+                        
+                        <h3>8. Ergebnis</h3>
+                        <ul>
+                            <li>✔ Dateien können erstellt, gelöscht und gelesen werden</li>
+                            <li>✔ Zugriff von mehreren Geräten möglich</li>
+                            <li>✔ Persistenter Mount nach Reboot</li>
+                            <li>✔ Proxmox Systemordner geschützt</li>
+                            <li>✔ Firewall kontrolliert Zugriff</li>
+                        </ul>
+                        
+                        <h3>Wichtige Erkenntnisse</h3>
+                        <ul>
+                            <li>Proxmox GUI reicht nur für Disk-Setup</li>
+                            <li>Samba + Rechte erfordern Konsole</li>
+                            <li>Firewall braucht explizite ICMP- und SMB-Regeln</li>
+                            <li>Hypervisor-Storage und NAS-Funktion müssen logisch getrennt sein</li>
+                            <li>Der Ordner /mnt/shared/files ist der einzige freigegebene Bereich</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="usb-backup-box" class="Content-section collapsible-box" style="display:none;">
                 <div class="container3">
                     <div class="content">
                         <h2>MyDokuWiki LXC USB Backup Guide</h2>
@@ -381,6 +918,38 @@ pct destroy 103</code></pre>
                     toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
                 });
             })();
+            
+            function toggleBox(boxId) {
+                // Hide all boxes and remove active state from all buttons
+                const allBoxes = document.querySelectorAll('.collapsible-box');
+                const allButtons = document.querySelectorAll('.box-btn');
+                
+                allBoxes.forEach(box => box.style.display = 'none');
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Show the selected box
+                const targetBox = document.getElementById(boxId);
+                if (targetBox) {
+                    targetBox.style.display = 'block';
+                    
+                    // Add active state to the clicked button
+                    const activeButton = Array.from(allButtons).find(btn => 
+                        btn.getAttribute('onclick').includes(boxId)
+                    );
+                    if (activeButton) {
+                        activeButton.classList.add('active');
+                    }
+                }
+            }
+
+            // Check URL parameters on page load
+            window.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const boxParam = params.get('box');
+                if (boxParam) {
+                    toggleBox(boxParam);
+                }
+            });
         </script>
     </body>
 </html>

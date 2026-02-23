@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Web Application — Jonathan Kemmel</title>
+        <title>Proxmox HW — Detailed Guide</title>
         <link rel="stylesheet" href="project-1.css" />
     </head>
     <body>
@@ -26,83 +26,179 @@
                 </nav>
             </div>
         </header>
-    
+
         <main>
             <section class="project-detail-section">
                 <div class="container1">
-                    <h1 class="Proxmox">Proxmox — Hardware Guide</h1>
+                    <h1 class="Proxmox">Proxmox HW - Detailed Guide</h1>
                 </div>
             </section>
 
-            <section class="Content-section">
+            <section class="box-buttons-section">
+                <div class="container3">
+                    <div class="box-buttons">
+                        <button class="box-btn" onclick="toggleBox('ubuntu-vm-box')">Create Ubuntu VM</button>
+                        <button class="box-btn" onclick="toggleBox('kali-vm-box')">Create Kali VM</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ubuntu-vm-box" class="Content-section collapsible-box" style="display:none;">
                 <div class="container3">
                     <div class="content">
-                        <h2 id="os">Operating System</h2>
-                        <p>Prepare media and a minimal Debian 13 netinst for Proxmox VE.</p>
-
-                        <h2 id="prepare-iso">Prepare ISO</h2>
+                        <h2>Create Ubuntu VM (Programming)</h2>
+                        
+                        <h3>Upload ISO</h3>
+                        <p>Proxmox GUI → Datacenter → Storage(local) → ISO Images → Upload → choose Ubuntu ISO file</p>
+                        
+                        <h3>Create VM</h3>
+                        <p>Proxmox GUI → Create VM</p>
                         <ul>
-                            <li>Download Debian 13 netinst ISO and verify its checksum (SHA256).</li>
-                            <li>Write the ISO to a USB drive.</li>
+                            <li><strong>Node:</strong> &lt;your-host&gt;</li>
+                            <li><strong>VM ID:</strong> auto</li>
+                            <li><strong>Name:</strong> ubuntu-dev</li>
                         </ul>
-
-                        <h2 id="bios">BIOS Settings</h2>
+                        
+                        <h4>OS tab:</h4>
                         <ul>
-                            <li>Boot into BIOS.</li>
-                            <li>Enable AHCI for storage.</li>
-                            <li>Enable VT-x / AMD-V virtualization.</li>
-                            <li>Enable UEFI boot (recommended) and disable Secure Boot.</li>
-                            <li>Save &amp; reboot into the USB installer.</li>
+                            <li>Use uploaded Ubuntu ISO</li>
+                            <li>Leave other default</li>
                         </ul>
-
-                        <h2 id="install">Debian 13 Minimal Install</h2>
-                        <ol>
-                            <li>Boot the installer and select <strong>Install</strong>. Choose language, country and keyboard layout.</li>
-                            <li>Network Configuration: select the network interface (Ethernet preferred). If DHCP is used, an IP is assigned automatically.</li>
-                            <li>If using a static IP, use these placeholders:</li>
-                        </ol>
-                        <pre class="cmd"><code>IP: 192.168.X.XXX
-Netmask: 255.255.255.0
-Gateway: 192.168.X.1
-DNS: 8.8.8.8</code></pre>
-                        <ol start="4">
-                            <li>Set hostname: <code>proxmox-hw</code>. Leave domain empty.</li>
-                            <li>Set a strong root password and create an admin user.</li>
-                            <li>Partition disk: Guided → use entire disk. Optionally choose LVM for future expansion. Confirm changes and write partitions.</li>
-                            <li>Package selection: deselect desktop environments. Select only <em>SSH server</em> and <em>standard system utilities</em>.</li>
-                            <li>Install GRUB on the main disk, confirm and finish.</li>
-                            <li>Remove USB, reboot and log in with your user or root.</li>
-                        </ol>
-
-                        <h2 id="post-install">Post-Install Essentials</h2>
+                        
+                        <h4>System tab:</h4>
                         <ul>
-                            <li>Update &amp; Upgrade:</li>
+                            <li><strong>BIOS:</strong> default (OVMF only if UEFI is needed)</li>
+                            <li><strong>Machine:</strong> default</li>
+                            <li><strong>Qemu Agent:</strong> checked (enables better shutdowns & status)</li>
                         </ul>
+                        
+                        <h4>Disk tab:</h4>
+                        <ul>
+                            <li><strong>Bus/Device:</strong> SCSI0 on VIRTIO-SCSI controller</li>
+                            <li><strong>Disk size:</strong> &lt;your-choice&gt;</li>
+                            <li><strong>Format:</strong> qcow2 or raw (raw slightly faster on SSD)</li>
+                        </ul>
+                        
+                        <h4>CPU tab:</h4>
+                        <ul>
+                            <li><strong>Sockets:</strong> 1</li>
+                            <li><strong>Cores:</strong> 4 (2 if host smaller)</li>
+                        </ul>
+                        
+                        <h4>Memory tab:</h4>
+                        <ul>
+                            <li><strong>Memory:</strong> 8192 (recommended for dev work)</li>
+                        </ul>
+                        
+                        <h4>Network tab:</h4>
+                        <ul>
+                            <li><strong>Bridge:</strong> vmbr0</li>
+                            <li><strong>Model:</strong> VIRTIO (fast)</li>
+                        </ul>
+                        
+                        <p>Finish → Start VM → Console → run Ubuntu installer</p>
+                        
+                        <h3>Post-install</h3>
+                        <p>Update the guest and install typical dev tools:</p>
                         <pre class="cmd"><code>sudo apt update && sudo apt upgrade -y
-sudo reboot</code></pre>
-                        <ul>
-                            <li>Enable SSH:</li>
-                        </ul>
-                        <pre class="cmd"><code>sudo systemctl enable ssh
-sudo systemctl start ssh</code></pre>
-
-                        <h2 id="install-proxmox">Install Proxmox VE</h2>
-                        <pre class="cmd"><code>sudo apt install -y wget gnupg
-wget -qO - https://enterprise.proxmox.com/debian/pve-enterprise-repo.gpg | sudo apt-key add -
-echo "deb https://download.proxmox.com/debian/pve bookworm pve-no-subscription" | sudo tee /etc/apt/sources.list.d/pve-install-repo.list
+sudo apt install -y build-essential git curl qemu-guest-agent</code></pre>
+                        
+                        <p>Install docker:</p>
+                        <pre class="cmd"><code>sudo apt install -y ca-certificates gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \\
+    \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \\
+    https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" | \\
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt update
-sudo apt install proxmox-ve -y</code></pre>
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+sudo usermod -aG docker $USER</code></pre>
+                        
+                        <p>Install code-server (VS Code in browser) if remote IDE needed:</p>
+                        <pre class="cmd"><code>curl -fsSL https://code-server.dev/install.sh | sh</code></pre>
+                        
+                        <h3>Make a template</h3>
+                        <ol>
+                            <li>Once you're done, right click VM → clone</li>
+                            <li>Right click cloned VM → convert to template</li>
+                            <li>Now you're able to clone fresh dev VMs quick</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
 
-                        <h2 id="post-proxmox">Post-Proxmox Configuration</h2>
+            <section id="kali-vm-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Create Kali VM (Hacking)</h2>
+                        
+                        <p><strong>Important safety note:</strong> Treat Kali as a risky toolkit. Keep it isolated from your main LAN. Only use it on systems/networks you own or have explicit permission to test.</p>
+                        
+                        <h3>Upload ISO</h3>
+                        <p>Proxmox GUI → Datacenter → Storage(local) → ISO Images → Upload → choose Kali ISO file</p>
+                        
+                        <h3>Create isolated network without physical NIC</h3>
+                        <p>Proxmox GUI → Datacenter → Node → System → Network → Create → Linux Bridge</p>
                         <ul>
-                            <li>Access the web GUI at <code>https://&lt;your-server-ip&gt;:8006/</code></li>
-                            <li>Configure storage, networking bridges and enable necessary services.</li>
-                            <li>Apply updates and configure backups as required.</li>
+                            <li><strong>Name:</strong> vmbr1</li>
+                            <li>Leave rest empty</li>
                         </ul>
+                        <p>This way Kali can only talk to VMs on isolated Bridge (vmbr1)</p>
+                        
+                        <h3>Create VM</h3>
+                        <p>Proxmox GUI → Create VM</p>
+                        <ul>
+                            <li><strong>Node:</strong> &lt;your-host&gt;</li>
+                            <li><strong>VM ID:</strong> auto</li>
+                            <li><strong>Name:</strong> kali-lab</li>
+                        </ul>
+                        
+                        <h4>OS tab:</h4>
+                        <ul>
+                            <li>Use uploaded Kali ISO</li>
+                            <li>Leave other default</li>
+                        </ul>
+                        
+                        <h4>System tab:</h4>
+                        <ul>
+                            <li><strong>BIOS:</strong> default (OVMF only if UEFI is needed)</li>
+                            <li><strong>Machine:</strong> default</li>
+                            <li><strong>Qemu Agent:</strong> checked (enables better shutdowns & status)</li>
+                        </ul>
+                        
+                        <h4>Disk tab:</h4>
+                        <ul>
+                            <li><strong>Bus/Device:</strong> SCSI0 on VIRTIO-SCSI controller</li>
+                            <li><strong>Disk size:</strong> &lt;your-choice&gt;</li>
+                            <li><strong>Format:</strong> qcow2 or raw (raw slightly faster on SSD)</li>
+                        </ul>
+                        
+                        <h4>CPU tab:</h4>
+                        <ul>
+                            <li><strong>Sockets:</strong> 1</li>
+                            <li><strong>Cores:</strong> 4 (2 if host smaller)</li>
+                        </ul>
+                        
+                        <h4>Memory tab:</h4>
+                        <ul>
+                            <li><strong>Memory:</strong> 8192 (recommended for dev work)</li>
+                        </ul>
+                        
+                        <h4>Network tab:</h4>
+                        <ul>
+                            <li><strong>Bridge:</strong> vmbr1 (isolated bridge, no Network)</li>
+                            <li><strong>Model:</strong> VIRTIO (fast)</li>
+                        </ul>
+                        
+                        <p>Finish → Start VM → Console → run Kali installer</p>
                     </div>
                 </div>
             </section>
         </main>
+
+        <footer class="site-footer">
+            <div class="container">2026 Jonathan Kemmel</div>
+        </footer>
         <script>
             (function () {
                 const toggle = document.querySelector(".nav-toggle");
@@ -113,63 +209,38 @@ sudo apt install proxmox-ve -y</code></pre>
                     toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
                 });
             })();
+            
+            function toggleBox(boxId) {
+                // Hide all boxes and remove active state from all buttons
+                const allBoxes = document.querySelectorAll('.collapsible-box');
+                const allButtons = document.querySelectorAll('.box-btn');
+                
+                allBoxes.forEach(box => box.style.display = 'none');
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Show the selected box
+                const targetBox = document.getElementById(boxId);
+                if (targetBox) {
+                    targetBox.style.display = 'block';
+                    
+                    // Add active state to the clicked button
+                    const activeButton = Array.from(allButtons).find(btn => 
+                        btn.getAttribute('onclick').includes(boxId)
+                    );
+                    if (activeButton) {
+                        activeButton.classList.add('active');
+                    }
+                }
+            }
+
+            // Check URL parameters on page load
+            window.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const boxParam = params.get('box');
+                if (boxParam) {
+                    toggleBox(boxParam);
+                }
+            });
         </script>
-    </body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Proxmox HW — Detailed Guide</title>
-        <link rel="stylesheet" href="../../../styles.css" />
-        <link rel="stylesheet" href="../project-detail.css" />
-        <link rel="stylesheet" href="Proxmox-HW.css" />
-    </head>
-    <body>
-        <header class="site-header">
-            <div class="container header-inner">
-                <h1 class="site-title">JK Portfolio</h1>
-            </div>
-        </header>
-        <main class="container project-detail">
-            <article class="detail-content">
-                <h1>Proxmox HW — Full Details</h1>
-
-                <section>
-                    <h2>Create Ubuntu VM (Detailed)</h2>
-                    <ol>
-                        <li>Upload the Ubuntu ISO to Proxmox: Datacenter → Storage (local) → ISO Images → Upload.</li>
-                        <li>Create a VM: set name, VM ID, OS type and point to the uploaded ISO.</li>
-                        <li>System tab: set BIOS/UEFI as required, enable QEMU guest agent for better control.</li>
-                        <li>Disk: choose size and format (qcow2 for space-efficiency, raw for speed).</li>
-                        <li>CPU/Memory: allocate according to workload (e.g., 4 cores / 8GB for dev VM).</li>
-                        <li>Network: select bridge (vmbr0) and model (virtio) for performance.</li>
-                        <li>Start VM and run through the Ubuntu installer; then install guest tools and updates.</li>
-                        <li>Optional: install Docker and code-server for remote development use.</li>
-                    </ol>
-                </section>
-
-                <section>
-                    <h2>Create Kali VM (Detailed)</h2>
-                    <ol>
-                        <li>Upload Kali ISO and create a VM as above.</li>
-                        <li>Use an isolated network bridge (e.g., vmbr1) to keep Kali separated from production LAN.</li>
-                        <li>Allocate resources and enable snapshots before performing risky tests.</li>
-                        <li>Keep Kali updated and only use it on systems/networks you own or have permission to test.</li>
-                    </ol>
-                </section>
-
-                <section>
-                    <h2>Post-install tips</h2>
-                    <ul>
-                        <li>Create VM templates for frequent deployments.</li>
-                        <li>Use snapshots before major changes or security tests.</li>
-                        <li>Document VM configurations so you can reproduce environments precisely.</li>
-                    </ul>
-                </section>
-            </article>
-        </main>
-        <footer class="site-footer"><div class="container">2026 Jonathan Kemmel</div></footer>
     </body>
 </html>

@@ -68,9 +68,7 @@
                             <div class="underline"></div>
                             <ul class="content-table">
                                 <li><a href="#Debian Installation">Debian Installation</a></li>
-                                <li><a href="#Install OpenMediaVault">Install OpenMediaVault</a></li>
-                                <li><a href="#Configure Storage">Configure Storage</a></li>
-                                <li><a href="#Setup Shared Folders">Setup Shared Folders</a></li>
+                                <li><a href="#Install OMV">Install OMV</a></li>
                             </ul>
                         </div>
                     </div>
@@ -82,7 +80,7 @@
                     <div class="underline"></div>
                     <div class="content">
                         <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
-                            <a class="btn btn-primary" href="NAS-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                            <a class="btn btn-primary" href="NAS-detailed.html?box=os-install-box" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
                         </div>
                         <ul>
                             <li>Boot the Debian installer and choose "Install"; select language, country and keyboard layout.</li>
@@ -97,11 +95,11 @@
                         </ul>
                     </div>
 
-                    <h3 id="Install OpenMediaVault">Install OpenMediaVault:</h3>
+                    <h3 id="Install OMV">Install OMV:</h3>
                     <div class="underline"></div>
                     <div class="content">
                         <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
-                            <a class="btn btn-primary" href="NAS-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                            <a class="btn btn-primary" href="NAS-detailed.html?box=omv-install-box" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
                         </div>
                         <ul>
                             <li>Note: OMV 7 targets Debian 13 — prefer matching OS version.</li>
@@ -109,39 +107,16 @@
                             <li>Install OMV packages and required dependencies (postfix, openmediavault).</li>
                             <li>Run <span class="cmd">omv-initsystem</span> to initialize configuration.</li>
                             <li>Open the OMV web GUI at http://&lt;server-ip&gt; and change the default admin password.</li>
-                            <li>Configure storage backends, users and shared folders from the GUI.</li>
-                            <li>Enable desired services (SMB/NFS/FTP) and set access permissions.</li>
-                            <li>Install `omv-extras` if you need Docker/Plugins (optional).</li>
-                        </ul>
-                    </div>
-
-                    <h3 id="Configure Storage">Configure Storage:</h3>
-                    <div class="underline"></div>
-                    <div class="content">
-                        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
-                            <a class="btn btn-primary" href="NAS-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
-                        </div>
-                        <ul>
                             <li>Set a static IP for reliable access and disable IPv6 if unused.</li>
                             <li>Add drives in OMV → Storage → Disks and wipe if reusing media.</li>
                             <li>Create filesystems (EXT4 or your chosen FS) and set mountpoints.</li>
                             <li>Consider RAID/LVM/ZFS depending on redundancy and performance needs.</li>
                             <li>Enable SMART monitoring and schedule periodic SMART tests.</li>
-                            <li>Plan backups and retention; test restores regularly.</li>
-                        </ul>
-                    </div>
-
-                    <h3 id="Setup Shared Folders">Setup Shared Folders:</h3>
-                    <div class="underline"></div>
-                    <div class="content">
-                        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
-                            <a class="btn btn-primary" href="NAS-detailed.html" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
-                        </div>
-                        <ul>
                             <li>Create shared folders on the chosen mountpoints and assign permissions per user/group.</li>
                             <li>Enable SMB and/or NFS services and configure exports/shares.</li>
                             <li>Create users for network access and use strong passwords or external auth.</li>
                             <li>Set quotas or ACLs if you need per-user limits.</li>
+                            <li>Plan backups and retention; test restores regularly.</li>
                             <li>Enable update management and check for plugin updates periodically.</li>
                             <li>Optional: install Docker via omv-extras and advanced storage tools (SnapRAID/MergerFS).</li>
                         </ul>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Web Application — Jonathan Kemmel</title>
+        <title>NAS — Detailed Guide</title>
         <link rel="stylesheet" href="project-1.css" />
     </head>
     <body>
@@ -26,107 +26,224 @@
                 </nav>
             </div>
         </header>
-    
+
         <main>
             <section class="project-detail-section">
                 <div class="container1">
-                    <h1 class="Laptop">Laptop (Mobile Workstation)</h1>
+                    <h1 class="NAS">NAS - Detailed Guide</h1>
                 </div>
             </section>
 
-            <section class="Content-section">
+            <section class="box-buttons-section">
+                <div class="container3">
+                    <div class="box-buttons">
+                        <button class="box-btn" onclick="toggleBox('os-install-box')">Operating System</button>
+                        <button class="box-btn" onclick="toggleBox('omv-install-box')">OpenMediaVault</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="os-install-box" class="Content-section collapsible-box" style="display:none;">
                 <div class="container3">
                     <div class="content">
-                        <h2 id="os">Operating System</h2>
-                        <p>Prepare media and a minimal Debian 13 netinst for OpenMediaVault (OMV 7).</p>
-
-                        <h2 id="prepare-iso">Prepare ISO</h2>
+                        <h2>Operating System Installation</h2>
+                        
+                        <h3>Prepare ISO</h3>
                         <ul>
-                            <li>Download Debian 13 netinst ISO and verify its checksum (SHA256).</li>
-                            <li>Write the ISO to a Ventoy USB drive.</li>
+                            <li>Download Debian 13 netinst ISO</li>
+                            <li>Write to Ventoy USB Drive</li>
                         </ul>
-
-                        <h2 id="bios">BIOS Settings</h2>
-                        <ul>
-                            <li>Boot into BIOS.</li>
-                            <li>Enable AHCI (not RAID) for NVMe.</li>
-                            <li>Enable UEFI boot (recommended).</li>
-                            <li>Disable Secure Boot.</li>
-                            <li>Save &amp; reboot into the USB installer.</li>
-                        </ul>
-
-                        <h2 id="install">Debian 13 Minimal Install</h2>
+                        
+                        <h3>BIOS Settings</h3>
                         <ol>
-                            <li>Boot the installer and select <strong>Install</strong>. Choose language, country and keyboard layout.</li>
-                            <li>Network Configuration: select the network interface (Ethernet preferred). If DHCP is used, an IP is assigned automatically.</li>
-                            <li>If using a static IP, use these placeholders:</li>
+                            <li>Boot into BIOS</li>
+                            <li>Enable AHCI (not RAID) for NVMe</li>
+                            <li>Enable UEFI boot (recommended)</li>
+                            <li>Disable Secure Boot</li>
+                            <li>Save & reboot into USB installer</li>
                         </ol>
+                        
+                        <h3>Debian 13 Minimal Install</h3>
+                        
+                        <h4>Boot installer:</h4>
+                        <ul>
+                            <li>Select <strong>Install</strong></li>
+                            <li>Choose language, country, keyboard layout</li>
+                        </ul>
+                        
+                        <h4>Network Configuration:</h4>
+                        <ul>
+                            <li>Select network interface (Ethernet preferred)</li>
+                            <li>If using DHCP, automatically IP</li>
+                            <li>If static IP:</li>
+                        </ul>
                         <pre class="cmd"><code>IP: 192.168.X.XXX
 Netmask: 255.255.255.0
 Gateway: 192.168.X.1
 DNS: 8.8.8.8</code></pre>
-                        <ol start="4">
-                            <li>Set hostname: <code>omvserver</code>. Leave domain empty.</li>
-                            <li>Set a strong root password and create a user named <code>admin</code>.</li>
-                            <li>Partition disk: Guided → use entire disk. Optionally choose LVM for future expansion. Confirm changes and write partitions.</li>
-                            <li>Package selection: deselect desktop environments. Select only <em>SSH server</em> and <em>standard system utilities</em>. Do not install desktop environments for minimal OMV.</li>
-                            <li>Install GRUB on the main disk (for example <code>/dev/nvme0n1</code>), confirm and finish.</li>
-                            <li>Remove USB, reboot and log in with your user or root.</li>
-                        </ol>
-
-                        <h2 id="post-install">Post-Install Essentials</h2>
+                        
+                        <h4>Set Hostname & Domain:</h4>
                         <ul>
-                            <li>Update &amp; Upgrade:</li>
+                            <li><strong>Hostname:</strong> nas-server</li>
+                            <li><strong>Domain:</strong> leave empty</li>
                         </ul>
-                        <pre class="cmd"><code>sudo apt update && sudo apt upgrade -y
+                        
+                        <h4>Set Root & User:</h4>
+                        <ul>
+                            <li><strong>Root password:</strong> strong one</li>
+                            <li><strong>Create a user:</strong> admin</li>
+                        </ul>
+                        
+                        <h4>Partition Disk:</h4>
+                        <ul>
+                            <li>Guided → use entire disk</li>
+                            <li>Optional, choose LVM if expanded in future</li>
+                            <li>Confirm changes and write partitions</li>
+                        </ul>
+                        
+                        <h4>Package Selection:</h4>
+                        <p>Deselect all except:</p>
+                        <ul>
+                            <li>SSH server</li>
+                            <li>Standard system utilities</li>
+                        </ul>
+                        <p><strong>Do not install desktop environments for minimal OMV!!!</strong></p>
+                        
+                        <h4>Install GRUB:</h4>
+                        <ul>
+                            <li>Install GRUB on main disk (/dev/nvme0n1)</li>
+                            <li>Confirm installation</li>
+                        </ul>
+                        
+                        <h4>Finish & Reboot:</h4>
+                        <ul>
+                            <li>Remove USB and reboot</li>
+                            <li>Log in with your user or root</li>
+                        </ul>
+                        
+                        <h3>Post-Install Essentials</h3>
+                        
+                        <h4>Update & Upgrade:</h4>
+                        <pre class="cmd"><code>sudo apt update && apt upgrade -y
 sudo reboot</code></pre>
-                        <ul>
-                            <li>Enable SSH:</li>
-                        </ul>
+                        
+                        <h4>Enable SSH</h4>
                         <pre class="cmd"><code>sudo systemctl enable ssh
 sudo systemctl start ssh</code></pre>
-                        <ul>
-                            <li>Install required tools:</li>
-                        </ul>
+                        
+                        <h4>Install required tools</h4>
                         <pre class="cmd"><code>sudo apt install -y sudo curl gnupg lsb-release</code></pre>
-                        <ul>
-                        </ul>
+                    </div>
+                </div>
+            </section>
 
-                        <h2 id="install-omv">Install OpenMediaVault</h2>
-                        <p>Note: OMV 7 is designed for Debian 13.</p>
-
+            <section id="omv-install-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Install OpenMediaVault</h2>
+                        <p><strong>Note:</strong> OMV 7 is designed for Debian 13</p>
+                        
                         <h3>Add OMV Repo</h3>
                         <pre class="cmd"><code>sudo curl -fsSL https://packages.openmediavault.org/public/archive.key | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/openmediavault.gpg
 echo "deb https://packages.openmediavault.org/public arrakis main" | sudo tee /etc/apt/sources.list.d/openmediavault.list
 sudo apt update</code></pre>
-
+                        
                         <h3>Install OMV</h3>
                         <pre class="cmd"><code>sudo apt install openmediavault-keyring postfix -y
 sudo apt update
 sudo apt install openmediavault -y</code></pre>
-
+                        
                         <h3>Initialize OMV</h3>
                         <pre class="cmd"><code>sudo omv-initsystem</code></pre>
-
+                        
                         <h3>Access OMV Web GUI</h3>
-                        <p>Open the web GUI at:</p>
+                        <h4>Default URL</h4>
                         <pre class="cmd"><code>http://&lt;your-server-ip&gt;/</code></pre>
-                        <p><strong>Default credentials</strong><br>Username: <code>admin</code><br>Password: <code>openmediavault</code><br>Change the password immediately after login.</p>
-
-                        <h2 id="post-omv">Post-OMV Configuration</h2>
+                        
+                        <h4>Default credentials</h4>
                         <ul>
-                            <li>Network: configure a static IP if not already set; disable IPv6 if unused.</li>
-                            <li>Storage: add drives under <em>Storage &gt; Disks</em>, wipe and create filesystems (EXT4 recommended).</li>
-                            <li>Shared Folders: create shared folders and assign permissions; create users for network access.</li>
-                            <li>SMB/NFS/FTP: enable desired services in <em>Services</em> and verify firewall rules.</li>
-                            <li>Updates: regularly check <em>System &gt; Update Management</em> and apply updates.</li>
-                            <li>Optional: install Docker plugin (omv-extras), SnapRAID or MergerFS for advanced storage setups.</li>
+                            <li><strong>Username:</strong> admin</li>
+                            <li><strong>Password:</strong> openmediavault</li>
+                        </ul>
+                        <p><strong>⚠️ Change password immediately after login</strong></p>
+                        
+                        <h3>Post-OMV Configuration</h3>
+                        
+                        <h4>Network</h4>
+                        <ul>
+                            <li>Configure static IP if not done</li>
+                            <li>Disable IPv6 if unused</li>
+                        </ul>
+                        
+                        <h4>Storage</h4>
+                        <ul>
+                            <li>Add drives under <strong>Storage &gt; Disks</strong></li>
+                            <li>Wipe and create file systems (EXT4 recommended for simplicity)</li>
+                        </ul>
+                        
+                        <h4>Shared Folders</h4>
+                        <ul>
+                            <li>Create shared folders on drives</li>
+                            <li>Assign permissions</li>
+                        </ul>
+                        
+                        <h4>SMB / NFS / FTP</h4>
+                        <ul>
+                            <li>Enable desired services under <strong>Services</strong></li>
+                            <li>Create users for network access</li>
+                        </ul>
+                        
+                        <h4>Updates</h4>
+                        <ul>
+                            <li>Regularly check <strong>System &gt; Update Management</strong></li>
+                        </ul>
+                        
+                        <h4>Optional</h4>
+                        <ul>
+                            <li>Docker Plugin (omv-extras) for containers</li>
+                            <li>SnapRAID / MergerFS if needed for advanced storage</li>
                         </ul>
                     </div>
                 </div>
             </section>
         </main>
+
+        <footer class="site-footer">
+            <div class="container">2026 Jonathan Kemmel</div>
+        </footer>
         <script>
+            function toggleBox(boxId) {
+                // Hide all boxes and remove active state from all buttons
+                const allBoxes = document.querySelectorAll('.collapsible-box');
+                const allButtons = document.querySelectorAll('.box-btn');
+                
+                allBoxes.forEach(box => box.style.display = 'none');
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Show the selected box
+                const targetBox = document.getElementById(boxId);
+                if (targetBox) {
+                    targetBox.style.display = 'block';
+                    
+                    // Add active state to the clicked button
+                    const activeButton = Array.from(allButtons).find(btn => 
+                        btn.getAttribute('onclick').includes(boxId)
+                    );
+                    if (activeButton) {
+                        activeButton.classList.add('active');
+                    }
+                }
+            }
+
+            // Check URL parameters on page load
+            window.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const boxParam = params.get('box');
+                if (boxParam) {
+                    toggleBox(boxParam);
+                }
+            });
+
             (function () {
                 const toggle = document.querySelector(".nav-toggle");
                 const nav = document.querySelector(".main-nav");
@@ -137,64 +254,5 @@ sudo apt install openmediavault -y</code></pre>
                 });
             })();
         </script>
-    </body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>NAS — Detailed Guide</title>
-        <link rel="stylesheet" href="../../../styles.css" />
-        <link rel="stylesheet" href="../project-detail.css" />
-        <link rel="stylesheet" href="NAS.css" />
-    </head>
-    <body>
-        <header class="site-header"><div class="container header-inner"><h1 class="site-title">JK Portfolio</h1></div></header>
-        <main class="container project-detail">
-            <article class="detail-content">
-                <h1>NAS — Full Detailed Guide</h1>
-
-                <section>
-                    <h2>Debian Installation (Detailed)</h2>
-                    <ol>
-                        <li>Download Debian netinst ISO and write it to a Ventoy USB drive.</li>
-                        <li>Boot installer, configure language/keyboard and network (static IP recommended).</li>
-                        <li>Partition disks (guided or custom), consider LVM for flexibility.</li>
-                        <li>Install minimal system, enable SSH during package selection.</li>
-                        <li>Install GRUB to the main disk and reboot into the new system.</li>
-                    </ol>
-                </section>
-
-                <section>
-                    <h2>OpenMediaVault Installation</h2>
-                    <ol>
-                        <li>Add OMV repository keys and repository as documented by OMV.</li>
-                        <li>Install openmediavault packages and initialize the system (<code>omv-initsystem</code>).</li>
-                        <li>Open the OMV web GUI, change admin password and configure storage modules.</li>
-                        <li>Create Shared Folders and user accounts for SMB/NFS access.</li>
-                    </ol>
-                </section>
-
-                <section>
-                    <h2>Storage & Shares</h2>
-                    <ul>
-                        <li>Manage disks via OMV → Storage: wipe if needed, create filesystems, mountpoints.</li>
-                        <li>Use EXT4 for simplicity or plan RAID/LVM for redundancy/performance.</li>
-                        <li>Enable SMB and NFS services, configure permissions and test from clients.</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h2>Maintenance</h2>
-                    <ul>
-                        <li>Schedule updates and backups; consider offsite copies for critical data.</li>
-                        <li>Monitor disk health (SMART) and plan replacements before failure.</li>
-                        <li>Document share mappings and backup procedures.</li>
-                    </ul>
-                </section>
-            </article>
-        </main>
-        <footer class="site-footer"><div class="container">2026 Jonathan Kemmel</div></footer>
     </body>
 </html>
