@@ -160,6 +160,9 @@
     .projects-grid {
         grid-template-columns: 1fr;
         gap: 25px;
+        max-width: none;
+        width: 100%;
+        margin: 0;
     }
     
     .project-preview {
@@ -173,5 +176,19 @@
     
     .project-info {
         padding: 24px;
+    }
+
+    /* Reduce decorative overflow on small screens */
+    .project-preview::before {
+        top: -40%;
+        right: -20%;
+        width: 140px;
+        height: 140px;
+    }
+
+    /* safety: ensure no element forces horizontal scroll */
+    html, body, .projects-container {
+        max-width: 100%;
+        overflow-x: hidden;
     }
 }

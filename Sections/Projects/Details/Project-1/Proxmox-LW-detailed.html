@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Web Application — Jonathan Kemmel</title>
+        <title>Proxmox LW Detailed Guide</title>
         <link rel="stylesheet" href="project-1.css" />
     </head>
     <body>
@@ -26,83 +26,351 @@
                 </nav>
             </div>
         </header>
-    
+
         <main>
             <section class="project-detail-section">
                 <div class="container1">
-                    <h1 class="Proxmox">Proxmox — Lightweight Guide</h1>
+                    <h1 class="Proxmox">Proxmox LW - Detailed Guide</h1>
                 </div>
             </section>
 
             <section class="Content-section">
                 <div class="container3">
-                    <div class="content">
-                        <h2 id="os">Operating System</h2>
-                        <p>Prepare media and a minimal Debian 13 netinst for Proxmox VE (lightweight host).</p>
-
-                        <h2 id="prepare-iso">Prepare ISO</h2>
-                        <ul>
-                            <li>Download Debian 13 netinst ISO and verify its checksum (SHA256).</li>
-                            <li>Write the ISO to a USB drive.</li>
-                        </ul>
-
-                        <h2 id="bios">BIOS Settings</h2>
-                        <ul>
-                            <li>Boot into BIOS.</li>
-                            <li>Enable AHCI for storage.</li>
-                            <li>Enable VT-x / AMD-V virtualization.</li>
-                            <li>Enable UEFI boot (recommended) and disable Secure Boot.</li>
-                            <li>Save &amp; reboot into the USB installer.</li>
-                        </ul>
-
-                        <h2 id="install">Debian 13 Minimal Install</h2>
+                    <div class="content"></div>
+                        <h1>Proxmox VE Installation</h1>
+                        <h2>Write ISO to USB (Windows, Ventoy)</h2>
+                        <p>Using Ventoy (one-time setup):</p>
                         <ol>
-                            <li>Boot the installer and select <strong>Install</strong>. Choose language, country and keyboard layout.</li>
-                            <li>Network Configuration: select the network interface (Ethernet preferred). If DHCP is used, an IP is assigned automatically.</li>
-                            <li>If using a static IP, use these placeholders:</li>
-                        </ol>
-                        <pre class="cmd"><code>IP: 192.168.X.XXX
-Netmask: 255.255.255.0
-Gateway: 192.168.X.1
-DNS: 8.8.8.8</code></pre>
-                        <ol start="4">
-                            <li>Set hostname: <code>proxmox-lw</code>. Leave domain empty.</li>
-                            <li>Set a strong root password and create an admin user.</li>
-                            <li>Partition disk: Guided → use entire disk. Optionally choose LVM for future expansion. Confirm changes and write partitions.</li>
-                            <li>Package selection: deselect desktop environments. Select only <em>SSH server</em> and <em>standard system utilities</em>.</li>
-                            <li>Install GRUB on the main disk, confirm and finish.</li>
-                            <li>Remove USB, reboot and log in with your user or root.</li>
+                            <li>Download and install Ventoy to your USB drive (this will format the drive).</li>
+                            <li>Copy the Proxmox ISO file onto the Ventoy-formatted USB — no further flashing required.</li>
+                            <li>On target hardware, select the USB as boot media and choose the ISO from Ventoy's menu.</li>
                         </ol>
 
-                        <h2 id="post-install">Post-Install Essentials</h2>
+                        <h2>Boot Installer</h2>
                         <ul>
-                            <li>Update &amp; Upgrade:</li>
+                            <li>Insert the Ventoy/USB drive into the server, enter BIOS/UEFI boot menu and choose the USB device.</li>
+                            <li>From Ventoy, pick the Proxmox ISO (or use the dedicated Proxmox installer USB if you flashed one).</li>
                         </ul>
-                        <pre class="cmd"><code>sudo apt update && sudo apt upgrade -y
-sudo reboot</code></pre>
+
+                        <h2>Installer Walkthrough</h2>
+                        <p>Follow the installer prompts; the key steps and recommended options are below.</p>
+                        <h3>Welcome</h3>
                         <ul>
-                            <li>Enable SSH:</li>
+                            <li>Choose <strong>Install Proxmox VE</strong>.</li>
+                            <li>Accept the license/EULA to continue.</li>
                         </ul>
-                        <pre class="cmd"><code>sudo systemctl enable ssh
-sudo systemctl start ssh</code></pre>
 
-                        <h2 id="install-proxmox">Install Proxmox VE</h2>
-                        <pre class="cmd"><code>sudo apt install -y wget gnupg
-wget -qO - https://enterprise.proxmox.com/debian/pve-enterprise-repo.gpg | sudo apt-key add -
-echo "deb https://download.proxmox.com/debian/pve bookworm pve-no-subscription" | sudo tee /etc/apt/sources.list.d/pve-install-repo.list
-sudo apt update
-sudo apt install proxmox-ve -y</code></pre>
+                        <h3>Target Disk</h3>
+                    <ul>
+                        <li>Select the disk to install Proxmox VE on.</li>
+                        <li>Use <em>Options</em> (if available) to adjust partition sizes and swap. Recommended guidelines:
+                            <ul>
+                                <li><strong>hdsize</strong>: use the full disk or sized for your layout.</li>
+                                <li><strong>swapsize</strong>: match or approximate system RAM if you expect heavy memory pressure.</li>
+                                <li><strong>maxroot</strong>: leave space for VM/CT data and backups.</li>
+                                <li><strong>minfree</strong>: reserve a small amount (e.g., 2G) to prevent full-disk conditions.</li>
+                            </ul>
+                        </li>
+                        <li>Choose LVM, ZFS or plain partitions according to your needs; ZFS offers builtin snapshots and integrity at higher resource cost.</li>
+                    </ul>
 
-                        <h2 id="post-proxmox">Post-Proxmox Configuration</h2>
+                    <h3>Region, Password & Network</h3>
+                    <ul>
+                        <li>Select country, timezone and keyboard layout.</li>
+                        <li>Set a strong root password and a contact email (for alerts).</li>
+                        <li>Network: set a hostname (example: <code>pve.example.local</code>), choose DHCP or static addressing — static recommended for servers.
+                            Use environment values for IP, netmask (commonly /24), gateway and DNS (router or public DNS like 8.8.8.8).</li>
+                    </ul>
+
+                    <h3>Confirm & Install</h3>
+                    <ul>
+                        <li>Review all settings carefully, then start the installation.</li>
+                            <li>When complete, remove the USB and reboot into the installed system.</li>
+                        </ul>
+
+                        <h2>First Boot</h2>
                         <ul>
-                            <li>Access the web GUI at <code>https://&lt;your-server-ip&gt;:8006/</code></li>
-                            <li>Configure storage, networking bridges and enable necessary services.</li>
-                            <li>Apply updates and configure backups as required.</li>
+                            <li>Remove the Ventoy/USB drive so the host boots from the installed disk.</li>
+                            <li>Log into the local console as <strong>root</strong> with the password you set during install.</li>
+                        </ul>
+
+                        <h2>Access Web Interface</h2>
+                        <p>From another machine, open a browser to the Proxmox web UI:</p>
+                        <pre class="cmd"><code>https://&lt;your-proxmox-ip&gt;:8006</code></pre>
+                        <p>Log in as <strong>root</strong> (or an administrative user) to begin configuring VMs, storage and networking.</p>
+
+                        <h2>Post-install Essentials</h2>
+                    <h3>Update System</h3>
+                    <pre class="cmd"><code>apt update && apt full-upgrade -y</code></pre>
+
+                    <h3>Enable No-Subscription Repository (optional)</h3>
+                    <p>If you don't use a paid subscription, you can enable the community repository to receive updates:</p>
+                    <pre class="cmd"><code>nano /etc/apt/sources.list
+deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription
+apt update && apt upgrade -y</code></pre>
+
+                    <h3>Enable NTP</h3>
+                    <pre class="cmd"><code>timedatectl set-ntp on</code></pre>
+
+                    <h3>Enable Firewall</h3>
+                    <pre class="cmd"><code>pve-firewall enable</code></pre>
+
+                        <h3>Verify Storage</h3>
+                        <p>Open the Web GUI &rarr; Datacenter &rarr; Storage and ensure local storage points to <code>/var/lib/vz</code> (or your chosen path).</p>
+
+                        <h2>Security & Maintenance</h2>
+                    <h3>Two-Factor Authentication (TOTP)</h3>
+                    <ol>
+                        <li>In the web UI navigate to <strong>Datacenter &rarr; Permissions &rarr; Two Factor</strong> and add a TOTP entry.</li>
+                        <li>Pick the user, scan the QR code with an authenticator app and verify the 6-digit code to enable.</li>
+                    </ol>
+
+                    <h3>Backups</h3>
+                    <p>Schedule regular backups in the GUI:</p>
+                    <ul>
+                        <li>Datacenter &rarr; Backup &rarr; Add</li>
+                        <li>Node: select your node, choose dedicated backup storage, schedule (e.g., Mon–Fri 00:00), pick <em>All</em>, compression <em>ZSTD</em>, mode <em>Snapshot</em>, and set retention (e.g., keep 3 weekly).</li>
+                    </ul>
+
+                    <h3>Routine Maintenance</h3>
+                    <ul>
+                        <li>Monthly: <code>apt update && apt full-upgrade -y</code> and review release notes.</li>
+                        <li>Consider monitoring, logging and alerting (Prometheus/Grafana, syslog/ELK) for production environments.</li>
+                        <li>Use SSH keys and disable password root SSH where practical; enable 2FA for management users.</li>
+                    </ul>
+
+                        <h3>Hardware Considerations</h3>
+                        <ul>
+                            <li>Consider setting static MACs for important VMs and protecting hosts with a UPS to avoid data corruption during power events.</li>
+                            <li>Plan storage (ZFS, LVM, Ceph) according to performance, redundancy and RAM requirements.</li>
+                        </ul>
+
+                            <h2>Useful Commands</h2>
+                        <ul>
+                            <li>Update host: <code>apt update && apt full-upgrade -y</code></li>
+                            <li>List VMs: <code>qm list</code></li>
+                            <li>Backup VM: <code>vzdump &lt;vmid&gt; --mode snapshot --compress zstd</code></li>
+                            <li>Restore backup: <code>qmrestore</code> (or <code>vzrestore</code> depending on backup type)</li>
                         </ul>
                     </div>
                 </div>
             </section>
+
+            <section id="mydokuwiki-box" class="Content-section">
+                <div class="container3">
+                    <div class="content">
+                        <h2>MyDokuWiki — Container Setup (sanitized)</h2>
+                        <p>This boxed summary shows a sanitized, non-sensitive workflow for creating an LXC container, installing a web stack and running DokuWiki. Replace placeholder values with your environment-specific names, passwords and IPs.</p>
+
+                        <h3>Create a Container Template</h3>
+                        <p>Proxmox GUI → <strong>Node → local(pve) → CT Templates</strong>. Click <em>Templates</em>, search for an Ubuntu LXC template (for example <code>ubuntu-24.04-standard_...</code>) and download it.</p>
+
+                        <h3>Create LXC Container</h3>
+                        <p>Proxmox GUI → <strong>Create CT</strong>. Recommended example settings:</p>
+                        <ul>
+                            <li>Node: <code>&lt;your-node&gt;</code></li>
+                            <li>Hostname: <code>mydokuwiki</code></li>
+                            <li>Unprivileged: checked (recommended)</li>
+                            <li>Template: the downloaded Ubuntu template</li>
+                            <li>Root disk: 8 GB; CPU: 1 core; RAM: 512 MB; Swap: 512 MB</li>
+                            <li>Network: DHCP or static IP; DNS: automatic or your DNS server</li>
+                        </ul>
+
+                        <h3>Update & Install Web Stack (inside container)</h3>
+                        <pre class="cmd"><code>apt update && apt upgrade -y
+apt install apache2 php php-gd php-xml php-json php-mbstring libapache2-mod-php unzip wget nano ufw -y
+systemctl enable apache2</code></pre>
+
+                        <h3>Install DokuWiki</h3>
+                        <pre class="cmd"><code>cd /tmp
+wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz
+tar -xvzf dokuwiki-stable.tgz
+mv dokuwiki-* /var/www/dokuwiki
+chown -R www-data:www-data /var/www/dokuwiki</code></pre>
+
+                        <h3>Apache Configuration (HTTP)</h3>
+                        <p>Create <code>/etc/apache2/sites-available/dokuwiki.conf</code> with a VirtualHost pointing to <code>/var/www/dokuwiki</code>, then enable the site and modules:</p>
+                        <pre class="cmd"><code>a2ensite dokuwiki.conf
+a2dissite 000-default.conf
+a2enmod rewrite
+systemctl reload apache2</code></pre>
+
+                        <h3>Run DokuWiki Installer</h3>
+                        <p>Open <code>http://&lt;LXC-IP&gt;/install.php</code> in a browser, complete the installer (wiki name, admin user/password) and then remove the installer:</p>
+                        <pre class="cmd"><code>rm /var/www/dokuwiki/install.php</code></pre>
+
+                        <h3>Optional: Self-signed HTTPS</h3>
+                        <pre class="cmd"><code>a2enmod ssl
+mkdir -p /etc/apache2/ssl
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/wiki.key -out /etc/apache2/ssl/wiki.crt
+a2ensite dokuwiki-ssl.conf
+systemctl reload apache2</code></pre>
+                        <p>Browsers will warn for self-signed certs; accept the exception for local use.</p>
+
+                        <h3>Firewall</h3>
+                        <pre class="cmd"><code>ufw allow 80,443/tcp
+ufw enable
+ufw status</code></pre>
+
+                        <h3>Local Backup Script</h3>
+                        <pre class="cmd"><code>#!/bin/bash
+TIMESTAMP=$(date +%F-%H-%M)
+BACKUP_DIR=/root/dokuwiki_backups
+mkdir -p $BACKUP_DIR
+tar -czf $BACKUP_DIR/dokuwiki-$TIMESTAMP.tar.gz /var/www/dokuwiki /etc/apache2 /etc/ssl 2>/dev/null
+find $BACKUP_DIR -type f -mtime +14 -delete</code></pre>
+                        <p>Make the script executable and test it once, then add a cron entry to schedule backups.</p>
+
+                        <h3>Maintenance</h3>
+                        <ul>
+                            <li>Update: <code>apt update && apt upgrade -y</code></li>
+                            <li>Restart Apache: <code>systemctl restart apache2</code></li>
+                            <li>View logs: <code>tail -f /var/log/apache2/access.log</code></li>
+                            <li>Check disk: <code>df -h</code></li>
+                        </ul>
+
+                        <h3>Optional: Proxmox CT Backup</h3>
+                        <p>Use the Proxmox GUI (Datacenter → Backup) to create scheduled CT backups. Choose snapshot mode and ZSTD compression and store backups in dedicated storage.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="usb-backup-box" class="Content-section">
+                <div class="container3">
+                    <div class="content">
+                        <h2>MyDokuWiki LXC USB Backup Guide</h2>
+                        <p>This guide describes how to set up a weekly backup of a MyDokuWiki LXC in Proxmox to a USB stick. The backup is consistent, snapshot-based, and restorable. A restore test is also explained.</p>
+
+                        <h3>Prerequisites</h3>
+                        <ul>
+                            <li>Proxmox VE installed</li>
+                            <li>MyDokuWiki running in an LXC (e.g., VMID 101)</li>
+                            <li>Root access to Proxmox</li>
+                            <li>USB stick, empty or ready to format</li>
+                        </ul>
+
+                        <h3>Step 1 – Prepare the USB Stick</h3>
+                        <h4>1.1 Identify USB device</h4>
+                        <pre class="cmd"><code>lsblk</code></pre>
+                        <p>Note the correct device, e.g., <code>/dev/sdc</code>.</p>
+
+                        <h4>1.2 Format USB stick</h4>
+                        <pre class="cmd"><code>mkfs.ext4 /dev/sdc</code></pre>
+                        <p>⚠️ All data on the USB stick will be lost.</p>
+
+                        <h4>1.3 Set label</h4>
+                        <pre class="cmd"><code>e2label /dev/sdc USB_WIKI_BACKUP</code></pre>
+
+                        <h4>1.4 Create mount point</h4>
+                        <pre class="cmd"><code>mkdir -p /mnt/usb-wiki-backup</code></pre>
+
+                        <h3>Step 2 – Identify MyDokuWiki LXC</h3>
+                        <p>List all LXCs:</p>
+                        <pre class="cmd"><code>pct list</code></pre>
+                        <p>Example:</p>
+                        <pre class="cmd"><code>VMID  Status  Name
+101   running mydokuwiki</code></pre>
+                        <p>Note the VMID (101).</p>
+
+                        <h3>Step 3 – Test Manual Backup</h3>
+                        <h4>3.1 Mount USB stick</h4>
+                        <pre class="cmd"><code>mount /dev/disk/by-label/USB_WIKI_BACKUP /mnt/usb-wiki-backup</code></pre>
+
+                        <h4>3.2 Backup with vzdump</h4>
+                        <pre class="cmd"><code>vzdump 101 --mode snapshot --compress zstd --dumpdir /mnt/usb-wiki-backup</code></pre>
+
+                        <h4>3.3 Verify backup</h4>
+                        <pre class="cmd"><code>ls -lh /mnt/usb-wiki-backup</code></pre>
+                        <p>Expected:</p>
+                        <pre class="cmd"><code>vzdump-lxc-101-YYYY_MM_DD-HH_MM_SS.tar.zst</code></pre>
+
+                        <h4>3.4 Unmount USB stick</h4>
+                        <pre class="cmd"><code>umount /mnt/usb-wiki-backup</code></pre>
+
+                        <h3>Step 4 – Automation (Cronjob)</h3>
+                        <h4>4.1 Create script</h4>
+                        <pre class="cmd"><code>nano /root/wiki-usb-backup.sh</code></pre>
+                        <p>Content:</p>
+                        <pre class="cmd"><code>#!/bin/bash
+set -e
+
+VMID=101
+MOUNTPOINT="/mnt/usb-wiki-backup"
+DEVICE="/dev/disk/by-label/USB_WIKI_BACKUP"
+LOG="/var/log/wiki-usb-backup.log"
+
+echo "==== Backup Start $(date) ====" >> "$LOG"
+
+mount "$DEVICE" "$MOUNTPOINT"
+
+vzdump "$VMID" --mode snapshot --compress zstd --dumpdir "$MOUNTPOINT" >> "$LOG" 2>&1
+
+# Keep only last 4 backups
+ls -1t "$MOUNTPOINT"/vzdump-lxc-"$VMID"-*.tar.zst | tail -n +5 | xargs -r rm --
+
+umount "$MOUNTPOINT"
+
+echo "==== Backup End $(date) ====" >> "$LOG"</code></pre>
+
+                        <h4>4.2 Make script executable</h4>
+                        <pre class="cmd"><code>chmod +x /root/wiki-usb-backup.sh</code></pre>
+
+                        <h4>4.3 Setup cronjob</h4>
+                        <pre class="cmd"><code>crontab -e</code></pre>
+                        <p>Example (Sunday 03:00):</p>
+                        <pre class="cmd"><code>0 3 * * 0 /root/wiki-usb-backup.sh</code></pre>
+
+                        <h3>Step 5 – Restore Test</h3>
+                        <h4>5.1 Mount USB stick</h4>
+                        <pre class="cmd"><code>mount /dev/disk/by-label/USB_WIKI_BACKUP /mnt/usb-wiki-backup</code></pre>
+
+                        <h4>5.2 Create new LXC (e.g., 103)</h4>
+                        <pre class="cmd"><code>pct restore 103 /mnt/usb-wiki-backup/vzdump-lxc-101-YYYY_MM_DD-HH_MM_SS.tar.zst --storage local-lvm</code></pre>
+                        <ul>
+                            <li>103 = new VMID</li>
+                            <li>--storage local-lvm = Proxmox storage for rootfs</li>
+                        </ul>
+
+                        <h4>5.3 Start LXC</h4>
+                        <pre class="cmd"><code>pct start 103</code></pre>
+
+                        <h4>5.4 Verify</h4>
+                        <pre class="cmd"><code>pct exec 103 -- bash</code></pre>
+                        <ul>
+                            <li>Check MyDokuWiki content</li>
+                            <li>Test uploads and user permissions</li>
+                        </ul>
+
+                        <h4>5.5 Remove test LXC (optional)</h4>
+                        <pre class="cmd"><code>pct stop 103
+pct destroy 103</code></pre>
+
+                        <h3>Notes / Best Practices</h3>
+                        <ul>
+                            <li>Do not keep USB mounted permanently</li>
+                            <li>Backup only via Proxmox snapshot + vzdump, never rsync directly from running container</li>
+                            <li>Perform restore tests regularly</li>
+                            <li>Rotate old backups, e.g., keep last 4 weeks</li>
+                            <li>Check backup logs (<code>/var/log/wiki-usb-backup.log</code>)</li>
+                            <li>Never overwrite production LXC directly</li>
+                        </ul>
+
+                        <h3>Summary</h3>
+                        <ul>
+                            <li>USB = backup source</li>
+                            <li>Proxmox storage = restore target (local-lvm)</li>
+                            <li>Script + cronjob = automated weekly backup</li>
+                            <li>Restore test = validate on new VMID (e.g., 103)</li>
+                        </ul>
+                        <p>With this setup, your MyDokuWiki is safe, consistent, and fully restorable.</p>
+                    </div>
+                </div>
+            </section>
         </main>
+
+        <footer class="site-footer">
+            <div class="container">2026 Jonathan Kemmel</div>
+        </footer>
         <script>
             (function () {
                 const toggle = document.querySelector(".nav-toggle");
@@ -114,80 +382,5 @@ sudo apt install proxmox-ve -y</code></pre>
                 });
             })();
         </script>
-    </body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Proxmox VE — Detailed Guide</title>
-        <link rel="stylesheet" href="../../../styles.css" />
-        <link rel="stylesheet" href="../project-detail.css" />
-        <link rel="stylesheet" href="Proxmox-LW.css" />
-    </head>
-    <body>
-        <header class="site-header">
-            <div class="container header-inner">
-                <h1 class="site-title">JK Portfolio</h1>
-            </div>
-        </header>
-        <main class="container project-detail">
-            <article class="detail-content">
-                <div class="detail-header">
-                    <h1>Proxmox VE — Detailed Guide</h1>
-                </div>
-
-                <section class="detail-section">
-                    <h2>Setup & Installation</h2>
-                    <p>This guide documents the full steps I used to install and configure Proxmox VE.</p>
-                    <ol>
-                        <li>Download the latest Proxmox VE ISO from the official site.</li>
-                        <li>Create a bootable USB (Rufus/Etcher/Ventoy) and verify the image checksum.</li>
-                        <li>Boot the target machine from USB and follow the installer prompts.</li>
-                        <li>Choose installation disk and partitioning scheme (LVM or ZFS depending on needs).</li>
-                        <li>Set a strong root password and the management IP (static recommended).</li>
-                        <li>Complete installation and reboot the host.</li>
-                        <li>Access the web UI via https://<your-host-ip>:8006 and login as root.</li>
-                    </ol>
-                </section>
-
-                <section class="detail-section">
-                    <h2>Post-Install Configuration</h2>
-                    <ul>
-                        <li>Update the host: <code>apt update && apt full-upgrade -y</code>.</li>
-                        <li>Enable the QEMU guest agent on guests for better management.</li>
-                        <li>Configure storage: add LVM, ZFS pool or directory storage as needed.</li>
-                        <li>Create VM templates for common guest OSes to speed up deployments.</li>
-                        <li>Set up backups (vzdump) and test restore procedures regularly.</li>
-                        <li>Harden SSH (disable root login over SSH, use keys), enable 2FA where useful.</li>
-                        <li>Consider monitoring (Prometheus/Grafana) and log collection for alerts.</li>
-                    </ul>
-                </section>
-
-                <section class="detail-section">
-                    <h2>Useful Commands</h2>
-                    <ul>
-                        <li>Update host: <code>apt update && apt full-upgrade -y</code></li>
-                        <li>List VMs: <code>qm list</code></li>
-                        <li>Backup VM: <code>vzdump <vmid> --mode snapshot --compress lzo</code></li>
-                        <li>Restore backup: <code>qmrestore</code> or <code>vzrestore</code> (depending on format)</li>
-                    </ul>
-                </section>
-
-                <section class="detail-section">
-                    <h2>Advanced Topics</h2>
-                    <ul>
-                        <li>Consider ZFS for data integrity and snapshots if storage and RAM allow.</li>
-                        <li>Use Ceph or shared storage for HA setups (complex, requires planning).</li>
-                        <li>Automate provisioning with cloud-init templates and configuration management.</li>
-                    </ul>
-                </section>
-
-            </article>
-        </main>
-        <footer class="site-footer">
-            <div class="container">2026 Jonathan Kemmel</div>
-        </footer>
     </body>
 </html>
