@@ -18,7 +18,7 @@
                 </button>
                 <nav class="main-nav" id="primary-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="project-1.html">Geräte/Server</a></li>
+                        <li><a href="../Project-1/project-1.html">Geräte/Server</a></li>
                         <li><a href="../Project-2/project-2.html">Networking</a></li>
                         <li><a href="../Project-3/project-3.html">Home Automation</a></li>
                         <li><a href="../Project-4/project-4.html">Coding</a></li>
@@ -60,7 +60,7 @@
                 <aside class="proxmox-hw-sidebar">
                     <div class="Content-table-section">
                         <div class="container1">
-                            <h2>Content: (Planned)</h2>
+                            <h2>Content:</h2>
                             <div class="underline"></div>
                             <ul class="content-table">
                                 <li><a href="#Part 1">Mounting Hardware inside Rack and setting it up</a></li>
@@ -74,28 +74,43 @@
                 <div class="proxmox-hw-main">
                     <section class="Content-section">
                         <div class="container2">
-                            <h3 id="Part 1">Mounting Hardware inside Rack and setting it up</h3>
+                            <h3 id="Part 1">Mounting Hardware inside Rack</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Planned!!!</p>
+                                <p>Photo documentation of the network hardware installation and rack mounting process.</p>
+                                <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
+                                    <a class="btn btn-primary" href="Home-Network-System-detailed.html?box=mounting-box" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Photo Documentation</a>
+                                </div>
                             </div>
 
                             <h3 id="Part 2">Creating a Controller</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Planned!!!</p>
+                                <p>A self-hosted Omada Controller provides centralized management for all network devices. It enables unified configuration, real-time monitoring, and simplified troubleshooting across switches, routers, and access points without relying on cloud services.</p>
+                                <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
+                                    <a class="btn btn-primary" href="Home-Network-System-detailed.html?box=controller-box" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                                </div>
                             </div>
 
-                            <h3 id="Part 3">Planning a Network Structure</h3>
+                            <h3 id="Part 3">Planning Network Structure</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Planned!!!</p>
+                                <ul style="list-style:none;padding-left:0;">
+                                    <li style="margin-bottom:12px;"><strong>VLAN 10 (LAN):</strong> PCs, NAS, normal clients → Internet access</li>
+                                    <li style="margin-bottom:12px;"><strong>VLAN 20 (IoT):</strong> ESPHome, Tasmota, Smart Devices → No access to other VLANs, optional internet</li>
+                                    <li style="margin-bottom:12px;"><strong>VLAN 30 (Mgmt):</strong> Switch, AP, Router, Hypervisor → Isolated, no internet</li>
+                                    <li style="margin-bottom:12px;"><strong>VLAN 40 (Server):</strong> Home Assistant, Proxmox, NAS → Internet access, restricted access to LAN</li>
+                                    <li style="margin-bottom:12px;"><strong>VLAN 50 (Guest):</strong> WLAN guests → Internet only, no access to local networks</li>
+                                </ul>
                             </div>
 
-                            <h3 id="Part 4">Setting up Network Structure in Software</h3>
+                            <h3 id="Part 4">Setting Up Network Structure in Software</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Planned!!!</p>
+                                <p>Configure VLANs, ACLs, and routing policies in the Omada Controller to implement the planned network segmentation. This includes setting up firewall rules, port assignments, and inter-VLAN communication restrictions.</p>
+                                <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:8px;">
+                                    <a class="btn btn-primary" href="Home-Network-System-detailed.html?box=setup-box" style="padding:10px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(16,78,120,0.12);background:linear-gradient(135deg,var(--primary),var(--accent-strong));color:#fff;">Full Guide</a>
+                                </div>
                             </div>
                         </div>
                     </section>

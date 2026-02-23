@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Home Network System — Detailed Guide</title>
+        <link rel="stylesheet" href="project-2.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="primary-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../Project-1/project-1.html">Geräte/Server</a></li>
+                        <li><a href="project-2.html">Networking</a></li>
+                        <li><a href="../Project-3/project-3.html">Home Automation</a></li>
+                        <li><a href="../Project-4/project-4.html">Coding</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="project-detail-section">
+                <div class="container1">
+                    <h1 class="Proxmox">Home Network System - Detailed Guide</h1>
+                </div>
+            </section>
+
+            <section class="box-buttons-section">
+                <div class="container3">
+                    <div class="box-buttons">
+                        <button class="box-btn" onclick="toggleBox('mounting-box')">Mounting Hardware</button>
+                        <button class="box-btn" onclick="toggleBox('controller-box')">Creating Controller</button>
+                        <button class="box-btn" onclick="toggleBox('setup-box')">Setting up Software</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mounting-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Mounting Hardware inside Rack</h2>
+                        <p>In planning - not yet finished</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="controller-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Creating a Controller</h2>
+                        <p>In planning - not yet finished</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="setup-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Setting up Network Structure in Software</h2>
+                        <p>In planning - not yet finished</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">2026 Jonathan Kemmel</div>
+        </footer>
+        <script>
+            (function () {
+                const toggle = document.querySelector(".nav-toggle");
+                const nav = document.querySelector(".main-nav");
+                if (!toggle || !nav) return;
+                toggle.addEventListener("click", () => {
+                    const isOpen = nav.classList.toggle("open");
+                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            })();
+            
+            function toggleBox(boxId) {
+                // Hide all boxes and remove active state from all buttons
+                const allBoxes = document.querySelectorAll('.collapsible-box');
+                const allButtons = document.querySelectorAll('.box-btn');
+                
+                allBoxes.forEach(box => box.style.display = 'none');
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Show the selected box
+                const targetBox = document.getElementById(boxId);
+                if (targetBox) {
+                    targetBox.style.display = 'block';
+                    
+                    // Add active state to the clicked button
+                    const activeButton = Array.from(allButtons).find(btn => 
+                        btn.getAttribute('onclick').includes(boxId)
+                    );
+                    if (activeButton) {
+                        activeButton.classList.add('active');
+                    }
+                }
+            }
+
+            // Check URL parameters on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const boxId = params.get('box');
+                if (boxId) {
+                    toggleBox(boxId);
+                }
+            });
+        </script>
+    </body>
+</html>
