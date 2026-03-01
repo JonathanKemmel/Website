@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Website — Detailed Guide</title>
+        <link rel="stylesheet" href="project-4.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="primary-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../Project-1/project-1.html">Devices / Servers</a></li>
+                        <li><a href="../Project-2/project-2.html">Networking</a></li>
+                        <li><a href="../Project-3/project-3.html">Home Automation</a></li>
+                        <li><a href="../Project-4/project-4.html">Coding</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="project-detail-section">
+                <div class="container1">
+                    <h1 class="Proxmox">Website Development - Detailed Guide</h1>
+                </div>
+            </section>
+
+            <section class="box-buttons-section">
+                <div class="container3">
+                    <div class="box-buttons">
+                        <button class="box-btn" onclick="toggleBox('html-box')">HTML Commands</button>
+                        <button class="box-btn" onclick="toggleBox('css-box')">CSS Definitions</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="html-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>HTML Commands Reference</h2>
+                        
+                        <h3>Document Structure</h3>
+                        <ul>
+                            <li><strong>&lt;!DOCTYPE html&gt;</strong> - Declares document as HTML5</li>
+                            <li><strong>&lt;html&gt;</strong> - Root element containing all HTML content</li>
+                            <li><strong>&lt;head&gt;</strong> - Contains metadata, title, links to CSS/JavaScript</li>
+                            <li><strong>&lt;meta&gt;</strong> - Defines metadata (charset, viewport, description)</li>
+                            <li><strong>&lt;title&gt;</strong> - Sets page title shown in browser tab</li>
+                            <li><strong>&lt;link&gt;</strong> - Links external resources (CSS stylesheets, favicons)</li>
+                            <li><strong>&lt;script&gt;</strong> - Embeds or references JavaScript code</li>
+                            <li><strong>&lt;body&gt;</strong> - Contains all visible page content</li>
+                        </ul>
+
+                        <h3>Semantic Structure Elements</h3>
+                        <ul>
+                            <li><strong>&lt;header&gt;</strong> - Defines header section (logo, navigation)</li>
+                            <li><strong>&lt;nav&gt;</strong> - Navigation menu container</li>
+                            <li><strong>&lt;main&gt;</strong> - Main content area of the document</li>
+                            <li><strong>&lt;section&gt;</strong> - Thematic grouping of content</li>
+                            <li><strong>&lt;article&gt;</strong> - Self-contained content (blog post, news article)</li>
+                            <li><strong>&lt;aside&gt;</strong> - Sidebar or tangentially related content</li>
+                            <li><strong>&lt;footer&gt;</strong> - Footer section (copyright, links)</li>
+                        </ul>
+
+                        <h3>Text Content</h3>
+                        <ul>
+                            <li><strong>&lt;h1&gt; to &lt;h6&gt;</strong> - Headings (h1 most important, h6 least)</li>
+                            <li><strong>&lt;p&gt;</strong> - Paragraph of text</li>
+                            <li><strong>&lt;br&gt;</strong> - Line break (self-closing)</li>
+                            <li><strong>&lt;hr&gt;</strong> - Horizontal rule/divider (self-closing)</li>
+                            <li><strong>&lt;strong&gt;</strong> - Important text (bold)</li>
+                            <li><strong>&lt;em&gt;</strong> - Emphasized text (italic)</li>
+                            <li><strong>&lt;mark&gt;</strong> - Highlighted text</li>
+                            <li><strong>&lt;small&gt;</strong> - Smaller text</li>
+                            <li><strong>&lt;code&gt;</strong> - Inline code snippet</li>
+                            <li><strong>&lt;pre&gt;</strong> - Preformatted text (preserves spacing)</li>
+                            <li><strong>&lt;blockquote&gt;</strong> - Block quotation</li>
+                        </ul>
+
+                        <h3>Lists</h3>
+                        <ul>
+                            <li><strong>&lt;ul&gt;</strong> - Unordered list (bullet points)</li>
+                            <li><strong>&lt;ol&gt;</strong> - Ordered list (numbered)</li>
+                            <li><strong>&lt;li&gt;</strong> - List item</li>
+                            <li><strong>&lt;dl&gt;</strong> - Description list</li>
+                            <li><strong>&lt;dt&gt;</strong> - Description term</li>
+                            <li><strong>&lt;dd&gt;</strong> - Description definition</li>
+                        </ul>
+
+                        <h3>Links & Media</h3>
+                        <ul>
+                            <li><strong>&lt;a href="url"&gt;</strong> - Hyperlink (href required)</li>
+                            <li><strong>&lt;img src="url" alt="text"&gt;</strong> - Image (src and alt required)</li>
+                            <li><strong>&lt;video&gt;</strong> - Embeds video player</li>
+                            <li><strong>&lt;audio&gt;</strong> - Embeds audio player</li>
+                            <li><strong>&lt;iframe&gt;</strong> - Embeds another webpage/document</li>
+                            <li><strong>&lt;picture&gt;</strong> - Responsive image container</li>
+                            <li><strong>&lt;source&gt;</strong> - Defines media resources for video/audio/picture</li>
+                        </ul>
+
+                        <h3>Tables</h3>
+                        <ul>
+                            <li><strong>&lt;table&gt;</strong> - Defines a table</li>
+                            <li><strong>&lt;thead&gt;</strong> - Table header section</li>
+                            <li><strong>&lt;tbody&gt;</strong> - Table body section</li>
+                            <li><strong>&lt;tfoot&gt;</strong> - Table footer section</li>
+                            <li><strong>&lt;tr&gt;</strong> - Table row</li>
+                            <li><strong>&lt;th&gt;</strong> - Table header cell</li>
+                            <li><strong>&lt;td&gt;</strong> - Table data cell</li>
+                            <li><strong>&lt;caption&gt;</strong> - Table caption</li>
+                        </ul>
+
+                        <h3>Forms & Input</h3>
+                        <ul>
+                            <li><strong>&lt;form&gt;</strong> - Form container (action, method attributes)</li>
+                            <li><strong>&lt;input&gt;</strong> - Input field (type: text, email, password, etc.)</li>
+                            <li><strong>&lt;textarea&gt;</strong> - Multi-line text input</li>
+                            <li><strong>&lt;button&gt;</strong> - Clickable button</li>
+                            <li><strong>&lt;select&gt;</strong> - Dropdown menu</li>
+                            <li><strong>&lt;option&gt;</strong> - Option in dropdown</li>
+                            <li><strong>&lt;label&gt;</strong> - Label for input field</li>
+                            <li><strong>&lt;fieldset&gt;</strong> - Groups form elements</li>
+                            <li><strong>&lt;legend&gt;</strong> - Caption for fieldset</li>
+                        </ul>
+
+                        <h3>Container & Layout</h3>
+                        <ul>
+                            <li><strong>&lt;div&gt;</strong> - Generic block-level container</li>
+                            <li><strong>&lt;span&gt;</strong> - Generic inline container</li>
+                        </ul>
+
+                        <h3>Attributes (Apply to many elements)</h3>
+                        <ul>
+                            <li><strong>id="unique-name"</strong> - Unique identifier</li>
+                            <li><strong>class="name"</strong> - CSS class name(s)</li>
+                            <li><strong>style="css"</strong> - Inline CSS styling</li>
+                            <li><strong>title="text"</strong> - Tooltip text</li>
+                            <li><strong>data-*="value"</strong> - Custom data attributes</li>
+                            <li><strong>aria-*</strong> - Accessibility attributes</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="css-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>CSS Definitions Reference</h2>
+                        
+                        <h3>Text Styling</h3>
+                        <ul>
+                            <li><strong>color</strong> - Text color (hex, rgb, hsl, named)</li>
+                            <li><strong>font-size</strong> - Text size (px, rem, em, %)</li>
+                            <li><strong>font-family</strong> - Font typeface</li>
+                            <li><strong>font-weight</strong> - Text thickness (normal, bold, 100-900)</li>
+                            <li><strong>font-style</strong> - Normal, italic, oblique</li>
+                            <li><strong>text-align</strong> - Horizontal alignment (left, center, right, justify)</li>
+                            <li><strong>text-decoration</strong> - Underline, line-through, none</li>
+                            <li><strong>text-transform</strong> - Uppercase, lowercase, capitalize</li>
+                            <li><strong>line-height</strong> - Space between lines</li>
+                            <li><strong>letter-spacing</strong> - Space between characters</li>
+                            <li><strong>word-spacing</strong> - Space between words</li>
+                        </ul>
+
+                        <h3>Background & Colors</h3>
+                        <ul>
+                            <li><strong>background-color</strong> - Background color</li>
+                            <li><strong>background-image</strong> - Background image (url())</li>
+                            <li><strong>background-size</strong> - Image size (cover, contain, px, %)</li>
+                            <li><strong>background-position</strong> - Image position</li>
+                            <li><strong>background-repeat</strong> - Image repetition (repeat, no-repeat)</li>
+                            <li><strong>background</strong> - Shorthand for all background properties</li>
+                            <li><strong>opacity</strong> - Element transparency (0 to 1)</li>
+                        </ul>
+
+                        <h3>Box Model</h3>
+                        <ul>
+                            <li><strong>margin</strong> - Outer spacing (margin-top, -right, -bottom, -left)</li>
+                            <li><strong>padding</strong> - Inner spacing (padding-top, -right, -bottom, -left)</li>
+                            <li><strong>border</strong> - Element border (width style color)</li>
+                            <li><strong>border-width</strong> - Border thickness</li>
+                            <li><strong>border-style</strong> - solid, dashed, dotted, none</li>
+                            <li><strong>border-color</strong> - Border color</li>
+                            <li><strong>border-radius</strong> - Rounded corners</li>
+                            <li><strong>width</strong> - Element width</li>
+                            <li><strong>height</strong> - Element height</li>
+                            <li><strong>max-width / min-width</strong> - Width constraints</li>
+                            <li><strong>max-height / min-height</strong> - Height constraints</li>
+                            <li><strong>box-sizing</strong> - border-box includes padding/border in size</li>
+                        </ul>
+
+                        <h3>Display & Positioning</h3>
+                        <ul>
+                            <li><strong>display</strong> - block, inline, inline-block, flex, grid, none</li>
+                            <li><strong>position</strong> - static, relative, absolute, fixed, sticky</li>
+                            <li><strong>top / right / bottom / left</strong> - Position offsets</li>
+                            <li><strong>z-index</strong> - Stacking order (higher = front)</li>
+                            <li><strong>float</strong> - left, right, none (legacy layout)</li>
+                            <li><strong>clear</strong> - Clears floats</li>
+                            <li><strong>overflow</strong> - visible, hidden, scroll, auto</li>
+                            <li><strong>visibility</strong> - visible, hidden</li>
+                        </ul>
+
+                        <h3>Flexbox Layout</h3>
+                        <ul>
+                            <li><strong>display: flex</strong> - Enables flexbox on container</li>
+                            <li><strong>flex-direction</strong> - row, column, row-reverse, column-reverse</li>
+                            <li><strong>justify-content</strong> - Main axis alignment (start, center, space-between, etc.)</li>
+                            <li><strong>align-items</strong> - Cross axis alignment (start, center, stretch)</li>
+                            <li><strong>align-content</strong> - Multi-line alignment</li>
+                            <li><strong>flex-wrap</strong> - wrap, nowrap, wrap-reverse</li>
+                            <li><strong>flex</strong> - Shorthand for flex-grow, flex-shrink, flex-basis</li>
+                            <li><strong>gap</strong> - Space between flex items</li>
+                        </ul>
+
+                        <h3>Grid Layout</h3>
+                        <ul>
+                            <li><strong>display: grid</strong> - Enables grid on container</li>
+                            <li><strong>grid-template-columns</strong> - Defines column structure</li>
+                            <li><strong>grid-template-rows</strong> - Defines row structure</li>
+                            <li><strong>grid-gap / gap</strong> - Space between grid items</li>
+                            <li><strong>grid-column</strong> - Item column placement</li>
+                            <li><strong>grid-row</strong> - Item row placement</li>
+                            <li><strong>grid-area</strong> - Shorthand for row/column placement</li>
+                        </ul>
+
+                        <h3>Effects & Transforms</h3>
+                        <ul>
+                            <li><strong>box-shadow</strong> - Drop shadow (x y blur spread color)</li>
+                            <li><strong>text-shadow</strong> - Text shadow (x y blur color)</li>
+                            <li><strong>transform</strong> - translate, rotate, scale, skew</li>
+                            <li><strong>transition</strong> - Animates property changes (property duration easing)</li>
+                            <li><strong>animation</strong> - Keyframe animations</li>
+                            <li><strong>filter</strong> - Visual effects (blur, brightness, contrast, etc.)</li>
+                        </ul>
+
+                        <h3>Pseudo-Classes</h3>
+                        <ul>
+                            <li><strong>:hover</strong> - Mouse hover state</li>
+                            <li><strong>:active</strong> - Click/tap state</li>
+                            <li><strong>:focus</strong> - Keyboard focus state</li>
+                            <li><strong>:visited</strong> - Visited link state</li>
+                            <li><strong>:nth-child(n)</strong> - Selects nth child</li>
+                            <li><strong>:first-child</strong> - First child element</li>
+                            <li><strong>:last-child</strong> - Last child element</li>
+                            <li><strong>:not(selector)</strong> - Negation selector</li>
+                        </ul>
+
+                        <h3>Pseudo-Elements</h3>
+                        <ul>
+                            <li><strong>::before</strong> - Inserts content before element</li>
+                            <li><strong>::after</strong> - Inserts content after element</li>
+                            <li><strong>::first-letter</strong> - First letter of text</li>
+                            <li><strong>::first-line</strong> - First line of text</li>
+                            <li><strong>::selection</strong> - Selected text styling</li>
+                        </ul>
+
+                        <h3>CSS Variables (Custom Properties)</h3>
+                        <ul>
+                            <li><strong>:root</strong> - Global scope for variables</li>
+                            <li><strong>--variable-name</strong> - Defines custom property</li>
+                            <li><strong>var(--variable-name)</strong> - Uses custom property</li>
+                        </ul>
+
+                        <h3>Responsive Design</h3>
+                        <ul>
+                            <li><strong>@media</strong> - Media queries for responsive design</li>
+                            <li><strong>max-width / min-width</strong> - Screen size breakpoints</li>
+                            <li><strong>viewport units</strong> - vw (viewport width), vh (viewport height)</li>
+                        </ul>
+
+                        <h3>Units</h3>
+                        <ul>
+                            <li><strong>px</strong> - Pixels (absolute)</li>
+                            <li><strong>%</strong> - Percentage of parent</li>
+                            <li><strong>em</strong> - Relative to parent font-size</li>
+                            <li><strong>rem</strong> - Relative to root font-size</li>
+                            <li><strong>vw / vh</strong> - Viewport width/height percentage</li>
+                            <li><strong>fr</strong> - Fraction unit (grid only)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p>2026 Jonathan Kemmel</p>
+            </div>
+        </footer>
+
+        <script>
+            function toggleBox(boxId) {
+                // Hide all boxes and remove active state from all buttons
+                const allBoxes = document.querySelectorAll('.collapsible-box');
+                const allButtons = document.querySelectorAll('.box-btn');
+                
+                allBoxes.forEach(box => box.style.display = 'none');
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Show selected box
+                const selectedBox = document.getElementById(boxId);
+                if (selectedBox) {
+                    selectedBox.style.display = 'block';
+                    
+                    // Add active state to the clicked button
+                    const activeButton = Array.from(allButtons).find(btn => 
+                        btn.getAttribute('onclick').includes(boxId)
+                    );
+                    if (activeButton) {
+                        activeButton.classList.add('active');
+                    }
+                }
+            }
+
+            // Check for URL parameter to auto-open a box
+            window.addEventListener('DOMContentLoaded', () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const box = urlParams.get('box');
+                if (box) {
+                    toggleBox(box);
+                }
+            });
+
+            // Navigation toggle
+            (function () {
+                const toggle = document.querySelector(".nav-toggle");
+                const nav = document.querySelector(".main-nav");
+                if (!toggle || !nav) return;
+                toggle.addEventListener("click", () => {
+                    const isOpen = nav.classList.toggle("open");
+                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            })();
+        </script>
+    </body>
+</html>

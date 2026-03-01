@@ -79,37 +79,130 @@
                             <h3 id="Part 1">Which Extensions to Install in IDE</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Upload ISO:</p>
+                                <ul>
+                                    <li>YAML Support</li>
+                                    <li>C++ IntelliSense</li>
+                                    <li>Python Extension</li>
+                                    <li>PlatformIO (for embedded development)</li>
+                                    <li>ESP-IDF</li>
+                                    <li>Serial Monitor</li>
+                                </ul>
                             </div>
 
                             <h3 id="Part 2">What should the Code do?</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Important safety note:</p>
+                                <ul>
+                                    <li>ESP LED Controller: Control RGB LEDs, communicate with Home Assistant</li>
+                                    <li>ESP Sensor Node: Read sensor data (e.g., temperature, humidity) and send it to Home Assistant</li>
+                                    <li>ESP Presence/Motion Node: Detect presence or motion and trigger automations in Home Assistant</li>
+                                    <li>ESP Smart Switch & Smart Button: Control power to devices and trigger actions in Home Assistant</li>
                             </div>
 
                             <h3 id="Part 3">When and how to write in YAML</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Important safety note:</p>
+                                <h4>Use YAML if:</h4>
+                                <ul>
+                                    <li>You want fast Home Assistant integration</li>
+                                    <li>You care more about automation than firmware engineering</li>
+                                    <li>You don't want to manage memory, tasks, interrupts</li>
+                                    <li>You prefer configuration over programming</li>
+                                </ul>
+
+                                <h4>When NOT to use YAML:</h4>
+                                <ul>
+                                    <li>Complex custom logic</li>
+                                    <li>Real-time constraints</li>
+                                    <li>Performance-sensitive tasks</li>
+                                    <li>Advanced networking control</li>
+                                </ul>
+
+                                <h4>Use Case Examples:</h4>
+                                <ul>
+                                    <li>Smart switch</li>
+                                    <li>Temperature sensor</li>
+                                    <li>Relay controller</li>
+                                    <li>Basic display panel</li>
+                                </ul>
+
+                                <p class="guide">If you need deep control, YAML becomes limiting fast.</p>
+                                <a href="home-assistant-iot-detailed.html?box=yaml-box" class="detail-button">View YAML Syntax Reference →</a>
                              </div>
 
                             <h3 id="Part 4">When and how to write in C++</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Important safety note:</p>
+                                <h4>Use C++ if:</h4>
+                                <ul>
+                                    <li>You need full hardware control</li>
+                                    <li>You care about performance and memory</li>
+                                    <li>You need real-time behavior</li>
+                                    <li>You're building something beyond simple IoT nodes</li>
+                                </ul>
+
+                                <h4>When NOT to use C++:</h4>
+                                <ul>
+                                    <li>Simple automation tasks (use YAML instead)</li>
+                                    <li>Rapid prototyping and experimentation</li>
+                                    <li>When development speed is more important than performance</li>
+                                    <li>Learning embedded systems for the first time</li>
+                                </ul>
+
+                                <h4>Use Case Examples:</h4>
+                                <ul>
+                                    <li>Motor control</li>
+                                    <li>Custom communication protocols</li>
+                                    <li>High-speed data processing</li>
+                                    <li>Low-power optimization</li>
+                                    <li>RTOS-level control</li>
+                                </ul>
+
+                                <p class="guide">C++ gives you maximum performance and control, but with more complexity and steeper learning curve.</p>
+                                <a href="home-assistant-iot-detailed.html?box=cpp-box" class="detail-button">View C++ Syntax Reference →</a>
                              </div>
 
                             <h3 id="Part 5">When and how to write in Python</h3>
                             <div class="underline"></div>
                             <div class="content">
-                                <p class="guide">Important safety note:</p>
+                                <h4>Use Python if:</h4>
+                                <ul>
+                                    <li>You want rapid prototyping</li>
+                                    <li>You're experimenting</li>
+                                    <li>You value speed of development over performance</li>
+                                    <li>You're not doing timing-critical tasks</li>
+                                </ul>
+
+                                <h4>When NOT to use Python:</h4>
+                                <ul>
+                                    <li>Performance-critical applications</li>
+                                    <li>Real-time systems with strict timing requirements</li>
+                                    <li>Memory-constrained devices</li>
+                                    <li>Production-grade IoT deployments requiring stability</li>
+                                </ul>
+
+                                <h4>Use Case Examples:</h4>
+                                <ul>
+                                    <li>Learning microcontrollers</li>
+                                    <li>Simple IoT demos</li>
+                                    <li>Quick sensor experiments</li>
+                                    <li>Educational projects</li>
+                                </ul>
+
+                                <p class="guide">Python is great for learning and prototyping, but has slower execution and higher memory overhead.</p>
+                                <a href="home-assistant-iot-detailed.html?box=python-box" class="detail-button">View Python Syntax Reference →</a>
                             </div>
 
                             <h3 id="Part 6">Flashing on Controller and Testing</h3>
                             <div class="underline"></div>
-                            <div class="content">
-                                <p class="guide">Important safety note:</p>
+                                <div class="content">
+                                    <ul>
+                                        <li>Connect ESP via USB</li>
+                                        <li>Use PlatformIO or ESP-IDF to flash firmware</li>
+                                        <li>Monitor serial output for debugging</li>
+                                        <li>Test functionality and Home Assistant integration</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </section>

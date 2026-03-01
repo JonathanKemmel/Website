@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Home Assistant IoT — Detailed Guide</title>
+        <link rel="stylesheet" href="project-4.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <h1 class="site-title">JK Portfolio</h1>
+                <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-nav" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="primary-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../Project-1/project-1.html">Devices / Servers</a></li>
+                        <li><a href="../Project-2/project-2.html">Networking</a></li>
+                        <li><a href="../Project-3/project-3.html">Home Automation</a></li>
+                        <li><a href="../Project-4/project-4.html">Coding</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="project-detail-section">
+                <div class="container1">
+                    <h1 class="Proxmox">IoT Programming - Language Reference</h1>
+                </div>
+            </section>
+
+            <section class="box-buttons-section">
+                <div class="container3">
+                    <div class="box-buttons">
+                        <button class="box-btn" onclick="toggleBox('yaml-box')">YAML Syntax</button>
+                        <button class="box-btn" onclick="toggleBox('cpp-box')">C++ Syntax</button>
+                        <button class="box-btn" onclick="toggleBox('python-box')">Python Syntax</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="yaml-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>YAML Syntax Reference (ESPHome)</h2>
+                        
+                        <h3>Basic Structure</h3>
+                        <pre class="cmd"><code>esphome:
+  name: my-device
+  platform: ESP32
+  board: esp32dev
+
+wifi:
+  ssid: "Your_WiFi"
+  password: "your_password"
+
+api:
+  encryption:
+    key: "your_api_key"
+
+ota:
+  password: "ota_password"</code></pre>
+
+                        <h3>Common Components</h3>
+                        
+                        <h4>GPIO Output (Relay, LED)</h4>
+                        <pre class="cmd"><code>switch:
+  - platform: gpio
+    pin: GPIO23
+    name: "Living Room Light"
+    id: light_1</code></pre>
+
+                        <h4>GPIO Input (Button)</h4>
+                        <pre class="cmd"><code>binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: true
+    name: "Button"
+    on_press:
+      - switch.toggle: light_1</code></pre>
+
+                        <h4>Temperature Sensor (DHT22)</h4>
+                        <pre class="cmd"><code>sensor:
+  - platform: dht
+    pin: GPIO4
+    temperature:
+      name: "Temperature"
+    humidity:
+      name: "Humidity"
+    update_interval: 60s</code></pre>
+
+                        <h4>PWM LED</h4>
+                        <pre class="cmd"><code>output:
+  - platform: ledc
+    pin: GPIO5
+    id: led_output
+
+light:
+  - platform: monochromatic
+    output: led_output
+    name: "Dimmable LED"</code></pre>
+
+                        <h4>RGB LED Strip</h4>
+                        <pre class="cmd"><code>output:
+  - platform: ledc
+    pin: GPIO12
+    id: red
+  - platform: ledc
+    pin: GPIO13
+    id: green
+  - platform: ledc
+    pin: GPIO14
+    id: blue
+
+light:
+  - platform: rgb
+    name: "RGB Strip"
+    red: red
+    green: green
+    blue: blue</code></pre>
+
+                        <h3>Automation</h3>
+                        <pre class="cmd"><code>on_...:
+  - then:
+    - switch.turn_on: relay_1
+    - delay: 5s
+    - switch.turn_off: relay_1</code></pre>
+
+                        <h3>Important Keywords</h3>
+                        <ul>
+                            <li><strong>platform:</strong> - Specifies the component type</li>
+                            <li><strong>pin:</strong> - GPIO pin number</li>
+                            <li><strong>name:</strong> - Display name in Home Assistant</li>
+                            <li><strong>id:</strong> - Internal reference ID</li>
+                            <li><strong>on_press / on_release:</strong> - Button events</li>
+                            <li><strong>update_interval:</strong> - Sensor reading frequency</li>
+                            <li><strong>inverted:</strong> - Inverts logic level</li>
+                            <li><strong>mode:</strong> - Pin mode (INPUT, OUTPUT, INPUT_PULLUP)</li>
+                        </ul>
+
+                        <h3>Common Platforms</h3>
+                        <ul>
+                            <li><strong>gpio</strong> - Direct pin control</li>
+                            <li><strong>dht</strong> - DHT11/DHT22 temperature/humidity sensors</li>
+                            <li><strong>dallas</strong> - DS18B20 temperature sensors</li>
+                            <li><strong>ledc</strong> - PWM output for ESP32</li>
+                            <li><strong>adc</strong> - Analog to digital converter</li>
+                            <li><strong>i2c</strong> - I2C bus devices</li>
+                            <li><strong>spi</strong> - SPI bus devices</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cpp-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>C++ Syntax Reference (Arduino / ESP-IDF)</h2>
+                        
+                        <h3>Basic Arduino Structure</h3>
+                        <pre class="cmd"><code>#include &lt;Arduino.h&gt;
+
+void setup() {
+  // Runs once at startup
+  Serial.begin(115200);
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  // Runs continuously
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(1000);
+}</code></pre>
+
+                        <h3>GPIO Control</h3>
+                        <pre class="cmd"><code>// Pin modes
+pinMode(pin, INPUT);
+pinMode(pin, OUTPUT);
+pinMode(pin, INPUT_PULLUP);
+
+// Digital I/O
+digitalWrite(pin, HIGH);  // Set high
+digitalWrite(pin, LOW);   // Set low
+int value = digitalRead(pin);
+
+// Analog I/O
+int value = analogRead(A0);  // 0-4095 on ESP32
+analogWrite(pin, value);     // PWM output</code></pre>
+
+                        <h3>WiFi (ESP32/ESP8266)</h3>
+                        <pre class="cmd"><code>#include &lt;WiFi.h&gt;
+
+const char* ssid = "Your_WiFi";
+const char* password = "your_password";
+
+void setup() {
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  
+  Serial.println("Connected!");
+  Serial.println(WiFi.localIP());
+}</code></pre>
+
+                        <h3>Serial Communication</h3>
+                        <pre class="cmd"><code>Serial.begin(115200);
+Serial.println("Hello World");
+Serial.print("Value: ");
+Serial.println(value);
+
+if (Serial.available() > 0) {
+  char c = Serial.read();
+}</code></pre>
+
+                        <h3>Timers & Delays</h3>
+                        <pre class="cmd"><code>delay(1000);           // Block for 1 second
+delayMicroseconds(10); // Block for 10 microseconds
+
+unsigned long currentTime = millis();
+unsigned long previousTime = 0;
+unsigned long interval = 1000;
+
+if (currentTime - previousTime >= interval) {
+  previousTime = currentTime;
+  // Do something every second
+}</code></pre>
+
+                        <h3>PWM (LED Dimming)</h3>
+                        <pre class="cmd"><code>const int ledPin = 5;
+const int freq = 5000;
+const int ledChannel = 0;
+const int resolution = 8;
+
+void setup() {
+  ledcSetup(ledChannel, freq, resolution);
+  ledcAttachPin(ledPin, ledChannel);
+}
+
+void loop() {
+  for(int duty = 0; duty <= 255; duty++) {
+    ledcWrite(ledChannel, duty);
+    delay(10);
+  }
+}</code></pre>
+
+                        <h3>Interrupts</h3>
+                        <pre class="cmd"><code>const int buttonPin = 0;
+volatile bool buttonPressed = false;
+
+void IRAM_ATTR handleInterrupt() {
+  buttonPressed = true;
+}
+
+void setup() {
+  pinMode(buttonPin, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(buttonPin), 
+                  handleInterrupt, FALLING);
+}
+
+void loop() {
+  if (buttonPressed) {
+    buttonPressed = false;
+    // Handle button press
+  }
+}</code></pre>
+
+                        <h3>Common Libraries</h3>
+                        <ul>
+                            <li><strong>WiFi.h</strong> - WiFi connectivity</li>
+                            <li><strong>WebServer.h</strong> - HTTP server</li>
+                            <li><strong>WiFiClient.h</strong> - TCP/IP client</li>
+                            <li><strong>PubSubClient.h</strong> - MQTT protocol</li>
+                            <li><strong>Wire.h</strong> - I2C communication</li>
+                            <li><strong>SPI.h</strong> - SPI communication</li>
+                            <li><strong>DHT.h</strong> - DHT sensor library</li>
+                            <li><strong>Adafruit_Sensor.h</strong> - Unified sensor API</li>
+                        </ul>
+
+                        <h3>Data Types</h3>
+                        <ul>
+                            <li><strong>int</strong> - Integer (32-bit on ESP32)</li>
+                            <li><strong>float</strong> - Floating point number</li>
+                            <li><strong>bool</strong> - Boolean (true/false)</li>
+                            <li><strong>char</strong> - Single character</li>
+                            <li><strong>String</strong> - Text string object</li>
+                            <li><strong>unsigned long</strong> - Large positive integer</li>
+                            <li><strong>byte</strong> - 8-bit unsigned (0-255)</li>
+                            <li><strong>const</strong> - Constant value</li>
+                            <li><strong>volatile</strong> - Variable can change unexpectedly</li>
+                        </ul>
+
+                        <h3>Control Structures</h3>
+                        <pre class="cmd"><code>// If statement
+if (condition) {
+  // code
+} else if (condition) {
+  // code
+} else {
+  // code
+}
+
+// For loop
+for (int i = 0; i < 10; i++) {
+  // code
+}
+
+// While loop
+while (condition) {
+  // code
+}
+
+// Switch statement
+switch (variable) {
+  case 1:
+    // code
+    break;
+  case 2:
+    // code
+    break;
+  default:
+    // code
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section id="python-box" class="Content-section collapsible-box" style="display:none;">
+                <div class="container3">
+                    <div class="content">
+                        <h2>Python Syntax Reference (MicroPython)</h2>
+                        
+                        <h3>Basic Structure</h3>
+                        <pre class="cmd"><code>import machine
+import time
+
+# No setup() or loop() - just sequential code
+led = machine.Pin(2, machine.Pin.OUT)
+
+while True:
+    led.on()
+    time.sleep(1)
+    led.off()
+    time.sleep(1)</code></pre>
+
+                        <h3>GPIO Control</h3>
+                        <pre class="cmd"><code>from machine import Pin
+
+# Setup pins
+button = Pin(0, Pin.IN, Pin.PULL_UP)
+led = Pin(2, Pin.OUT)
+
+# Digital output
+led.on()
+led.off()
+led.value(1)  # Same as on()
+led.value(0)  # Same as off()
+
+# Digital input
+if button.value() == 0:
+    print("Button pressed")
+
+# Analog input (ADC)
+from machine import ADC
+adc = ADC(Pin(34))
+adc.atten(ADC.ATTN_11DB)  # Full range: 0-3.3V
+value = adc.read()  # 0-4095</code></pre>
+
+                        <h3>PWM Control</h3>
+                        <pre class="cmd"><code>from machine import Pin, PWM
+
+led = PWM(Pin(5))
+led.freq(1000)  # Set frequency to 1kHz
+
+# Fade LED
+for duty in range(0, 1024):
+    led.duty(duty)
+    time.sleep_ms(1)
+
+for duty in range(1023, -1, -1):
+    led.duty(duty)
+    time.sleep_ms(1)</code></pre>
+
+                        <h3>WiFi Connection</h3>
+                        <pre class="cmd"><code>import network
+
+wlan = network.WLAN(network.STA_IF)
+wlan.active(True)
+wlan.connect('SSID', 'password')
+
+while not wlan.isconnected():
+    pass
+
+print('Connected!')
+print('IP:', wlan.ifconfig()[0])</code></pre>
+
+                        <h3>Temperature Sensor (DHT22)</h3>
+                        <pre class="cmd"><code>import dht
+from machine import Pin
+import time
+
+sensor = dht.DHT22(Pin(4))
+
+while True:
+    sensor.measure()
+    temp = sensor.temperature()
+    humidity = sensor.humidity()
+    print('Temperature: {}°C'.format(temp))
+    print('Humidity: {}%'.format(humidity))
+    time.sleep(2)</code></pre>
+
+                        <h3>Timers</h3>
+                        <pre class="cmd"><code>from machine import Timer
+
+def callback(timer):
+    print("Timer triggered")
+
+# Create timer (ID, period in ms, callback)
+timer = Timer(0)
+timer.init(period=1000, mode=Timer.PERIODIC, callback=callback)</code></pre>
+
+                        <h3>Interrupts</h3>
+                        <pre class="cmd"><code>from machine import Pin
+
+def handle_interrupt(pin):
+    print("Interrupt triggered on pin", pin)
+
+button = Pin(0, Pin.IN, Pin.PULL_UP)
+button.irq(trigger=Pin.IRQ_FALLING, handler=handle_interrupt)</code></pre>
+
+                        <h3>I2C Communication</h3>
+                        <pre class="cmd"><code>from machine import Pin, I2C
+
+i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400000)
+
+# Scan for devices
+devices = i2c.scan()
+print('I2C devices found:', devices)
+
+# Read/Write
+i2c.writeto(address, data)
+data = i2c.readfrom(address, num_bytes)</code></pre>
+
+                        <h3>File Operations</h3>
+                        <pre class="cmd"><code># Write to file
+with open('config.txt', 'w') as f:
+    f.write('Hello World\n')
+
+# Read from file
+with open('config.txt', 'r') as f:
+    content = f.read()
+    print(content)
+
+# Append to file
+with open('log.txt', 'a') as f:
+    f.write('New log entry\n')</code></pre>
+
+                        <h3>Common Modules</h3>
+                        <ul>
+                            <li><strong>machine</strong> - Hardware control (Pin, PWM, ADC, I2C, SPI, Timer)</li>
+                            <li><strong>network</strong> - WiFi and network connectivity</li>
+                            <li><strong>time</strong> - Time and sleep functions</li>
+                            <li><strong>dht</strong> - DHT temperature/humidity sensors</li>
+                            <li><strong>onewire</strong> - OneWire protocol (DS18B20)</li>
+                            <li><strong>ds18x20</strong> - DS18B20 temperature sensor</li>
+                            <li><strong>neopixel</strong> - WS2812 LED control</li>
+                            <li><strong>socket</strong> - Network sockets</li>
+                        </ul>
+
+                        <h3>Key Differences from Regular Python</h3>
+                        <ul>
+                            <li>Limited standard library (no numpy, pandas, etc.)</li>
+                            <li>Direct hardware access via <code>machine</code> module</li>
+                            <li>Memory constraints - careful with large data structures</li>
+                            <li>No threading (but has async/await support)</li>
+                            <li>Use <code>time.sleep_ms()</code> instead of <code>time.sleep()</code> for milliseconds</li>
+                            <li>String formatting: <code>'Value: {}'.format(x)</code></li>
+                            <li>Limited floating point precision</li>
+                        </ul>
+
+                        <h3>Useful Functions</h3>
+                        <pre class="cmd"><code># Time functions
+time.sleep(1)        # Sleep 1 second
+time.sleep_ms(100)   # Sleep 100 milliseconds
+time.sleep_us(10)    # Sleep 10 microseconds
+time.ticks_ms()      # Get millisecond counter
+
+# Memory management
+import gc
+gc.collect()         # Force garbage collection
+gc.mem_free()        # Get free memory
+
+# System functions
+import machine
+machine.reset()      # Reset the device
+machine.freq()       # Get CPU frequency
+machine.freq(240000000)  # Set CPU to 240MHz</code></pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p>2026 Jonathan Kemmel</p>
+            </div>
+        </footer>
+
+        <script>
+            function toggleBox(boxId) {
+                // Hide all boxes and remove active state from all buttons
+                const allBoxes = document.querySelectorAll('.collapsible-box');
+                const allButtons = document.querySelectorAll('.box-btn');
+                
+                allBoxes.forEach(box => box.style.display = 'none');
+                allButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Show selected box
+                const selectedBox = document.getElementById(boxId);
+                if (selectedBox) {
+                    selectedBox.style.display = 'block';
+                    
+                    // Add active state to the clicked button
+                    const activeButton = Array.from(allButtons).find(btn => 
+                        btn.getAttribute('onclick').includes(boxId)
+                    );
+                    if (activeButton) {
+                        activeButton.classList.add('active');
+                    }
+                }
+            }
+
+            // Check for URL parameter to auto-open a box
+            window.addEventListener('DOMContentLoaded', () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const box = urlParams.get('box');
+                if (box) {
+                    toggleBox(box);
+                }
+            });
+
+            // Navigation toggle
+            (function () {
+                const toggle = document.querySelector(".nav-toggle");
+                const nav = document.querySelector(".main-nav");
+                if (!toggle || !nav) return;
+                toggle.addEventListener("click", () => {
+                    const isOpen = nav.classList.toggle("open");
+                    toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+                });
+            })();
+        </script>
+    </body>
+</html>
