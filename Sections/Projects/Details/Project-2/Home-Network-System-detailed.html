@@ -48,7 +48,20 @@
                 <div class="container3">
                     <div class="content">
                         <h2>Mounting Hardware inside Rack</h2>
-                        <p>In planning - not yet finished</p>
+                        <div class="photo-entry">
+                            <div class="photo-timestamp">
+                                <span class="date">2026-08-26</span>
+                            </div>
+                            <div class="photo-container">
+                                <img src="../../../Images/Rack 26.08.26.jpg" alt="Initial rack assembly">
+                            </div>
+
+                            </div>
+                            <div class="photo-container">
+                                <img src="../../../Images/Gateway 26.08.26.jpg" alt="Initial rack assembly">
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </section>
@@ -56,8 +69,77 @@
             <section id="controller-box" class="Content-section collapsible-box" style="display:none;">
                 <div class="container3">
                     <div class="content">
-                        <h2>Creating a Controller</h2>
-                        <p>In planning - not yet finished</p>
+                        <h2>Creating Omada Controller</h2>
+                        <h3>Installing & Configuring OMV Extras and Docker</h3>
+                    
+                        <p>Installing OMV Extras:</p>
+                        <p class="cmd"><code>Systems -> Plugins -> Install openmediavault-compose</code></p>
+                        <p>Configuring Compose:</p>
+                        <p class="cmd"><code>Services -> Compose -> Settings</code></p>
+                        <p>Set Docker Storage Path to: 
+                        <p class="cmd"><code>/srv/dev-disk-by-uuid-(DISK-UUID)</code></p>
+                        <p>Save -> Apply</p>
+                        <p>Check if worked under:</p>
+                        <p class="cmd"><code>Services -> Compose</code></p>
+                        <p>Options for Files, Services, Images, etc. should show up.</p>
+                        <br></br>
+                        <h3>Installing Omada Controller on Docker Compose</h3>
+                        
+                        <p>Access OMV over terminal or use SSH.</p>
+                        <p class="cmd"><code>sudo mkdir -p /srv/dev-disk-by-uuid-(DISK-UUID)/appdata/omada/data</code></p>
+                        <p>And:</p>
+                        <p class="cmd"><code>sudo mkdir -p /srv/dev-disk-by-uuid-(DISK-UUID)/appdata/omada/logs</code></p>
+                        <p>On OMV Webinterface:</p>
+                        <p class="cmd"><code>Services -> Compose -> Files -> Add</code></p>
+                        <p>Name: omada-controller</p>
+                        <p>Add Compose/YAML File:</p>
+                        <pre class="cmd"><code>
+services:
+    omada-controller:
+        container_name: omada-controller
+        image: mbentley/omada-controller:6.2
+
+        restart: unless-stopped
+        stop_grace_period: 60s
+
+        network_mode: host
+
+        ulimits:
+             nofile:
+             soft: 4096
+            hard: 8192
+
+        environment:
+            - MANAGE_HTTP_PORT=8088
+            - MANAGE_HTTPS_PORT=8043
+            - PORTAL_HTTP_PORT=8088
+            - PORTAL_HTTPS_PORT=8843
+            - UPGRADE_HTTPS_PORT=8043
+            - PORT_APP_DISCOVERY=27001
+            - PORT_DISCOVERY=29810
+            - PORT_MANAGER_V1=29811
+            - PORT_ADOPT_V1=29812
+            - PORT_UPGRADE_V1=29813
+            - PORT_MANAGER_V2=29814
+            - PORT_TRANSFER_V2=29815
+            - PORT_RTTY=29816
+            - PORT_DEVICE_MONITOR=29817
+            - SHOW_SERVER_LOGS=true
+            - SHOW_MONGODB_LOGS=false
+            - TZ=Europe/Berlin
+
+        volumes:
+            - /srv/dev-disk-by-uuid-(DISK_UUID)/appdata/omada/data:/opt/tplink/EAPController/data
+            - /srv/dev-disk-by-uuid-(DISK_UUID)/appdata/omada/logs:/opt/tplink/EAPController/logs
+                            </code></pre>
+                        <p>Save and Check Compose File if everything is alright, click Up.</p>
+                        <p>Check if Container is running under:</p>
+                        <p class="cmd"><code>Services -> Compose -> Services</code></p>
+                        <p>Should show up as running.</p>
+                        <br></br>
+                        <h3>Accessing Omada Controller UI</h3>
+                        <p>Open Omada Controller Webinterface via: <span class="cmd">https://your-omv-ip:8043</span></p>
+                        <p>Setup Wizard will start, create Admin Account and adopt Omada Hardware.</p>
                     </div>
                 </div>
             </section>
