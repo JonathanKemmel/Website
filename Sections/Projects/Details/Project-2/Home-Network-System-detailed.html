@@ -194,7 +194,16 @@ services:
             // Check URL parameters on page load
             document.addEventListener('DOMContentLoaded', () => {
                 const params = new URLSearchParams(window.location.search);
-                const boxId = params.get('box');
+                const section = params.get('section');
+                
+                // Map section names to box IDs
+                const sectionMap = {
+                    'mounting': 'mounting-box',
+                    'controller': 'controller-box',
+                    'setup': 'setup-box'
+                };
+                
+                const boxId = sectionMap[section];
                 if (boxId) {
                     toggleBox(boxId);
                 }
